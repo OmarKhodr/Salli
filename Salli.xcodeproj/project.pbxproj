@@ -13,6 +13,11 @@
 		23BFD147247D13FA00E0EF2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23BFD145247D13FA00E0EF2F /* Main.storyboard */; };
 		23BFD149247D13FD00E0EF2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23BFD148247D13FD00E0EF2F /* Assets.xcassets */; };
 		23BFD14C247D13FD00E0EF2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23BFD14A247D13FD00E0EF2F /* LaunchScreen.storyboard */; };
+		23BFD156247D2EC000E0EF2F /* PrayerTimesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD155247D2EC000E0EF2F /* PrayerTimesManager.swift */; };
+		23BFD159247D318700E0EF2F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD158247D318700E0EF2F /* Constants.swift */; };
+		23BFD15B247D342000E0EF2F /* PrayerTimesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD15A247D342000E0EF2F /* PrayerTimesData.swift */; };
+		23BFD15D247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD15C247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift */; };
+		23BFD15F247D390C00E0EF2F /* PrayerTimesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		23BFD148247D13FD00E0EF2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23BFD14B247D13FD00E0EF2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		23BFD14D247D13FD00E0EF2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23BFD155247D2EC000E0EF2F /* PrayerTimesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesManager.swift; sourceTree = "<group>"; };
+		23BFD158247D318700E0EF2F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		23BFD15A247D342000E0EF2F /* PrayerTimesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesData.swift; sourceTree = "<group>"; };
+		23BFD15C247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesManagerDelegate.swift; sourceTree = "<group>"; };
+		23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +68,42 @@
 			children = (
 				23BFD13F247D13FA00E0EF2F /* AppDelegate.swift */,
 				23BFD141247D13FA00E0EF2F /* SceneDelegate.swift */,
-				23BFD143247D13FA00E0EF2F /* ViewController.swift */,
-				23BFD145247D13FA00E0EF2F /* Main.storyboard */,
+				23BFD157247D2EC600E0EF2F /* Models */,
+				23BFD154247D2EA800E0EF2F /* Views */,
+				23BFD153247D2E9F00E0EF2F /* Controllers */,
 				23BFD148247D13FD00E0EF2F /* Assets.xcassets */,
 				23BFD14A247D13FD00E0EF2F /* LaunchScreen.storyboard */,
 				23BFD14D247D13FD00E0EF2F /* Info.plist */,
+				23BFD158247D318700E0EF2F /* Constants.swift */,
 			);
 			path = Salli;
+			sourceTree = "<group>";
+		};
+		23BFD153247D2E9F00E0EF2F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				23BFD143247D13FA00E0EF2F /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		23BFD154247D2EA800E0EF2F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				23BFD145247D13FA00E0EF2F /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		23BFD157247D2EC600E0EF2F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				23BFD155247D2EC000E0EF2F /* PrayerTimesManager.swift */,
+				23BFD15A247D342000E0EF2F /* PrayerTimesData.swift */,
+				23BFD15C247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift */,
+				23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +177,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23BFD159247D318700E0EF2F /* Constants.swift in Sources */,
+				23BFD15B247D342000E0EF2F /* PrayerTimesData.swift in Sources */,
 				23BFD144247D13FA00E0EF2F /* ViewController.swift in Sources */,
 				23BFD140247D13FA00E0EF2F /* AppDelegate.swift in Sources */,
+				23BFD15D247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift in Sources */,
 				23BFD142247D13FA00E0EF2F /* SceneDelegate.swift in Sources */,
+				23BFD156247D2EC000E0EF2F /* PrayerTimesManager.swift in Sources */,
+				23BFD15F247D390C00E0EF2F /* PrayerTimesModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
