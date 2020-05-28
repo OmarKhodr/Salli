@@ -19,11 +19,24 @@ class TimesViewController: UIViewController {
     @IBOutlet weak var maghribTimeLabel: UILabel!
     @IBOutlet weak var ishaTimeLabel: UILabel!
     
+    @IBOutlet weak var fajrLabel: UILabel!
+    @IBOutlet weak var sunriseLabel: UILabel!
+    @IBOutlet weak var dhuhrLabel: UILabel!
+    @IBOutlet weak var asrLabel: UILabel!
+    @IBOutlet weak var maghribLabel: UILabel!
+    @IBOutlet weak var ishaLabel: UILabel!
+    
+    @IBOutlet weak var prayerTimesBackgroundView: UIView!
+    
     var locationManager = CLLocationManager()
     var prayerTimesManager = PrayerTimesManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        prayerTimesBackgroundView.layer.cornerRadius = 12;
+        prayerTimesBackgroundView.layer.masksToBounds = true;
+        
         // setting view as delegate for location manager
         locationManager.delegate = self
         
@@ -84,6 +97,30 @@ extension TimesViewController: PrayerTimesManagerDelegate {
             self.asrTimeLabel.text = formatter.string(from: dict[K.asr]!)
             self.maghribTimeLabel.text = formatter.string(from: dict[K.maghrib]!)
             self.ishaTimeLabel.text = formatter.string(from: dict[K.isha]!)
+            let currTime = Date().time
+            var currLabel: UILabel?
+            switch currTime {
+            case dict[K.fajr]!.time..<dict[K.sunrise]!.time:
+                currLabel = self.fajrLabel
+                break
+            case dict[K.dhuhr]!.time..<dict[K.asr]!.time:
+                currLabel = self.dhuhrLabel
+                break
+            case dict[K.asr]!.time..<dict[K.maghrib]!.time:
+                currLabel = self.asrLabel
+                break
+            case dict[K.maghrib]!.time..<dict[K.isha]!.time:
+                currLabel = self.maghribLabel
+                break
+            case dict[K.isha]!.time..<Time(23, 59):
+                currLabel = self.ishaLabel
+                break
+            default:
+                break
+            }
+            if let currLabel = currLabel {
+                currLabel.textColor = #colorLiteral(red: 0.1450980392, green: 0.5137254902, blue: 0.8549019608, alpha: 1)
+            }
         }
     }
 }

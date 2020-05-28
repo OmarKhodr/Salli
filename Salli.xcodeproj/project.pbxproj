@@ -18,6 +18,7 @@
 		23BFD15B247D342000E0EF2F /* PrayerTimesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD15A247D342000E0EF2F /* PrayerTimesData.swift */; };
 		23BFD15D247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD15C247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift */; };
 		23BFD15F247D390C00E0EF2F /* PrayerTimesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */; };
+		23F0AA36247FD78B0013F880 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F0AA35247FD78B0013F880 /* Time.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		23BFD15A247D342000E0EF2F /* PrayerTimesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesData.swift; sourceTree = "<group>"; };
 		23BFD15C247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesManagerDelegate.swift; sourceTree = "<group>"; };
 		23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesModel.swift; sourceTree = "<group>"; };
+		23F0AA35247FD78B0013F880 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				23BFD15A247D342000E0EF2F /* PrayerTimesData.swift */,
 				23BFD15C247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift */,
 				23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */,
+				23F0AA35247FD78B0013F880 /* Time.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				23BFD140247D13FA00E0EF2F /* AppDelegate.swift in Sources */,
 				23BFD15D247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift in Sources */,
 				23BFD142247D13FA00E0EF2F /* SceneDelegate.swift in Sources */,
+				23F0AA36247FD78B0013F880 /* Time.swift in Sources */,
 				23BFD156247D2EC000E0EF2F /* PrayerTimesManager.swift in Sources */,
 				23BFD15F247D390C00E0EF2F /* PrayerTimesModel.swift in Sources */,
 			);
