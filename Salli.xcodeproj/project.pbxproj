@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		23BFD140247D13FA00E0EF2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD13F247D13FA00E0EF2F /* AppDelegate.swift */; };
 		23BFD142247D13FA00E0EF2F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD141247D13FA00E0EF2F /* SceneDelegate.swift */; };
-		23BFD144247D13FA00E0EF2F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD143247D13FA00E0EF2F /* ViewController.swift */; };
+		23BFD144247D13FA00E0EF2F /* TimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD143247D13FA00E0EF2F /* TimesViewController.swift */; };
 		23BFD147247D13FA00E0EF2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23BFD145247D13FA00E0EF2F /* Main.storyboard */; };
 		23BFD149247D13FD00E0EF2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23BFD148247D13FD00E0EF2F /* Assets.xcassets */; };
 		23BFD14C247D13FD00E0EF2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23BFD14A247D13FD00E0EF2F /* LaunchScreen.storyboard */; };
@@ -24,7 +24,7 @@
 		23BFD13C247D13FA00E0EF2F /* Salli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23BFD13F247D13FA00E0EF2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23BFD141247D13FA00E0EF2F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		23BFD143247D13FA00E0EF2F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		23BFD143247D13FA00E0EF2F /* TimesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesViewController.swift; sourceTree = "<group>"; };
 		23BFD146247D13FA00E0EF2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		23BFD148247D13FD00E0EF2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23BFD14B247D13FD00E0EF2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 		23BFD153247D2E9F00E0EF2F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				23BFD143247D13FA00E0EF2F /* ViewController.swift */,
+				23BFD143247D13FA00E0EF2F /* TimesViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -179,7 +179,7 @@
 			files = (
 				23BFD159247D318700E0EF2F /* Constants.swift in Sources */,
 				23BFD15B247D342000E0EF2F /* PrayerTimesData.swift in Sources */,
-				23BFD144247D13FA00E0EF2F /* ViewController.swift in Sources */,
+				23BFD144247D13FA00E0EF2F /* TimesViewController.swift in Sources */,
 				23BFD140247D13FA00E0EF2F /* AppDelegate.swift in Sources */,
 				23BFD15D247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift in Sources */,
 				23BFD142247D13FA00E0EF2F /* SceneDelegate.swift in Sources */,

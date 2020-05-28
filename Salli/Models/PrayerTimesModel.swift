@@ -8,9 +8,13 @@
 
 import Foundation
 
+//model for prayer times after having fetched them from API request
 class PrayerTimesModel {
     
+    //dictionary containing datetimes for prayers
     var times: [String: Date]
+    
+    //constructor takes strings of times in 24-hour format (as it comes from API request) and converts them to date types
     init(fajr: String, sunrise: String, dhuhr: String, asr: String, maghrib: String, isha: String) {
         times = [:]
         let dateFormatter = DateFormatter()

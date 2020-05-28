@@ -10,5 +10,5 @@ import Foundation
 
 protocol PrayerTimesManagerDelegate {
     func didUpdatePrayerTimes(_ manager: PrayerTimesManager, _ model: PrayerTimesModel)
-    func didFailWithError(error: Error)
+    func didFailWithError(_ manager: PrayerTimesManager, error: Error)
 }
