@@ -16,4 +16,5 @@ class K {
     static let asr = "asr"
     static let maghrib = "maghrib"
     static let isha = "isha"
+    static let dayInSeconds: Double = 24*3600
 }

@@ -8,12 +8,15 @@
 
 import UIKit
 import CoreLocation
+import CoreData
 
 class TimesViewController: UIViewController {
     
+    var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     @IBOutlet weak var currentDateLabel: UILabel!
     
+    @IBOutlet weak var prayerTimesBackgroundView: UIView!
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     
@@ -31,13 +34,14 @@ class TimesViewController: UIViewController {
     @IBOutlet weak var maghribLabel: UILabel!
     @IBOutlet weak var ishaLabel: UILabel!
     
-    @IBOutlet weak var prayerTimesBackgroundView: UIView!
-    
     var locationManager = CLLocationManager()
     var prayerTimesManager = PrayerTimesManager()
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! as String)
         
         //Setting date label as current Hijri date
         let dateFor = DateFormatter()
@@ -54,9 +58,11 @@ class TimesViewController: UIViewController {
         prayerTimesBackgroundView.layer.cornerRadius = 12
         prayerTimesBackgroundView.layer.masksToBounds = true
         
+        //adding rounded corners to refresh button
         refreshButton.layer.cornerRadius = 12
         refreshButton.layer.masksToBounds = true
         
+        //adding rounded corners to settings button
         settingsButton.layer.cornerRadius = 12
         settingsButton.layer.masksToBounds = true
         
@@ -66,11 +72,8 @@ class TimesViewController: UIViewController {
         //setting view as delegate for prayer times manager
         prayerTimesManager.delegate = self
         
-        // Request location permission in case app isn't allowed
-        locationManager.requestWhenInUseAuthorization()
+        loadTimes()
         
-        //request location
-        locationManager.requestLocation()
     }
 
 }
@@ -107,38 +110,116 @@ extension TimesViewController: PrayerTimesManagerDelegate {
     
     //called to update UI when prayer times are updated
     func didUpdatePrayerTimes(_ manager: PrayerTimesManager, _ model: PrayerTimesModel) {
+
+        let dict = model.times
+        
+        //saving in database
+        let newPrayerInfo = PrayerInfo(context: context)
+        newPrayerInfo.dateFetched = Date()
+        newPrayerInfo.fajr = dict[K.fajr]!
+        newPrayerInfo.sunrise = dict[K.sunrise]!
+        newPrayerInfo.dhuhr = dict[K.dhuhr]!
+        newPrayerInfo.asr = dict[K.asr]!
+        newPrayerInfo.maghrib = dict[K.maghrib]!
+        newPrayerInfo.isha = dict[K.isha]!
+        
+        saveContext()
+        
+        updateUI(with: dict)
+
+    }
+}
+
+//MARK: - Supporting Methods
+
+extension TimesViewController {
+    func saveContext () {
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+    
+    func loadTimes() {
+        let request: NSFetchRequest<PrayerInfo> = PrayerInfo.fetchRequest()
+        do {
+            var array = try context.fetch(request)
+            if (array.count > 1) {
+                print("NOOO THAT'S WRONG")
+            }
+            else {
+                if (array.count == 1) {
+                    let info = array.first!
+                    let age = abs(Date().distance(to: (info.dateFetched)!))
+                    if (age > K.dayInSeconds) {
+                        context.delete(info)
+                        saveContext()
+                        array = []
+                    }
+                }
+                if (array.count == 1) {
+                    let info = array.first!
+                    let times: [String: Date] = [
+                        K.fajr: info.fajr!,
+                        K.sunrise: info.sunrise!,
+                        K.dhuhr: info.dhuhr!,
+                        K.asr: info.asr!,
+                        K.maghrib: info.maghrib!,
+                        K.isha: info.isha!
+                    ]
+                    updateUI(with: times)
+                }
+                else {
+                    // Request location permission in case app isn't allowed
+                    locationManager.requestWhenInUseAuthorization()
+                    //request location
+                    locationManager.requestLocation()
+                }
+            }
+        }
+        catch {
+            print("error fetching request: \(error)")
+        }
+    }
+    
+    func updateUI(with dict: [String: Date]) {
+        
         //fetching dates from the model and coverting them to strings in --:-- AM/PM format
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm a"
-        //dictionary of dates in model containing datetimes for prayers
-        let dict = model.times
         
         let currTime = Date().time
         var currLabel: UILabel?
         var currTimeLabel: UILabel?
         switch currTime {
-        case dict[K.fajr]!.time..<dict[K.sunrise]!.time:
-            currLabel = self.fajrLabel
-            currTimeLabel = self.fajrTimeLabel
-            break
-        case dict[K.dhuhr]!.time..<dict[K.asr]!.time:
-            currLabel = self.dhuhrLabel
-            currTimeLabel = self.dhuhrTimeLabel
-            break
-        case dict[K.asr]!.time..<dict[K.maghrib]!.time:
-            currLabel = self.asrLabel
-            currTimeLabel = self.asrTimeLabel
-            break
-        case dict[K.maghrib]!.time..<dict[K.isha]!.time:
-            currLabel = self.maghribLabel
-            currTimeLabel = self.maghribTimeLabel
-            break
-        case dict[K.isha]!.time..<Time(23, 59):
-            currLabel = self.ishaLabel
-            currTimeLabel = self.ishaTimeLabel
-            break
-        default:
-            break
+            case dict[K.fajr]!.time..<dict[K.sunrise]!.time:
+                currLabel = self.fajrLabel
+                currTimeLabel = self.fajrTimeLabel
+                break
+            case dict[K.dhuhr]!.time..<dict[K.asr]!.time:
+                currLabel = self.dhuhrLabel
+                currTimeLabel = self.dhuhrTimeLabel
+                break
+            case dict[K.asr]!.time..<dict[K.maghrib]!.time:
+                currLabel = self.asrLabel
+                currTimeLabel = self.asrTimeLabel
+                break
+            case dict[K.maghrib]!.time..<dict[K.isha]!.time:
+                currLabel = self.maghribLabel
+                currTimeLabel = self.maghribTimeLabel
+                break
+            case dict[K.isha]!.time..<Time(23, 59):
+                currLabel = self.ishaLabel
+                currTimeLabel = self.ishaTimeLabel
+                break
+            default:
+                break
         }
         //calling main thread asynchronously to update UI elements
         DispatchQueue.main.async {
@@ -153,6 +234,7 @@ extension TimesViewController: PrayerTimesManagerDelegate {
                 currTimeLabel.textColor = #colorLiteral(red: 0.1450980392, green: 0.5137254902, blue: 0.8549019608, alpha: 1)
             }
         }
+        
     }
 }
 

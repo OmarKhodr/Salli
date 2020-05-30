@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23BBD40824822715003B0EC7 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23BBD40624822715003B0EC7 /* DataModel.xcdatamodeld */; };
 		23BFD140247D13FA00E0EF2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD13F247D13FA00E0EF2F /* AppDelegate.swift */; };
 		23BFD142247D13FA00E0EF2F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD141247D13FA00E0EF2F /* SceneDelegate.swift */; };
 		23BFD144247D13FA00E0EF2F /* TimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD143247D13FA00E0EF2F /* TimesViewController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23BBD40724822715003B0EC7 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		23BFD13C247D13FA00E0EF2F /* Salli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23BFD13F247D13FA00E0EF2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23BFD141247D13FA00E0EF2F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				23BFD15C247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift */,
 				23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */,
 				23F0AA35247FD78B0013F880 /* Time.swift */,
+				23BBD40624822715003B0EC7 /* DataModel.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23BFD159247D318700E0EF2F /* Constants.swift in Sources */,
+				23BBD40824822715003B0EC7 /* DataModel.xcdatamodeld in Sources */,
 				23BFD15B247D342000E0EF2F /* PrayerTimesData.swift in Sources */,
 				23BFD144247D13FA00E0EF2F /* TimesViewController.swift in Sources */,
 				23BFD140247D13FA00E0EF2F /* AppDelegate.swift in Sources */,
@@ -390,6 +394,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		23BBD40624822715003B0EC7 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				23BBD40724822715003B0EC7 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 23BBD40724822715003B0EC7 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 23BFD134247D13FA00E0EF2F /* Project object */;
 }
