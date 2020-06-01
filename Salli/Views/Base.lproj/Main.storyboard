@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Times View Controller-->
+        <!--Today-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="TimesViewController" customModule="Salli" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,27 +19,44 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="409"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qlI-Nc-XLF">
-                                        <rect key="frame" x="106.5" y="170" width="201" height="69.5"/>
+                                        <rect key="frame" x="52" y="178.5" width="310.5" height="52.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPD-Aj-i47">
-                                                <rect key="frame" x="53" y="0.0" width="95.5" height="41"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 hours 56 minutes until Maghrib" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPD-Aj-i47">
+                                                <rect key="frame" x="0.0" y="0.0" width="310.5" height="24"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday, Shaw. 3, 1441 AH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7IK-ia-mLP">
-                                                <rect key="frame" x="0.0" y="49" width="201" height="20.5"/>
+                                                <rect key="frame" x="54.5" y="32" width="201" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iB8-xF-rbg">
+                                        <rect key="frame" x="20" y="20" width="95.5" height="41"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City, Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6X4-NZ-G5u">
+                                        <rect key="frame" x="123.5" y="38" width="89" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
+                                    <constraint firstItem="iB8-xF-rbg" firstAttribute="leading" secondItem="VeU-es-Aph" secondAttribute="leading" constant="20" id="OCf-Rs-SEF"/>
+                                    <constraint firstItem="6X4-NZ-G5u" firstAttribute="leading" secondItem="iB8-xF-rbg" secondAttribute="trailing" constant="8" id="QCJ-5M-r31"/>
+                                    <constraint firstItem="iB8-xF-rbg" firstAttribute="top" secondItem="VeU-es-Aph" secondAttribute="top" constant="20" id="YA6-S0-qc8"/>
                                     <constraint firstItem="qlI-Nc-XLF" firstAttribute="centerY" secondItem="VeU-es-Aph" secondAttribute="centerY" id="amk-de-v2K"/>
+                                    <constraint firstItem="6X4-NZ-G5u" firstAttribute="bottom" secondItem="iB8-xF-rbg" secondAttribute="bottom" constant="-5" id="eA3-D3-M1b"/>
                                     <constraint firstItem="qlI-Nc-XLF" firstAttribute="centerX" secondItem="VeU-es-Aph" secondAttribute="centerX" id="jhE-Y2-TLP"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6X4-NZ-G5u" secondAttribute="trailing" constant="20" id="yYF-Qm-Y09"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3i-f6-vyS" userLabel="Lower View">
@@ -56,6 +73,9 @@
                                                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="arrow.clockwise" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="refreshButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Uo8-JG-Qwc"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M1A-uf-EXb">
                                                         <rect key="frame" x="169" y="0.0" width="149" height="39"/>
@@ -63,7 +83,8 @@
                                                         <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" image="gear" catalog="system"/>
                                                         <connections>
-                                                            <segue destination="9oe-9Q-adp" kind="presentation" modalPresentationStyle="fullScreen" id="sud-rO-fYh"/>
+                                                            <action selector="settingsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VWq-Zk-O3d"/>
+                                                            <segue destination="pon-Pt-0oy" kind="presentation" identifier="goToSettings" modalPresentationStyle="fullScreen" id="D1W-8R-f5S"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -223,6 +244,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Today" id="wJB-f5-7Hb"/>
                     <connections>
                         <outlet property="asrLabel" destination="I7a-B2-VmF" id="7Bs-vJ-ObO"/>
                         <outlet property="asrTimeLabel" destination="TP0-9r-E97" id="usI-iQ-QW4"/>
@@ -240,21 +262,22 @@
                         <outlet property="settingsButton" destination="M1A-uf-EXb" id="IGM-Oj-Gt6"/>
                         <outlet property="sunriseLabel" destination="LAG-Ee-7f9" id="Odk-TG-0Zh"/>
                         <outlet property="sunriseTimeLabel" destination="FrZ-oY-Ebv" id="0d6-VW-sIC"/>
+                        <outlet property="timeUntilLabel" destination="jPD-Aj-i47" id="WPN-xY-PS0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="118.52678571428571"/>
+            <point key="canvasLocation" x="1047.8260869565217" y="118.52678571428571"/>
         </scene>
         <!--SettingsViewController-->
-        <scene sceneID="VTJ-g8-Wx8">
+        <scene sceneID="rDv-Wp-pjF">
             <objects>
-                <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="SettingsViewController" id="9oe-9Q-adp" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="6wx-Eq-gUO"/>
+                <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="SettingsViewController" id="pon-Pt-0oy" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="rcT-hT-WXO"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KQD-7z-N8Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NzJ-Su-oGP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="640" y="68"/>
+            <point key="canvasLocation" x="1618.1159420289857" y="125.89285714285714"/>
         </scene>
     </scenes>
     <resources>

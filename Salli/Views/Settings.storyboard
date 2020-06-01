@@ -3,36 +3,59 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="T77-6x-FBY">
+        <!--SettingsViewController-->
+        <scene sceneID="Vl9-gR-NfH">
             <objects>
-                <viewController storyboardIdentifier="SettingsViewController" id="JaS-dW-K7O" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="moH-B6-MsG">
+                <tableViewController title="SettingsViewController" id="f4i-LK-rpp" customClass="SettingsViewController" customModule="Salli" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="M0L-mn-SeL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8g-eP-CIy">
-                                <rect key="frame" x="91.5" y="418" width="231" height="60"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="50"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="q8g-eP-CIy" firstAttribute="centerY" secondItem="moH-B6-MsG" secondAttribute="centerY" id="IpI-0r-Ba0"/>
-                            <constraint firstItem="q8g-eP-CIy" firstAttribute="centerX" secondItem="moH-B6-MsG" secondAttribute="centerX" id="y0P-C0-zGj"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="kz6-NG-WL6"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Iv9-cg-53l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingCell" id="kag-nY-VgG">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kag-nY-VgG" id="juc-89-vdM">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="f4i-LK-rpp" id="rb3-RB-dyz"/>
+                            <outlet property="delegate" destination="f4i-LK-rpp" id="NFt-AJ-03Q"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="B1D-SK-jxq">
+                        <barButtonItem key="leftBarButtonItem" title="Done" id="Pg5-pU-isg">
+                            <connections>
+                                <action selector="doneBarButtonPressed:" destination="f4i-LK-rpp" id="3t7-gR-tpF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c7E-xY-ov2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="142.02898550724638" y="167.41071428571428"/>
+            <point key="canvasLocation" x="622" y="210"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="usk-Cw-lsv">
+            <objects>
+                <navigationController storyboardIdentifier="SettingsViewController" id="u4I-Cj-IOE" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Pia-ds-Awp">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="f4i-LK-rpp" kind="relationship" relationship="rootViewController" id="gbK-dG-bdp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YBS-e1-QMj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-298" y="209"/>
         </scene>
     </scenes>
 </document>

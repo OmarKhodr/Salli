@@ -53,7 +53,7 @@ init(_ date: Date) {
         return calendar.date(byAdding: dateComponents, to: Date())!
     }
 
-    /// the number or seconds since the beggining of the day, this is used for comparisions
+    // the number or seconds since the beggining of the day, this is used for comparisons
     private let secondsSinceBeginningOfDay: Int
 
     //comparisions so you can compare times
