@@ -17,5 +17,8 @@ class K {
     static let maghrib = "maghrib"
     static let isha = "isha"
     static let dayInSeconds: Double = 24*3600
-    static let settingsSegue = "goToSettings"
+    
+    struct Colors {
+        static let brandBlue = "brandBlue"
+    }
 }

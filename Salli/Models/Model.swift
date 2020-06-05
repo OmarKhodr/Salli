@@ -48,7 +48,9 @@ class Model {
         //likewise for current time
         let currTime = Date().time
         let currVal = Float(currTime.hour) + Float(currTime.minute)/60.0
-        let difference = abs(nextVal-currVal)
+        
+        //in case val. of next prayer is less than curr. val (i.e. fajr most likely) the difference would be that between curr and midnight added to nextVal.
+        let difference = nextVal >= currVal ? nextVal-currVal : 24-currVal+nextVal
         //converting difference from float format to hours/minutes to return.
         let hour = Int(difference)
         let minute = Int((difference-floor(difference))*60)
@@ -62,14 +64,22 @@ class Model {
         let minutesLeft = timeLeft.1
         var timeLeftString = ""
         if (hoursLeft == 0 && minutesLeft == 0) {
-            timeLeftString = "less than a minute "
+            timeLeftString = "Less than a minute "
         }
         else {
             if (hoursLeft > 0) {
-                timeLeftString += "\(hoursLeft) hours "
+                timeLeftString += "\(hoursLeft) hour"
+                if (hoursLeft > 1) {
+                    timeLeftString += "s"
+                }
+                timeLeftString += " "
             }
             if (minutesLeft > 0) {
-                timeLeftString += "\(minutesLeft) minutes "
+                timeLeftString += "\(minutesLeft) minute"
+                if (minutesLeft > 1) {
+                    timeLeftString += "s"
+                }
+                timeLeftString += " "
             }
             
         }

@@ -12,14 +12,11 @@ import CoreLocation
 
 class TimesViewController: UIViewController {
     
-    var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
+    @IBOutlet weak var cityCountryLabel: UILabel!
     @IBOutlet weak var timeUntilLabel: UILabel!
     @IBOutlet weak var currentDateLabel: UILabel!
     
     @IBOutlet weak var prayerTimesBackgroundView: UIView!
-    @IBOutlet weak var refreshButton: UIButton!
-    @IBOutlet weak var settingsButton: UIButton!
     
     @IBOutlet weak var fajrTimeLabel: UILabel!
     @IBOutlet weak var sunriseTimeLabel: UILabel!
@@ -34,6 +31,14 @@ class TimesViewController: UIViewController {
     @IBOutlet weak var asrLabel: UILabel!
     @IBOutlet weak var maghribLabel: UILabel!
     @IBOutlet weak var ishaLabel: UILabel!
+    
+    var cityCountry: String! {
+        didSet {
+            cityCountryLabel.text = cityCountry
+        }
+    }
+    
+    var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     //initialize location manager for requesting/fetching current location
     var locationManager = CLLocationManager()
@@ -56,16 +61,8 @@ class TimesViewController: UIViewController {
         currentDateLabel.text = "\(dateFor.string(from: Date())) AH"
         
         //adding rounded corners to background of prayer times
-        prayerTimesBackgroundView.layer.cornerRadius = 12
+        prayerTimesBackgroundView.layer.cornerRadius = 16
         prayerTimesBackgroundView.layer.masksToBounds = true
-        
-        //adding rounded corners to refresh button
-        refreshButton.layer.cornerRadius = 12
-        refreshButton.layer.masksToBounds = true
-        
-        //adding rounded corners to settings button
-        settingsButton.layer.cornerRadius = 12
-        settingsButton.layer.masksToBounds = true
         
         // setting view as delegate for location manager
         locationManager.delegate = self
@@ -76,19 +73,9 @@ class TimesViewController: UIViewController {
         //load prayer times either through valid data in database or fetching updated times if they're outdated, after which it updateUI() is called either by fetchPrayerTimes() in case data is outdated or the function itself in case it isn't.
         loadTimes()
         
-        //timer for calling loadTimes() every second.
-        _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(TimesViewController.loadTimes), userInfo: nil, repeats: true)
+        //timer for calling loadTimes() every tenth of a second.
+        _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(TimesViewController.loadTimes), userInfo: nil, repeats: true)
         
-    }
-    
-    @IBAction func refreshButtonPressed(_ sender: UIButton) {
-        animate(button: sender)
-        //refresh button calls loadTimes() so doesn't send HTTP request unless stored times are invalid
-        loadTimes()
-    }
-    
-    @IBAction func settingsButtonPressed(_ sender: UIButton) {
-        animate(button: sender)
     }
     
     
@@ -108,6 +95,29 @@ extension TimesViewController: CLLocationManagerDelegate {
             let lon = location.coordinate.longitude
             //call method of prayer times manager to perform GET request from the API to fetch the latest prayer times and update the UI
             prayerTimesManager.fetchPrayerTimes(latitude: lat, longitude: lon)
+            
+            let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(location, preferredLocale: nil) { (placemarkArray, error) in
+                if let error = error {
+                    print("\(error)")
+                } else {
+                    if let placemark = placemarkArray?.last {
+                        var city = ""
+                        if let ct = placemark.addressDictionary?["City"] {
+                            city = "\(ct), "
+                        }
+                        var state = ""
+                        if let st = placemark.addressDictionary?["State"] {
+                            state = "\(st), "
+                        }
+                        var country = ""
+                        if let cot = placemark.addressDictionary?["Country"] {
+                            country = "\(cot)"
+                        }
+                        self.cityCountry = "\(city)\(state)\(country)"
+                    }
+                }
+            }
             
         }
     }
@@ -233,6 +243,7 @@ extension TimesViewController {
         }
     }
     
+    //Updates time left, hightlights time of current time in blue
     func updateUI(with dict: [String: Date]) {
         
         //fetching dates from the model and coverting them to strings in --:-- AM/PM format.
@@ -242,6 +253,7 @@ extension TimesViewController {
         //dictionary to fetch which labels we want to target (in this case, color current prayer blue) based on their string names.
         let labels: [String: (UILabel, UILabel)] = [
             K.fajr : (fajrLabel, fajrTimeLabel),
+            K.sunrise : (sunriseLabel, sunriseTimeLabel),
             K.dhuhr : (dhuhrLabel, dhuhrTimeLabel),
             K.asr : (asrLabel, asrTimeLabel),
             K.maghrib : (maghribLabel, maghribTimeLabel),
@@ -265,16 +277,19 @@ extension TimesViewController {
         //calling main thread asynchronously to update UI elements
         DispatchQueue.main.async {
             //set prayer time labels.
-            self.fajrTimeLabel.text = formatter.string(from: dict[K.fajr]!)
-            self.sunriseTimeLabel.text = formatter.string(from: dict[K.sunrise]!)
-            self.dhuhrTimeLabel.text = formatter.string(from: dict[K.dhuhr]!)
-            self.asrTimeLabel.text = formatter.string(from: dict[K.asr]!)
-            self.maghribTimeLabel.text = formatter.string(from: dict[K.maghrib]!)
-            self.ishaTimeLabel.text = formatter.string(from: dict[K.isha]!)
-            //if current labels were assigned non-nil values then we should color the labels they reference (can be nil if no time has to be colored, e.g. sunrise).
+            for prayer in labels.keys {
+                let label = labels[prayer]!.0
+                let timeLabel = labels[prayer]!.1
+                label.textColor = UIColor.label
+                timeLabel.text = formatter.string(from: dict[prayer]!)
+                timeLabel.textColor = UIColor.label
+            }
+            //if current labels were assigned non-nil values then we should color the labels they reference.
             if let currLabel = currLabel, let currTimeLabel = currTimeLabel {
-                currLabel.textColor = #colorLiteral(red: 0.1450980392, green: 0.5137254902, blue: 0.8549019608, alpha: 1)
-                currTimeLabel.textColor = #colorLiteral(red: 0.1450980392, green: 0.5137254902, blue: 0.8549019608, alpha: 1)
+                if (currLabel != self.sunriseLabel) {
+                    currLabel.textColor = UIColor(named: K.Colors.brandBlue)
+                    currTimeLabel.textColor = UIColor(named: K.Colors.brandBlue)
+                }
             }
             //set string of time left label
             self.timeUntilLabel.text = timeLeftString
