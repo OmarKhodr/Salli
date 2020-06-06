@@ -32,12 +32,6 @@ class TimesViewController: UIViewController {
     @IBOutlet weak var maghribLabel: UILabel!
     @IBOutlet weak var ishaLabel: UILabel!
     
-    var cityCountry: String! {
-        didSet {
-            cityCountryLabel.text = cityCountry
-        }
-    }
-    
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     //initialize location manager for requesting/fetching current location
@@ -74,8 +68,7 @@ class TimesViewController: UIViewController {
         loadTimes()
         
         //timer for calling loadTimes() every tenth of a second.
-        _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(TimesViewController.loadTimes), userInfo: nil, repeats: true)
-        
+        _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(TimesViewController.loadTimes), userInfo: nil, repeats: true)
     }
     
     
@@ -90,34 +83,8 @@ extension TimesViewController: CLLocationManagerDelegate {
         if let location = locations.last {
             //stop updating location while fetching from array
             locationManager.stopUpdatingLocation()
-            //get latitude and longitude
-            let lat = location.coordinate.latitude
-            let lon = location.coordinate.longitude
             //call method of prayer times manager to perform GET request from the API to fetch the latest prayer times and update the UI
-            prayerTimesManager.fetchPrayerTimes(latitude: lat, longitude: lon)
-            
-            let geocoder = CLGeocoder()
-            geocoder.reverseGeocodeLocation(location, preferredLocale: nil) { (placemarkArray, error) in
-                if let error = error {
-                    print("\(error)")
-                } else {
-                    if let placemark = placemarkArray?.last {
-                        var city = ""
-                        if let ct = placemark.addressDictionary?["City"] {
-                            city = "\(ct), "
-                        }
-                        var state = ""
-                        if let st = placemark.addressDictionary?["State"] {
-                            state = "\(st), "
-                        }
-                        var country = ""
-                        if let cot = placemark.addressDictionary?["Country"] {
-                            country = "\(cot)"
-                        }
-                        self.cityCountry = "\(city)\(state)\(country)"
-                    }
-                }
-            }
+            prayerTimesManager.fetchPrayerTimes(withLocation: location)
             
         }
     }
@@ -153,6 +120,7 @@ extension TimesViewController: PrayerTimesManagerDelegate {
 
         //dictionary from model which contains just-fetched times
         let dict = model.times
+        let location = model.location
         
         //creating table entry for updated prayer times and saving them
         let newPrayerInfo = PrayerInfo(context: context)
@@ -163,11 +131,12 @@ extension TimesViewController: PrayerTimesManagerDelegate {
         newPrayerInfo.asr = dict[K.asr]!
         newPrayerInfo.maghrib = dict[K.maghrib]!
         newPrayerInfo.isha = dict[K.isha]!
+        newPrayerInfo.location = location
         
         //save entry in table
         saveContext()
         
-        updateUI(with: dict)
+        updateUI(with: model)
 
     }
 }
@@ -227,7 +196,11 @@ extension TimesViewController {
                         K.maghrib: info.maghrib!,
                         K.isha: info.isha!
                     ]
-                    updateUI(with: times)
+                    let location = info.location
+                    
+                    let model = PrayerTimesModel(times: times, location: location!)
+                    
+                    updateUI(with: model)
                 }
                 //if database never had an entry or entry was removed because it was invalid, request location to updated prayer times.
                 else {
@@ -244,7 +217,11 @@ extension TimesViewController {
     }
     
     //Updates time left, hightlights time of current time in blue
-    func updateUI(with dict: [String: Date]) {
+    func updateUI(with model: PrayerTimesModel) {
+        
+        let dict = model.times
+        
+        let location = model.location
         
         //fetching dates from the model and coverting them to strings in --:-- AM/PM format.
         let formatter = DateFormatter()
@@ -291,22 +268,24 @@ extension TimesViewController {
                     currTimeLabel.textColor = UIColor(named: K.Colors.brandBlue)
                 }
             }
+            self.cityCountryLabel.text = location
             //set string of time left label
             self.timeUntilLabel.text = timeLeftString
         }
     }
     
-    func animate(button: UIButton) {
-        //animate button by shrinking to 95% size for a tenth of a second then back to original size in the same time
-        UIView.animate(withDuration: 0.1,
-        animations: {
-            button.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        },
-        completion: { _ in
-            UIView.animate(withDuration: 0.1) {
-                button.transform = CGAffineTransform.identity
-            }
-        })
-    }
+    //was using to animate buttons which don't exist anymore, might use later
+//    func animate(button: UIButton) {
+//        //animate button by shrinking to 95% size for a tenth of a second then back to original size in the same time
+//        UIView.animate(withDuration: 0.1,
+//        animations: {
+//            button.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+//        },
+//        completion: { _ in
+//            UIView.animate(withDuration: 0.1) {
+//                button.transform = CGAffineTransform.identity
+//            }
+//        })
+//    }
 }
 

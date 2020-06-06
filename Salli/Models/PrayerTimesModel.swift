@@ -13,9 +13,10 @@ class PrayerTimesModel {
     
     //dictionary containing datetimes for prayers
     var times: [String: Date]
+    var location: String
     
     //constructor takes strings of times in 24-hour format (as it comes from API request) and converts them to date types
-    init(fajr: String, sunrise: String, dhuhr: String, asr: String, maghrib: String, isha: String) {
+    init(fajr: String, sunrise: String, dhuhr: String, asr: String, maghrib: String, isha: String, location: String) {
         times = [:]
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
@@ -25,5 +26,11 @@ class PrayerTimesModel {
         times[K.asr] = dateFormatter.date(from: asr)
         times[K.maghrib] = dateFormatter.date(from: maghrib)
         times[K.isha] = dateFormatter.date(from: isha)
+        self.location = location
+    }
+    
+    init(times: [String: Date], location: String) {
+        self.times = times
+        self.location = location
     }
 }

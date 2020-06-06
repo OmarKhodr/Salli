@@ -19,13 +19,38 @@ class PrayerTimesManager {
     var delegate: PrayerTimesManagerDelegate?
     
     //called from CLLocationManager's didUpdateLocation() method where the current location's latitude and longitude are taken to complete the URL to perform the GET request from the
-    func fetchPrayerTimes(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+    func fetchPrayerTimes(withLocation location: CLLocation) {
+        let latitude = location.coordinate.latitude
+        let longitude = location.coordinate.longitude
         //completes URL with latitude and longitude and the 4th method of prayer times calculations, currently hardcoded as 4 - Umm Al-Qura University, Makkah
         let urlString = "\(K.prayerTimesURL)&latitude=\(latitude)&longitude=\(longitude)&method=4"
-        performRequest(with: urlString)
+        //perform reverse geocode location operation to get user-friendly location representation (i.e. city, state, country) from coordinates.
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location, preferredLocale: nil) { (placemarksArray, error) in
+            if let error = error {
+                print("error performing reverse geolocation: \(error)")
+            } else {
+                if let placemark = placemarksArray?.last {
+                    var city = ""
+                    if let ct = placemark.locality {
+                        city = "\(ct), "
+                    }
+                    var state = ""
+                    if let st = placemark.subAdministrativeArea {
+                        state = "\(st), "
+                    }
+                    var country = ""
+                    if let cot = placemark.country {
+                        country = "\(cot)"
+                    }
+                    let locationStr = "\(city)\(state)\(country)"
+                    self.performRequest(with: urlString, locationString: locationStr)
+                }
+            }
+        }
     }
     
-    func performRequest(with urlString: String) {
+    func performRequest(with urlString: String, locationString: String) {
         //1. Creating URL from string
         if let url = URL(string: urlString) {
             //2. Creating URLSession
@@ -37,8 +62,8 @@ class PrayerTimesManager {
                     return
                 }
                 if let safeData = data {
-                    //parse received JSON data and pass model to delegate
-                    if let model = self.parseJSON(safeData) {
+                    //build model by parsing JSON data and adding location string, then pass that model to the delegate
+                    if let model = self.buildModel(data: safeData, location: locationString) {
                         self.delegate?.didUpdatePrayerTimes(self, model)
                     }
                     
@@ -49,7 +74,7 @@ class PrayerTimesManager {
         }
     }
     
-    func parseJSON(_ prayerTimesData: Foundation.Data) -> PrayerTimesModel? {
+    func buildModel(data prayerTimesData: Foundation.Data, location: String) -> PrayerTimesModel? {
         //initializes decoder
         let decoder = JSONDecoder()
         do {
@@ -60,7 +85,8 @@ class PrayerTimesManager {
                                          dhuhr: decodedData.data.timings.Dhuhr,
                                          asr: decodedData.data.timings.Asr,
                                          maghrib: decodedData.data.timings.Maghrib,
-                                         isha: decodedData.data.timings.Isha)
+                                         isha: decodedData.data.timings.Isha,
+                                         location: location)
             //return the model for it to be passed as argument to didUpdatePrayerTimes() to be used by the delegate
             return model
             
