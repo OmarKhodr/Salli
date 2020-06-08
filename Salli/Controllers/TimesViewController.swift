@@ -12,6 +12,8 @@ import CoreLocation
 
 class TimesViewController: UIViewController {
     
+    var times: [Date] = []
+    
     @IBOutlet weak var cityCountryLabel: UILabel!
     @IBOutlet weak var timeUntilLabel: UILabel!
     @IBOutlet weak var currentDateLabel: UILabel!

@@ -80,6 +80,16 @@ class PrayerTimesManager {
         do {
             let decodedData = try decoder.decode(PrayerTimesData.self, from: prayerTimesData)
             //create model from decoded data of type PrayerTimesData to properly format the dates from strings to actual date types
+            let times: [String] = [
+                decodedData.data.timings.Fajr,
+                decodedData.data.timings.Sunrise,
+                decodedData.data.timings.Dhuhr,
+                decodedData.data.timings.Asr,
+                decodedData.data.timings.Maghrib,
+                decodedData.data.timings.Isha,
+                decodedData.data.timings.Midnight,
+                decodedData.data.timings.Imsak
+            ]
             let model = PrayerTimesModel(fajr: decodedData.data.timings.Fajr,
                                          sunrise: decodedData.data.timings.Sunrise,
                                          dhuhr: decodedData.data.timings.Dhuhr,

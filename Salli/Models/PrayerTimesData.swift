@@ -23,4 +23,6 @@ struct Timings: Codable {
     let Asr: String
     let Maghrib: String
     let Isha: String
+    let Midnight: String
+    let Imsak: String
 }
