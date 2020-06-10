@@ -90,13 +90,7 @@ class PrayerTimesManager {
                 decodedData.data.timings.Midnight,
                 decodedData.data.timings.Imsak
             ]
-            let model = PrayerTimesModel(fajr: decodedData.data.timings.Fajr,
-                                         sunrise: decodedData.data.timings.Sunrise,
-                                         dhuhr: decodedData.data.timings.Dhuhr,
-                                         asr: decodedData.data.timings.Asr,
-                                         maghrib: decodedData.data.timings.Maghrib,
-                                         isha: decodedData.data.timings.Isha,
-                                         location: location)
+            let model = PrayerTimesModel(stringArray: times, location: location)
             //return the model for it to be passed as argument to didUpdatePrayerTimes() to be used by the delegate
             return model
             

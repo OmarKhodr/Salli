@@ -12,27 +12,24 @@ import CoreLocation
 
 class TimesViewController: UIViewController {
     
-    var times: [Date] = []
-    
-    @IBOutlet weak var cityCountryLabel: UILabel!
-    @IBOutlet weak var timeUntilLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var timeLeftLabel: UILabel!
     @IBOutlet weak var currentDateLabel: UILabel!
     
     @IBOutlet weak var prayerTimesBackgroundView: UIView!
     
-    @IBOutlet weak var fajrTimeLabel: UILabel!
-    @IBOutlet weak var sunriseTimeLabel: UILabel!
-    @IBOutlet weak var dhuhrTimeLabel: UILabel!
-    @IBOutlet weak var asrTimeLabel: UILabel!
-    @IBOutlet weak var maghribTimeLabel: UILabel!
-    @IBOutlet weak var ishaTimeLabel: UILabel!
+    @IBOutlet var prayerLabels: [UILabel]!
+    @IBOutlet var prayerTimeLabels: [UILabel]!
     
-    @IBOutlet weak var fajrLabel: UILabel!
-    @IBOutlet weak var sunriseLabel: UILabel!
-    @IBOutlet weak var dhuhrLabel: UILabel!
-    @IBOutlet weak var asrLabel: UILabel!
-    @IBOutlet weak var maghribLabel: UILabel!
-    @IBOutlet weak var ishaLabel: UILabel!
+    @IBOutlet weak var midnightHStack: UIStackView!
+    @IBOutlet weak var imsakHStack: UIStackView!
+    
+    var prayerTimes: [Date] = []
+    
+    var locationString: String = ""
+    
+    var timeLeftString: String = ""
+    
     
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -44,6 +41,13 @@ class TimesViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        midnightHStack.isHidden = true
+        imsakHStack.isHidden = true
+        
+        locationLabel.text = ""
+        timeLeftLabel.text = ""
+        currentDateLabel.text = ""
         
         //Setting date label as current Hijri date
         let dateFor = DateFormatter()
@@ -60,7 +64,7 @@ class TimesViewController: UIViewController {
         prayerTimesBackgroundView.layer.cornerRadius = 16
         prayerTimesBackgroundView.layer.masksToBounds = true
         
-        // setting view as delegate for location manager
+        //setting view as delegate for location manager
         locationManager.delegate = self
         
         //setting view as delegate for prayer times manager
@@ -70,7 +74,7 @@ class TimesViewController: UIViewController {
         loadTimes()
         
         //timer for calling loadTimes() every tenth of a second.
-        _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(TimesViewController.loadTimes), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(TimesViewController.updateUI), userInfo: nil, repeats: true)
     }
     
     
@@ -121,24 +125,29 @@ extension TimesViewController: PrayerTimesManagerDelegate {
         }
 
         //dictionary from model which contains just-fetched times
-        let dict = model.times
+        let times = model.times
         let location = model.location
         
         //creating table entry for updated prayer times and saving them
         let newPrayerInfo = PrayerInfo(context: context)
         newPrayerInfo.dateFetched = Date()
-        newPrayerInfo.fajr = dict[K.fajr]!
-        newPrayerInfo.sunrise = dict[K.sunrise]!
-        newPrayerInfo.dhuhr = dict[K.dhuhr]!
-        newPrayerInfo.asr = dict[K.asr]!
-        newPrayerInfo.maghrib = dict[K.maghrib]!
-        newPrayerInfo.isha = dict[K.isha]!
+        newPrayerInfo.fajr = times[0]
+        newPrayerInfo.sunrise = times[1]
+        newPrayerInfo.dhuhr = times[2]
+        newPrayerInfo.asr = times[3]
+        newPrayerInfo.maghrib = times[4]
+        newPrayerInfo.isha = times[5]
+        newPrayerInfo.midnight = times[6]
+        newPrayerInfo.imsak = times[7]
         newPrayerInfo.location = location
         
         //save entry in table
         saveContext()
         
-        updateUI(with: model)
+        prayerTimes = times
+        locationString = location
+        
+        updateUI()
 
     }
 }
@@ -190,19 +199,21 @@ extension TimesViewController {
                 if (array.count == 1) {
                     let info = array.first!
                     //store found data in dictionary which matches model's way of storing times so that we can pass it to updateUI().
-                    let times: [String: Date] = [
-                        K.fajr: info.fajr!,
-                        K.sunrise: info.sunrise!,
-                        K.dhuhr: info.dhuhr!,
-                        K.asr: info.asr!,
-                        K.maghrib: info.maghrib!,
-                        K.isha: info.isha!
+                    prayerTimes = [
+                        info.fajr!,
+                        info.sunrise!,
+                        info.dhuhr!,
+                        info.asr!,
+                        info.maghrib!,
+                        info.isha!,
+                        info.midnight!,
+                        info.imsak!
                     ]
-                    let location = info.location
+                    locationString = info.location!
                     
-                    let model = PrayerTimesModel(times: times, location: location!)
+                    updateUI()
+
                     
-                    updateUI(with: model)
                 }
                 //if database never had an entry or entry was removed because it was invalid, request location to updated prayer times.
                 else {
@@ -218,61 +229,61 @@ extension TimesViewController {
         }
     }
     
-    //Updates time left, hightlights time of current time in blue
-    func updateUI(with model: PrayerTimesModel) {
+    @objc func updateUI() {
         
-        let dict = model.times
+        if prayerTimes.count == 0 {
+            return
+        }
         
-        let location = model.location
+        var nextPrayer = Model.nextPrayer(prayerTimes)
+        nextPrayer = nextPrayer.prefix(1).capitalized + nextPrayer.dropFirst()
+        timeLeftString = Model.timeLeftString(prayerTimes, nextPrayer)
         
-        //fetching dates from the model and coverting them to strings in --:-- AM/PM format.
+        let currentPrayer = Model.currentPrayer(prayerTimes)
+        
+        var currentTag = K.prayersArray.firstIndex(of: currentPrayer)!
+        
+        let noHighlight = [1,6,7]
+        if noHighlight.contains(currentTag) {
+            currentTag = -1
+        }
+        
+        let highlightColor = UIColor(named: K.Colors.brandBlue)
+        
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm a"
         
-        //dictionary to fetch which labels we want to target (in this case, color current prayer blue) based on their string names.
-        let labels: [String: (UILabel, UILabel)] = [
-            K.fajr : (fajrLabel, fajrTimeLabel),
-            K.sunrise : (sunriseLabel, sunriseTimeLabel),
-            K.dhuhr : (dhuhrLabel, dhuhrTimeLabel),
-            K.asr : (asrLabel, asrTimeLabel),
-            K.maghrib : (maghribLabel, maghribTimeLabel),
-            K.isha : (ishaLabel, ishaTimeLabel)
-        ]
-        
-        //get string of current prayer.
-        let current: String = Model.currentPrayer(dict)
-
-        //set labels that we will color blue to reference those of current prayer time.
-        let currLabel: UILabel? = labels[current]?.0
-        let currTimeLabel: UILabel? = labels[current]?.1
-        
-        //get string of next prayer then capitalize first letter to display on UI.
-        var nextPrayer: String = Model.nextPrayer(dict)
-        nextPrayer = nextPrayer.prefix(1).capitalized + nextPrayer.dropFirst()
-        
-        //get time left string, fully formattted thanks to Model.
-        let timeLeftString = Model.timeLeftString(dict, nextPrayer)
-
-        //calling main thread asynchronously to update UI elements
         DispatchQueue.main.async {
-            //set prayer time labels.
-            for prayer in labels.keys {
-                let label = labels[prayer]!.0
-                let timeLabel = labels[prayer]!.1
-                label.textColor = UIColor.label
-                timeLabel.text = formatter.string(from: dict[prayer]!)
-                timeLabel.textColor = UIColor.label
+            
+            self.locationLabel.text = self.locationString
+            
+            self.timeLeftLabel.text = self.timeLeftString
+            
+            for timeLabel in self.prayerTimeLabels {
+                let string = formatter.string(from: self.prayerTimes[timeLabel.tag])
+                timeLabel.text = string
             }
-            //if current labels were assigned non-nil values then we should color the labels they reference.
-            if let currLabel = currLabel, let currTimeLabel = currTimeLabel {
-                if (currLabel != self.sunriseLabel) {
-                    currLabel.textColor = UIColor(named: K.Colors.brandBlue)
-                    currTimeLabel.textColor = UIColor(named: K.Colors.brandBlue)
-                }
+            
+            self.resetLabelColors(of: self.prayerLabels)
+            self.resetLabelColors(of: self.prayerTimeLabels)
+            
+            self.setLabelColor(in: self.prayerLabels, tag: currentTag, color: highlightColor)
+            self.setLabelColor(in: self.prayerTimeLabels, tag: currentTag, color: highlightColor)
+        }
+        
+    }
+    
+    func resetLabelColors(of labelArray: [UILabel]) {
+        for label in labelArray {
+            label.textColor = .label
+        }
+    }
+    
+    func setLabelColor(in labelArray: [UILabel], tag: Int, color: UIColor?) {
+        for label in labelArray {
+            if label.tag == tag  {
+                label.textColor = color
             }
-            self.cityCountryLabel.text = location
-            //set string of time left label
-            self.timeUntilLabel.text = timeLeftString
         }
     }
     
@@ -289,5 +300,6 @@ extension TimesViewController {
 //            }
 //        })
 //    }
+    
 }
 

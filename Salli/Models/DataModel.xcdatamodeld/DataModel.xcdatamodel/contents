@@ -5,12 +5,14 @@
         <attribute name="dateFetched" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dhuhr" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="fajr" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="imsak" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isha" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="location" attributeType="String"/>
         <attribute name="maghrib" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="midnight" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="sunrise" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <elements>
-        <element name="PrayerInfo" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="PrayerInfo" positionX="-63" positionY="-18" width="128" height="193"/>
     </elements>
 </model>

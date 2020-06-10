@@ -10,6 +10,7 @@ import Foundation
 
 class K {
     static let prayerTimesURL = "https://api.aladhan.com/v1/timings?"
+    static let prayersArray = ["fajr", "sunrise", "dhuhr", "asr", "maghrib", "isha", "midnight", "imsak"]
     static let fajr = "fajr"
     static let sunrise = "sunrise"
     static let dhuhr = "dhuhr"

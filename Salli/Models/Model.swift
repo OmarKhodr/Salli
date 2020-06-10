@@ -10,39 +10,60 @@ import Foundation
 
 class Model {
     //takes dictionary from model containing the times to determine which prayer is the current one.
-    static func currentPrayer(_ dict: [String: Date]) -> String {
+    static func currentPrayer(_ times: [Date]) -> String {
+        
         let currTime = Date().time
-        switch currTime {
-            case dict[K.fajr]!.time..<dict[K.sunrise]!.time:
-                return K.fajr
-        case dict[K.sunrise]!.time..<dict[K.dhuhr]!.time:
-                return K.sunrise
-            case dict[K.dhuhr]!.time..<dict[K.asr]!.time:
-                return K.dhuhr
-            case dict[K.asr]!.time..<dict[K.maghrib]!.time:
-                return K.asr
-            case dict[K.maghrib]!.time..<dict[K.isha]!.time:
-                return K.maghrib
-            case dict[K.isha]!.time..<Time(23, 59):
-                return K.isha
-            default:
-                return ""
+
+        //i from fajr (0) to maghrib (4) to not hightlight midnight or imsak
+        for i in 0...times.count-1 {
+            
+            let previous = times[i].time
+            let next = times[i+1].time
+            
+            if previous < next {
+                let range = previous..<next
+                
+                //i != 1 for sunrise, don't want to highlight sunrise
+                if range.contains(currTime) {
+                    return K.prayersArray[i]
+                }
+            }
+            else {
+                let rangePre = previous..<Time(23,59)
+                let rangePost = Time(0,0)..<next
+                
+                if rangePre.contains(currTime) || rangePost.contains(currTime) {
+                    return K.prayersArray[i]
+                }
+            }
+            
         }
+        return ""
     }
     
     //uses current prayer to determine next one using an array with a counter that loops back to the beginning if needed (e.g. current is isha, then next is fajr).
-    static func nextPrayer(_ dict: [String: Date]) -> String {
-        let current = currentPrayer(dict)
-        let prayers = ["fajr", "sunrise", "dhuhr", "asr", "maghrib", "isha"]
+    static func nextPrayer(_ times: [Date]) -> String {
+        
+        let current = currentPrayer(times)
+        
+        if current == "midnight" {
+            return "fajr"
+        }
+        
+        let prayers = K.prayersArray
+        
         let nextPrayerIndex = (prayers.firstIndex(of: current)!+1) % prayers.count
         return prayers[nextPrayerIndex]
     }
     
     //calculates time between now and next prayer and returns tuple of hours and minutes left.
-    static func timeUntilNextPrayer(_ dict: [String: Date]) -> (Int, Int) {
-        let next = nextPrayer(dict)
+    static func timeUntilNextPrayer(_ times: [Date]) -> (Int, Int) {
+        
+        let next = nextPrayer(times)
+        let prayers = K.prayersArray
+        
         //get time value of next prayer
-        let nextTime: Time = dict[next]!.time
+        let nextTime: Time = times[prayers.firstIndex(of: next)!].time
         //this is the float time value in order to calculate the difference correctly (e.g. 2h15min -> 2.25).
         let nextVal = Float(nextTime.hour) + Float(nextTime.minute)/60.0
         //likewise for current time
@@ -58,12 +79,12 @@ class Model {
     }
     
     //formats final string for time left, takes dictionary to pass to timeUntilNextPrayer() and the capitalized version of the string for the next prayer
-    static func timeLeftString(_ dict: [String: Date], _ nextPrayer: String) -> String {
-        let timeLeft: (Int, Int) = timeUntilNextPrayer(dict)
+    static func timeLeftString(_ times: [Date], _ nextPrayer: String) -> String {
+        let timeLeft: (Int, Int) = timeUntilNextPrayer(times)
         let hoursLeft = timeLeft.0
         let minutesLeft = timeLeft.1
         var timeLeftString = ""
-        if (hoursLeft == 0 && minutesLeft == 0) {
+        if (hoursLeft == 0 && minutesLeft == 1) {
             timeLeftString = "Less than a minute "
         }
         else {
@@ -74,11 +95,8 @@ class Model {
                 }
                 timeLeftString += " "
             }
-            if (minutesLeft > 0) {
-                timeLeftString += "\(minutesLeft) minute"
-                if (minutesLeft > 1) {
-                    timeLeftString += "s"
-                }
+            if (minutesLeft > 1) {
+                timeLeftString += "\(minutesLeft) minutes"
                 timeLeftString += " "
             }
             
