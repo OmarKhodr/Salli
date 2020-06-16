@@ -42,9 +42,11 @@ class TimesViewController: UIViewController {
         
         super.viewDidLoad()
         
+        //TESTING - hiding midnight and imsak HStacks for now.
         midnightHStack.isHidden = true
         imsakHStack.isHidden = true
         
+        //clearing labels to prepare them for being updated by Core Data and/or CLLocationManager
         locationLabel.text = ""
         timeLeftLabel.text = ""
         currentDateLabel.text = ""
@@ -71,9 +73,12 @@ class TimesViewController: UIViewController {
         prayerTimesManager.delegate = self
         
         //load prayer times either through valid data in database or fetching updated times if they're outdated, after which it updateUI() is called either by fetchPrayerTimes() in case data is outdated or the function itself in case it isn't.
+        
+        
+        //fetching data (if available) from database and checking if still valid, request location to update them if either check fails.
         loadTimes()
         
-        //timer for calling loadTimes() every tenth of a second.
+        //timer for calling updateUI() on separate thread every tenth of a second.
         _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(TimesViewController.updateUI), userInfo: nil, repeats: true)
     }
     
@@ -118,7 +123,6 @@ extension TimesViewController: PrayerTimesManagerDelegate {
             for entry in array {
                 context.delete(entry)
             }
-            saveContext()
         }
         catch {
             print("error deleting old entries in database: \(error)")
@@ -146,15 +150,15 @@ extension TimesViewController: PrayerTimesManagerDelegate {
         
         prayerTimes = times
         locationString = location
-        
-        updateUI()
 
     }
 }
 
-//MARK: - Supporting Methods
+
 
 extension TimesViewController {
+    
+//MARK: - Core Data Methods
     
     //saving Core Data context.
     func saveContext () {
@@ -167,6 +171,34 @@ extension TimesViewController {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        }
+    }
+    
+    //assigns data inside PrayerInfo entry into prayerTimes array and location string
+    func assignData(with info: PrayerInfo) {
+        prayerTimes = [
+            info.fajr!,
+            info.sunrise!,
+            info.dhuhr!,
+            info.asr!,
+            info.maghrib!,
+            info.isha!,
+            info.midnight!,
+            info.imsak!
+        ]
+        locationString = info.location!
+    }
+    
+    //fetches the single instance of prayerInfo and returns it
+    func fetch() -> PrayerInfo? {
+        let request: NSFetchRequest<PrayerInfo> = PrayerInfo.fetchRequest()
+        do {
+            let array = try context.fetch(request)
+            return array.first
+        }
+        catch {
+            print("error fetching request: \(error)")
+            return nil
         }
     }
     
@@ -187,9 +219,17 @@ extension TimesViewController {
                 //if entry exists, check if valid and remove it from database
                 if (array.count == 1) {
                     let info = array.first!
-                    let age = abs(Date().distance(to: (info.dateFetched)!))
-                    //if time between now and date of creation is more than 24 hours, delete entry from database and empty result array
-                    if (age > K.dayInSeconds) {
+                    let dateFetched = info.dateFetched!
+            
+                    //time between now and time data was last updated, in seconds
+                    let age = abs(Date().distance(to: dateFetched))
+                    
+                    //time at which we fetched data
+                    let timeFetched = dateFetched.time
+                    let currTime = Date().time
+                    
+                    //if time between now and date of creation is more than 24 hours or time of creation is bigger than current time (i.e. current time has passed midnight), delete entry from database and empty result array
+                    if (age > K.dayInSeconds || timeFetched > currTime) {
                         context.delete(info)
                         saveContext()
                         array = []
@@ -210,8 +250,6 @@ extension TimesViewController {
                         info.imsak!
                     ]
                     locationString = info.location!
-                    
-                    updateUI()
 
                     
                 }
@@ -229,20 +267,29 @@ extension TimesViewController {
         }
     }
     
+//MARK: - UI Helper Methods
+    
     @objc func updateUI() {
         
+        //if prayerTimes not yet loaded into array, nothing to update.
         if prayerTimes.count == 0 {
             return
         }
         
+        //use model to get string of next prayer
         var nextPrayer = Model.nextPrayer(prayerTimes)
+        //capitalize first character
         nextPrayer = nextPrayer.prefix(1).capitalized + nextPrayer.dropFirst()
+        //set string for time left using model function to which we pass captialized string of next prayer
         timeLeftString = Model.timeLeftString(prayerTimes, nextPrayer)
         
+        //use model to get string of current prayer
         let currentPrayer = Model.currentPrayer(prayerTimes)
         
+        //get "index" of current prayer using constant array of prayer names
         var currentTag = K.prayersArray.firstIndex(of: currentPrayer)!
         
+        //if prayer tag is either 1 (Sunrise), 6 (Midnight) or 7 (Imsak), do not highlight
         let noHighlight = [1,6,7]
         if noHighlight.contains(currentTag) {
             currentTag = -1
@@ -253,20 +300,23 @@ extension TimesViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm a"
         
+        //updating UI elements on main thread.
         DispatchQueue.main.async {
             
             self.locationLabel.text = self.locationString
             
             self.timeLeftLabel.text = self.timeLeftString
             
+            //setting time labels using prayerTimes property
             for timeLabel in self.prayerTimeLabels {
-                let string = formatter.string(from: self.prayerTimes[timeLabel.tag])
-                timeLabel.text = string
+                timeLabel.text = formatter.string(from: self.prayerTimes[timeLabel.tag])
             }
             
+            //reset colors of all labels to initial color
             self.resetLabelColors(of: self.prayerLabels)
             self.resetLabelColors(of: self.prayerTimeLabels)
             
+            //set highlight color to current prayer
             self.setLabelColor(in: self.prayerLabels, tag: currentTag, color: highlightColor)
             self.setLabelColor(in: self.prayerTimeLabels, tag: currentTag, color: highlightColor)
         }
