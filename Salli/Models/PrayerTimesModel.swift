@@ -9,7 +9,7 @@
 import Foundation
 
 //model for prayer times after having fetched them from API request
-class PrayerTimesModel {
+struct PrayerTimesModel {
     
     //dictionary containing datetimes for prayers
     var times: [Date]

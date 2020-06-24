@@ -95,7 +95,7 @@ extension TimesViewController: CLLocationManagerDelegate {
             //stop updating location while fetching from array
             locationManager.stopUpdatingLocation()
             //call method of prayer times manager to perform GET request from the API to fetch the latest prayer times and update the UI
-            prayerTimesManager.fetchPrayerTimes(withLocation: location)
+            prayerTimesManager.fetchTimings(coordinates: location)
             
         }
     }
@@ -103,6 +103,13 @@ extension TimesViewController: CLLocationManagerDelegate {
     //in case updating location fails
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("failed to update location: \(error)")
+    }
+    
+    func requestLocation() {
+        // Request location permission in case app isn't allowed
+        locationManager.requestWhenInUseAuthorization()
+        //request location
+        locationManager.requestLocation()
     }
 }
 
@@ -189,9 +196,8 @@ extension TimesViewController {
         locationString = info.location!
     }
     
-    //fetches the single instance of prayerInfo and returns it
-    func fetch() -> PrayerInfo? {
-        let request: NSFetchRequest<PrayerInfo> = PrayerInfo.fetchRequest()
+    //fetches the single instance of PrayerInfo and returns it (optional in case of error or non-existence of data
+    func fetch(with request: NSFetchRequest<PrayerInfo> = PrayerInfo.fetchRequest()) -> PrayerInfo? {
         do {
             let array = try context.fetch(request)
             return array.first
@@ -202,68 +208,32 @@ extension TimesViewController {
         }
     }
     
-    //function for loading prayer times to display on UI.
-    //two possible scenarios:
-    //1- database either has no previously stored prayer info or has outdated data (previous day's prayer times for e.g.) in which case a request to get the current location is sent.
-    //2- database already has updated prayer times in which case they're read from the database.
-    @objc func loadTimes() {
-        //initialize fetch request to read prayer times from database to determine if they exist and if they are valid.
-        let request: NSFetchRequest<PrayerInfo> = PrayerInfo.fetchRequest()
-        do {
-            var array = try context.fetch(request)
-            //if more than one entry in database, impossible since by design only one entry is stored at a time so throw an exception.
-            if (array.count > 1) {
-                throw ImpossibleDatabaseStateError.runtimeError(array.count)
-            }
-            else {
-                //if entry exists, check if valid and remove it from database
-                if (array.count == 1) {
-                    let info = array.first!
-                    let dateFetched = info.dateFetched!
+    func loadTimes() {
+        let info: PrayerInfo? = fetch()
+        if let info = info {
+            assignData(with: info)
+        }
+        updateTimes(with: info)
+    }
+    
+    func updateTimes(with info: PrayerInfo?) {
+        if let info = info {
+            let dateFetched = info.dateFetched!
             
-                    //time between now and time data was last updated, in seconds
-                    let age = abs(Date().distance(to: dateFetched))
-                    
-                    //time at which we fetched data
-                    let timeFetched = dateFetched.time
-                    let currTime = Date().time
-                    
-                    //if time between now and date of creation is more than 24 hours or time of creation is bigger than current time (i.e. current time has passed midnight), delete entry from database and empty result array
-                    if (age > K.dayInSeconds || timeFetched > currTime) {
-                        context.delete(info)
-                        saveContext()
-                        array = []
-                    }
-                }
-                //check again if entry is still in result array in which case it's valid
-                if (array.count == 1) {
-                    let info = array.first!
-                    //store found data in dictionary which matches model's way of storing times so that we can pass it to updateUI().
-                    prayerTimes = [
-                        info.fajr!,
-                        info.sunrise!,
-                        info.dhuhr!,
-                        info.asr!,
-                        info.maghrib!,
-                        info.isha!,
-                        info.midnight!,
-                        info.imsak!
-                    ]
-                    locationString = info.location!
-
-                    
-                }
-                //if database never had an entry or entry was removed because it was invalid, request location to updated prayer times.
-                else {
-                    // Request location permission in case app isn't allowed
-                    locationManager.requestWhenInUseAuthorization()
-                    //request location
-                    locationManager.requestLocation()
-                }
+            //time between now and time data was last updated, in seconds
+            let age = abs(Date().distance(to: dateFetched))
+            
+            //time at which we fetched data
+            let timeFetched = dateFetched.time
+            let currTime = Date().time
+            
+            //if time between now and date of creation is more than 24 hours or time of creation is bigger than current time (i.e. current time has passed midnight), delete entry from database and empty result array
+            if (age > K.dayInSeconds || timeFetched > currTime) {
+                requestLocation()
             }
         }
-        catch {
-            print("error fetching request: \(error)")
+        else {
+            requestLocation()
         }
     }
     
@@ -277,14 +247,14 @@ extension TimesViewController {
         }
         
         //use model to get string of next prayer
-        var nextPrayer = Model.nextPrayer(prayerTimes)
+        var nextPrayer = PrayerCurrentInformation.nextPrayer(prayerTimes)
         //capitalize first character
         nextPrayer = nextPrayer.prefix(1).capitalized + nextPrayer.dropFirst()
         //set string for time left using model function to which we pass captialized string of next prayer
-        timeLeftString = Model.timeLeftString(prayerTimes, nextPrayer)
+        timeLeftString = PrayerCurrentInformation.timeLeftString(prayerTimes, nextPrayer)
         
         //use model to get string of current prayer
-        let currentPrayer = Model.currentPrayer(prayerTimes)
+        let currentPrayer = PrayerCurrentInformation.currentPrayer(prayerTimes)
         
         //get "index" of current prayer using constant array of prayer names
         var currentTag = K.prayersArray.firstIndex(of: currentPrayer)!

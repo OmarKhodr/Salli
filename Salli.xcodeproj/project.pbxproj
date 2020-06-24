@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		23BBD40824822715003B0EC7 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23BBD40624822715003B0EC7 /* DataModel.xcdatamodeld */; };
-		23BBD40D24826CA8003B0EC7 /* ImpossibleDatabaseStateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BBD40C24826CA8003B0EC7 /* ImpossibleDatabaseStateError.swift */; };
 		23BBD40F24828950003B0EC7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BBD40E24828950003B0EC7 /* SettingsViewController.swift */; };
 		23BFD140247D13FA00E0EF2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD13F247D13FA00E0EF2F /* AppDelegate.swift */; };
 		23BFD142247D13FA00E0EF2F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD141247D13FA00E0EF2F /* SceneDelegate.swift */; };
@@ -23,12 +22,11 @@
 		23BFD15F247D390C00E0EF2F /* PrayerTimesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */; };
 		23F0AA36247FD78B0013F880 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F0AA35247FD78B0013F880 /* Time.swift */; };
 		23F0AA38247FF2E70013F880 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23F0AA37247FF2E70013F880 /* Settings.storyboard */; };
-		23FBFE782484DBCD004E11B5 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FBFE772484DBCD004E11B5 /* Model.swift */; };
+		23FBFE782484DBCD004E11B5 /* PrayerCurrentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FBFE772484DBCD004E11B5 /* PrayerCurrentInformation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		23BBD40724822715003B0EC7 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
-		23BBD40C24826CA8003B0EC7 /* ImpossibleDatabaseStateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpossibleDatabaseStateError.swift; sourceTree = "<group>"; };
 		23BBD40E24828950003B0EC7 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		23BFD13C247D13FA00E0EF2F /* Salli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23BFD13F247D13FA00E0EF2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,7 +43,7 @@
 		23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesModel.swift; sourceTree = "<group>"; };
 		23F0AA35247FD78B0013F880 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		23F0AA37247FF2E70013F880 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
-		23FBFE772484DBCD004E11B5 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		23FBFE772484DBCD004E11B5 /* PrayerCurrentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerCurrentInformation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +57,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		230EAAEB24A3D39A00B8FDAC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				23BFD158247D318700E0EF2F /* Constants.swift */,
+				23BFD148247D13FD00E0EF2F /* Assets.xcassets */,
+				23BFD14A247D13FD00E0EF2F /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		23BFD133247D13FA00E0EF2F = {
 			isa = PBXGroup;
 			children = (
@@ -83,10 +91,8 @@
 				23BFD157247D2EC600E0EF2F /* Models */,
 				23BFD154247D2EA800E0EF2F /* Views */,
 				23BFD153247D2E9F00E0EF2F /* Controllers */,
-				23BFD148247D13FD00E0EF2F /* Assets.xcassets */,
-				23BFD14A247D13FD00E0EF2F /* LaunchScreen.storyboard */,
+				230EAAEB24A3D39A00B8FDAC /* Supporting Files */,
 				23BFD14D247D13FD00E0EF2F /* Info.plist */,
-				23BFD158247D318700E0EF2F /* Constants.swift */,
 			);
 			path = Salli;
 			sourceTree = "<group>";
@@ -117,8 +123,7 @@
 				23BFD15C247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift */,
 				23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */,
 				23F0AA35247FD78B0013F880 /* Time.swift */,
-				23BBD40C24826CA8003B0EC7 /* ImpossibleDatabaseStateError.swift */,
-				23FBFE772484DBCD004E11B5 /* Model.swift */,
+				23FBFE772484DBCD004E11B5 /* PrayerCurrentInformation.swift */,
 				23BBD40624822715003B0EC7 /* DataModel.xcdatamodeld */,
 			);
 			path = Models;
@@ -197,12 +202,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				23BFD159247D318700E0EF2F /* Constants.swift in Sources */,
-				23FBFE782484DBCD004E11B5 /* Model.swift in Sources */,
+				23FBFE782484DBCD004E11B5 /* PrayerCurrentInformation.swift in Sources */,
 				23BBD40824822715003B0EC7 /* DataModel.xcdatamodeld in Sources */,
 				23BFD15B247D342000E0EF2F /* PrayerTimesData.swift in Sources */,
 				23BFD144247D13FA00E0EF2F /* TimesViewController.swift in Sources */,
 				23BFD140247D13FA00E0EF2F /* AppDelegate.swift in Sources */,
-				23BBD40D24826CA8003B0EC7 /* ImpossibleDatabaseStateError.swift in Sources */,
 				23BFD15D247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift in Sources */,
 				23BFD142247D13FA00E0EF2F /* SceneDelegate.swift in Sources */,
 				23F0AA36247FD78B0013F880 /* Time.swift in Sources */,
