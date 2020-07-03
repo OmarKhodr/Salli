@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23AD38BA24AA18590071A3DF /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 23AD38B924AA18590071A3DF /* Adhan */; };
+		23AD38BC24AA1AAE0071A3DF /* locationNameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AD38BB24AA1AAE0071A3DF /* locationNameManager.swift */; };
 		23BBD40824822715003B0EC7 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23BBD40624822715003B0EC7 /* DataModel.xcdatamodeld */; };
 		23BBD40F24828950003B0EC7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BBD40E24828950003B0EC7 /* SettingsViewController.swift */; };
 		23BFD140247D13FA00E0EF2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD13F247D13FA00E0EF2F /* AppDelegate.swift */; };
@@ -20,12 +22,14 @@
 		23BFD15B247D342000E0EF2F /* PrayerTimesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD15A247D342000E0EF2F /* PrayerTimesData.swift */; };
 		23BFD15D247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD15C247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift */; };
 		23BFD15F247D390C00E0EF2F /* PrayerTimesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */; };
+		23DAB27624A936A8001BD132 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23DAB27524A936A8001BD132 /* Settings.storyboard */; };
+		23E4BA8C24A4AD480018EB87 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E4BA8B24A4AD480018EB87 /* CoreDataHelper.swift */; };
 		23F0AA36247FD78B0013F880 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F0AA35247FD78B0013F880 /* Time.swift */; };
-		23F0AA38247FF2E70013F880 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23F0AA37247FF2E70013F880 /* Settings.storyboard */; };
 		23FBFE782484DBCD004E11B5 /* PrayerCurrentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FBFE772484DBCD004E11B5 /* PrayerCurrentInformation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23AD38BB24AA1AAE0071A3DF /* locationNameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationNameManager.swift; sourceTree = "<group>"; };
 		23BBD40724822715003B0EC7 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		23BBD40E24828950003B0EC7 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		23BFD13C247D13FA00E0EF2F /* Salli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salli.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,8 +45,9 @@
 		23BFD15A247D342000E0EF2F /* PrayerTimesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesData.swift; sourceTree = "<group>"; };
 		23BFD15C247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesManagerDelegate.swift; sourceTree = "<group>"; };
 		23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesModel.swift; sourceTree = "<group>"; };
+		23DAB27524A936A8001BD132 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		23E4BA8B24A4AD480018EB87 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		23F0AA35247FD78B0013F880 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
-		23F0AA37247FF2E70013F880 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		23FBFE772484DBCD004E11B5 /* PrayerCurrentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerCurrentInformation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23AD38BA24AA18590071A3DF /* Adhan in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				23BFD145247D13FA00E0EF2F /* Main.storyboard */,
-				23F0AA37247FF2E70013F880 /* Settings.storyboard */,
+				23DAB27524A936A8001BD132 /* Settings.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -124,7 +130,9 @@
 				23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */,
 				23F0AA35247FD78B0013F880 /* Time.swift */,
 				23FBFE772484DBCD004E11B5 /* PrayerCurrentInformation.swift */,
+				23E4BA8B24A4AD480018EB87 /* CoreDataHelper.swift */,
 				23BBD40624822715003B0EC7 /* DataModel.xcdatamodeld */,
+				23AD38BB24AA1AAE0071A3DF /* locationNameManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -145,6 +153,9 @@
 			dependencies = (
 			);
 			name = Salli;
+			packageProductDependencies = (
+				23AD38B924AA18590071A3DF /* Adhan */,
+			);
 			productName = Salli;
 			productReference = 23BFD13C247D13FA00E0EF2F /* Salli.app */;
 			productType = "com.apple.product-type.application";
@@ -173,6 +184,9 @@
 				Base,
 			);
 			mainGroup = 23BFD133247D13FA00E0EF2F;
+			packageReferences = (
+				23AD38B824AA18580071A3DF /* XCRemoteSwiftPackageReference "adhan-swift" */,
+			);
 			productRefGroup = 23BFD13D247D13FA00E0EF2F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -190,7 +204,7 @@
 				23BFD14C247D13FD00E0EF2F /* LaunchScreen.storyboard in Resources */,
 				23BFD149247D13FD00E0EF2F /* Assets.xcassets in Resources */,
 				23BFD147247D13FA00E0EF2F /* Main.storyboard in Resources */,
-				23F0AA38247FF2E70013F880 /* Settings.storyboard in Resources */,
+				23DAB27624A936A8001BD132 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,11 +218,13 @@
 				23BFD159247D318700E0EF2F /* Constants.swift in Sources */,
 				23FBFE782484DBCD004E11B5 /* PrayerCurrentInformation.swift in Sources */,
 				23BBD40824822715003B0EC7 /* DataModel.xcdatamodeld in Sources */,
+				23AD38BC24AA1AAE0071A3DF /* locationNameManager.swift in Sources */,
 				23BFD15B247D342000E0EF2F /* PrayerTimesData.swift in Sources */,
 				23BFD144247D13FA00E0EF2F /* TimesViewController.swift in Sources */,
 				23BFD140247D13FA00E0EF2F /* AppDelegate.swift in Sources */,
 				23BFD15D247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift in Sources */,
 				23BFD142247D13FA00E0EF2F /* SceneDelegate.swift in Sources */,
+				23E4BA8C24A4AD480018EB87 /* CoreDataHelper.swift in Sources */,
 				23F0AA36247FD78B0013F880 /* Time.swift in Sources */,
 				23BFD156247D2EC000E0EF2F /* PrayerTimesManager.swift in Sources */,
 				23BFD15F247D390C00E0EF2F /* PrayerTimesModel.swift in Sources */,
@@ -412,6 +428,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		23AD38B824AA18580071A3DF /* XCRemoteSwiftPackageReference "adhan-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/batoulapps/adhan-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		23AD38B924AA18590071A3DF /* Adhan */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 23AD38B824AA18580071A3DF /* XCRemoteSwiftPackageReference "adhan-swift" */;
+			productName = Adhan;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		23BBD40624822715003B0EC7 /* DataModel.xcdatamodeld */ = {

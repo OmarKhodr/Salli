@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import CoreLocation
+import Adhan
 
 class TimesViewController: UIViewController {
     
@@ -20,6 +21,8 @@ class TimesViewController: UIViewController {
     
     @IBOutlet var prayerLabels: [UILabel]!
     @IBOutlet var prayerTimeLabels: [UILabel]!
+    @IBOutlet var periodLabels: [UILabel]!
+    
     
     @IBOutlet weak var midnightHStack: UIStackView!
     @IBOutlet weak var imsakHStack: UIStackView!
@@ -30,8 +33,7 @@ class TimesViewController: UIViewController {
     
     var timeLeftString: String = ""
     
-    
-    var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let coreDataHelper = CoreDataHelper()
     
     //initialize location manager for requesting/fetching current location
     var locationManager = CLLocationManager()
@@ -72,14 +74,29 @@ class TimesViewController: UIViewController {
         //setting view as delegate for prayer times manager
         prayerTimesManager.delegate = self
         
-        //load prayer times either through valid data in database or fetching updated times if they're outdated, after which it updateUI() is called either by fetchPrayerTimes() in case data is outdated or the function itself in case it isn't.
-        
-        
         //fetching data (if available) from database and checking if still valid, request location to update them if either check fails.
         loadTimes()
         
         //timer for calling updateUI() on separate thread every tenth of a second.
         _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(TimesViewController.updateUI), userInfo: nil, repeats: true)
+    }
+    
+    
+    @IBAction func qiblaButtonPressed(_ sender: UIButton) {
+        //only apply the blur if the user hasn't disabled transparency effects
+        if !UIAccessibility.isReduceTransparencyEnabled {
+           view.backgroundColor = .clear
+
+           let blurEffect = UIBlurEffect(style: .dark)
+           let blurEffectView = UIVisualEffectView(effect: blurEffect)
+           //always fill the view
+           blurEffectView.frame = self.view.bounds
+           blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+           view.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
+        } else {
+           view.backgroundColor = .black
+        }
     }
     
     
@@ -123,40 +140,10 @@ extension TimesViewController: PrayerTimesManagerDelegate {
     //called to update UI when prayer times are updated
     func didUpdatePrayerTimes(_ manager: PrayerTimesManager, _ model: PrayerTimesModel) {
         
-        //first delete everything currently in PrayerInfo table (by design there should only be a single entry) to save a new one.
-        let request: NSFetchRequest<PrayerInfo> = PrayerInfo.fetchRequest()
-        do {
-            let array = try context.fetch(request)
-            for entry in array {
-                context.delete(entry)
-            }
-        }
-        catch {
-            print("error deleting old entries in database: \(error)")
-        }
-
-        //dictionary from model which contains just-fetched times
-        let times = model.times
-        let location = model.location
+        coreDataHelper.saveNewTimes(model: model)
         
-        //creating table entry for updated prayer times and saving them
-        let newPrayerInfo = PrayerInfo(context: context)
-        newPrayerInfo.dateFetched = Date()
-        newPrayerInfo.fajr = times[0]
-        newPrayerInfo.sunrise = times[1]
-        newPrayerInfo.dhuhr = times[2]
-        newPrayerInfo.asr = times[3]
-        newPrayerInfo.maghrib = times[4]
-        newPrayerInfo.isha = times[5]
-        newPrayerInfo.midnight = times[6]
-        newPrayerInfo.imsak = times[7]
-        newPrayerInfo.location = location
-        
-        //save entry in table
-        saveContext()
-        
-        prayerTimes = times
-        locationString = location
+        prayerTimes = model.times
+        locationString = model.location
 
     }
 }
@@ -167,74 +154,24 @@ extension TimesViewController {
     
 //MARK: - Core Data Methods
     
-    //saving Core Data context.
-    func saveContext () {
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-    }
-    
-    //assigns data inside PrayerInfo entry into prayerTimes array and location string
-    func assignData(with info: PrayerInfo) {
-        prayerTimes = [
-            info.fajr!,
-            info.sunrise!,
-            info.dhuhr!,
-            info.asr!,
-            info.maghrib!,
-            info.isha!,
-            info.midnight!,
-            info.imsak!
-        ]
-        locationString = info.location!
-    }
-    
-    //fetches the single instance of PrayerInfo and returns it (optional in case of error or non-existence of data
-    func fetch(with request: NSFetchRequest<PrayerInfo> = PrayerInfo.fetchRequest()) -> PrayerInfo? {
-        do {
-            let array = try context.fetch(request)
-            return array.first
-        }
-        catch {
-            print("error fetching request: \(error)")
-            return nil
-        }
-    }
-    
     func loadTimes() {
-        let info: PrayerInfo? = fetch()
-        if let info = info {
-            assignData(with: info)
+        
+        let result: [PrayerInfo] = coreDataHelper.fetch()
+        
+        guard result.count <= 1 else {
+            fatalError("result has more than one element!!!")
         }
-        updateTimes(with: info)
-    }
-    
-    func updateTimes(with info: PrayerInfo?) {
+        
+        let info = result.first
+        
         if let info = info {
-            let dateFetched = info.dateFetched!
-            
-            //time between now and time data was last updated, in seconds
-            let age = abs(Date().distance(to: dateFetched))
-            
-            //time at which we fetched data
-            let timeFetched = dateFetched.time
-            let currTime = Date().time
-            
-            //if time between now and date of creation is more than 24 hours or time of creation is bigger than current time (i.e. current time has passed midnight), delete entry from database and empty result array
-            if (age > K.dayInSeconds || timeFetched > currTime) {
-                requestLocation()
-            }
+            (prayerTimes, locationString) = coreDataHelper.assignData(with: info)
         }
-        else {
+        
+        if !coreDataHelper.upToDate(info: info) {
             requestLocation()
         }
+        
     }
     
 //MARK: - UI Helper Methods
@@ -270,6 +207,11 @@ extension TimesViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm a"
         
+        var timeStrings: [[String]] = []
+        for time in prayerTimes {
+            timeStrings.append(formatter.string(from: time).components(separatedBy: " "))
+        }
+        
         //updating UI elements on main thread.
         DispatchQueue.main.async {
             
@@ -278,17 +220,25 @@ extension TimesViewController {
             self.timeLeftLabel.text = self.timeLeftString
             
             //setting time labels using prayerTimes property
+//            for timeLabel in self.prayerTimeLabels {
+//                timeLabel.text = formatter.string(from: self.prayerTimes[timeLabel.tag])
+//            }
             for timeLabel in self.prayerTimeLabels {
-                timeLabel.text = formatter.string(from: self.prayerTimes[timeLabel.tag])
+                timeLabel.text = timeStrings[timeLabel.tag][0]
+            }
+            for periodLabel in self.periodLabels {
+                periodLabel.text = timeStrings[periodLabel.tag][1]
             }
             
             //reset colors of all labels to initial color
             self.resetLabelColors(of: self.prayerLabels)
             self.resetLabelColors(of: self.prayerTimeLabels)
+            self.resetLabelColors(of: self.periodLabels)
             
             //set highlight color to current prayer
             self.setLabelColor(in: self.prayerLabels, tag: currentTag, color: highlightColor)
             self.setLabelColor(in: self.prayerTimeLabels, tag: currentTag, color: highlightColor)
+            self.setLabelColor(in: self.periodLabels, tag: currentTag, color: highlightColor)
         }
         
     }

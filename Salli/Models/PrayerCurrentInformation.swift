@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PrayerCurrentInformation {
+struct PrayerCurrentInformation {
     //takes dictionary from model containing the times to determine which prayer is the current one.
     static func currentPrayer(_ times: [Date]) -> String {
         
@@ -84,7 +84,7 @@ class PrayerCurrentInformation {
         let hoursLeft = timeLeft.0
         let minutesLeft = timeLeft.1
         var timeLeftString = ""
-        if (hoursLeft == 0 && minutesLeft == 1) {
+        if (hoursLeft == 0 && minutesLeft == 0) {
             timeLeftString = "Less than a minute "
         }
         else {
