@@ -26,7 +26,7 @@ class PrayerTimesManager {
         let urlString = "\(K.prayerTimesURL)timings?latitude=\(latitude)&longitude=\(longitude)&method=4"
         //perform reverse geocode location operation to get user-friendly location representation (i.e. city, state, country) from coordinates.
         let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(location, preferredLocale: nil) { (placemarksArray, error) in
+        geocoder.reverseGeocodeLocation(location, preferredLocale: Locale.init(identifier: "lang".localized)) { (placemarksArray, error) in
             if let error = error {
                 print("error performing reverse geolocation: \(error)")
             } else {

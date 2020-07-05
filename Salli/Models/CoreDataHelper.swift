@@ -40,6 +40,7 @@ struct CoreDataHelper {
     
     func upToDate(info: PrayerInfo?) -> Bool {
         if let info = info {
+            
             let dateFetched = info.dateFetched!
             
             //time between now and time data was last updated, in seconds

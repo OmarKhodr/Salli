@@ -24,8 +24,8 @@ class TimesViewController: UIViewController {
     @IBOutlet var periodLabels: [UILabel]!
     
     
-    @IBOutlet weak var midnightHStack: UIStackView!
-    @IBOutlet weak var imsakHStack: UIStackView!
+    @IBOutlet weak var midnightStack: UIStackView!
+    @IBOutlet weak var imsakStack: UIStackView!
     
     var prayerTimes: [Date] = []
     
@@ -45,8 +45,8 @@ class TimesViewController: UIViewController {
         super.viewDidLoad()
         
         //TESTING - hiding midnight and imsak HStacks for now.
-        midnightHStack.isHidden = true
-        imsakHStack.isHidden = true
+//        midnightStack.isHidden = true
+//        imsakStack.isHidden = true
         
         //clearing labels to prepare them for being updated by Core Data and/or CLLocationManager
         locationLabel.text = ""
@@ -57,7 +57,8 @@ class TimesViewController: UIViewController {
         let dateFor = DateFormatter()
 
         let hijriCalendar = Calendar.init(identifier: Calendar.Identifier.islamicCivil)
-        dateFor.locale = Locale.init(identifier: "en") // or "en" as you want to show numbers
+        //use "lang" key from Localized to display date in accordance with system language
+        dateFor.locale = Locale.init(identifier: "lang".localized)
 
         dateFor.calendar = hijriCalendar
 
@@ -219,10 +220,6 @@ extension TimesViewController {
             
             self.timeLeftLabel.text = self.timeLeftString
             
-            //setting time labels using prayerTimes property
-//            for timeLabel in self.prayerTimeLabels {
-//                timeLabel.text = formatter.string(from: self.prayerTimes[timeLabel.tag])
-//            }
             for timeLabel in self.prayerTimeLabels {
                 timeLabel.text = timeStrings[timeLabel.tag][0]
             }

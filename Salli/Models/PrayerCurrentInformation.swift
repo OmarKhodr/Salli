@@ -85,26 +85,27 @@ struct PrayerCurrentInformation {
         let minutesLeft = timeLeft.1
         var timeLeftString = ""
         if (hoursLeft == 0 && minutesLeft == 0) {
-            timeLeftString = "Less than a minute "
+            timeLeftString = "less than a minute left".localized
         }
         else {
-            if (hoursLeft > 0) {
-                timeLeftString += "\(hoursLeft) hour"
-                if (hoursLeft > 1) {
-                    timeLeftString += "s"
-                }
-                timeLeftString += " "
-            }
-            if (minutesLeft > 0) {
-                timeLeftString += "\(minutesLeft) minute"
-                if (minutesLeft > 1) {
-                    timeLeftString += "s"
-                }
-                timeLeftString += " "
-            }
-            
+//            if (hoursLeft > 0) {
+//                timeLeftString += "\(hoursLeft) hour"
+//                if (hoursLeft > 1) {
+//                    timeLeftString += "s"
+//                }
+//                timeLeftString += " "
+//            }
+//            if (minutesLeft > 0) {
+//                timeLeftString += "\(minutesLeft) minute"
+//                if (minutesLeft > 1) {
+//                    timeLeftString += "s"
+//                }
+//                timeLeftString += " "
+//            }
+            let formatTimeLeft = "time left".localized
+            timeLeftString += String.localizedStringWithFormat(formatTimeLeft, hoursLeft, minutesLeft)
         }
-        timeLeftString += "until \(nextPrayer)"
+        timeLeftString += " " + "until \(nextPrayer)".localized
         return timeLeftString
     }
 }

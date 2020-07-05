@@ -1,0 +1,96 @@
+
+/* Class = "UILabel"; text = "PM"; ObjectID = "459-eE-b0i"; */
+"459-eE-b0i.text" = "PM";
+
+/* Class = "UILabel"; text = "PM"; ObjectID = "6OW-qe-CYo"; */
+"6OW-qe-CYo.text" = "PM";
+
+/* Class = "UILabel"; text = "City, Country"; ObjectID = "6X4-NZ-G5u"; */
+"6X4-NZ-G5u.text" = "Ville, Pays";
+
+/* Class = "UILabel"; text = "--:--"; ObjectID = "6oP-jl-anJ"; */
+"6oP-jl-anJ.text" = "--:--";
+
+/* Class = "UILabel"; text = "Monday, Shaw. 3, 1441 AH"; ObjectID = "7IK-ia-mLP"; */
+"7IK-ia-mLP.text" = "Lundi, Shaw. 3, 1441 AH";
+
+/* Class = "UILabel"; text = "PM"; ObjectID = "84v-LY-CmS"; */
+"84v-LY-CmS.text" = "PM";
+
+/* Class = "UILabel"; text = "--:--"; ObjectID = "8At-50-tHx"; */
+"8At-50-tHx.text" = "--:--";
+
+/* Class = "UILabel"; text = "--:--"; ObjectID = "FrZ-oY-Ebv"; */
+"FrZ-oY-Ebv.text" = "--:--";
+
+/* Class = "UILabel"; text = "PM"; ObjectID = "GWJ-oq-xaN"; */
+"GWJ-oq-xaN.text" = "PM";
+
+/* Class = "UILabel"; text = "Asr"; ObjectID = "I7a-B2-VmF"; */
+"I7a-B2-VmF.text" = "Asr";
+
+/* Class = "UILabel"; text = "PM"; ObjectID = "ID4-Hj-oIn"; */
+"ID4-Hj-oIn.text" = "PM";
+
+/* Class = "UILabel"; text = "PM"; ObjectID = "JFw-PT-ehV"; */
+"JFw-PT-ehV.text" = "PM";
+
+/* Class = "UILabel"; text = "Isha"; ObjectID = "JhP-Xb-pWo"; */
+"JhP-Xb-pWo.text" = "Isha";
+
+/* Class = "UILabel"; text = "Maghrib"; ObjectID = "KnA-nV-PUk"; */
+"KnA-nV-PUk.text" = "Maghrib";
+
+/* Class = "UILabel"; text = "--:--"; ObjectID = "KvS-p9-awx"; */
+"KvS-p9-awx.text" = "--:--";
+
+/* Class = "UILabel"; text = "Sunrise"; ObjectID = "LAG-Ee-7f9"; */
+"LAG-Ee-7f9.text" = "Shourouq";
+
+/* Class = "UILabel"; text = "--:--"; ObjectID = "N1a-bD-6KP"; */
+"N1a-bD-6KP.text" = "--:--";
+
+/* Class = "UILabel"; text = "--:--"; ObjectID = "Oev-Bb-dhJ"; */
+"Oev-Bb-dhJ.text" = "--:--";
+
+/* Class = "UILabel"; text = "--:--"; ObjectID = "TP0-9r-E97"; */
+"TP0-9r-E97.text" = "--:--";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "amt-W9-mg2"; */
+"amt-W9-mg2.title" = "Paramètres";
+
+/* Class = "UILabel"; text = "PM"; ObjectID = "cnK-jT-f8K"; */
+"cnK-jT-f8K.text" = "PM";
+
+/* Class = "UITabBarItem"; title = "Times"; ObjectID = "dS6-5h-gXR"; */
+"dS6-5h-gXR.title" = "Horaires";
+
+/* Class = "UILabel"; text = "5 hours 59 minutes until Midnight"; ObjectID = "jPD-Aj-i47"; */
+"jPD-Aj-i47.text" = "5 heures 59 minutes jusqu'à Minuit";
+
+/* Class = "UILabel"; text = "Duhr"; ObjectID = "kud-Yg-w8N"; */
+"kud-Yg-w8N.text" = "Duhr";
+
+/* Class = "UILabel"; text = "Midnight"; ObjectID = "o7P-am-VI7"; */
+"o7P-am-VI7.text" = "Minuit";
+
+/* Class = "UILabel"; text = "--:--"; ObjectID = "o7n-bz-wXx"; */
+"o7n-bz-wXx.text" = "--:--";
+
+/* Class = "UILabel"; text = "Imsak"; ObjectID = "sW4-QP-6rj"; */
+"sW4-QP-6rj.text" = "Imsak";
+
+/* Class = "UILabel"; text = "PM"; ObjectID = "tdf-3V-dRS"; */
+"tdf-3V-dRS.text" = "PM";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "u3a-DB-Wwg"; */
+"u3a-DB-Wwg.title" = "Paramètres";
+
+/* Class = "UILabel"; text = "Fajr"; ObjectID = "wlQ-0Y-e3e"; */
+"wlQ-0Y-e3e.text" = "Fajr";
+
+/* Class = "UINavigationItem"; title = "Setting"; ObjectID = "z4f-W4-EV7"; */
+"z4f-W4-EV7.title" = "Paramètre";
+
+/* Class = "UILabel"; text = "Today"; ObjectID = "zZv-hj-1Ih"; */
+"zZv-hj-1Ih.text" = "Aujourd'hui";
