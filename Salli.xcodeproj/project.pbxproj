@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		232D1CF624B2651400E74A7B /* QiblaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232D1CF524B2651400E74A7B /* QiblaViewController.swift */; };
 		2360C5C024B1D8C90092E5DF /* SwiftLocalizedExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360C5BF24B1D8C90092E5DF /* SwiftLocalizedExtension.swift */; };
 		2360C5C324B1DD5F0092E5DF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2360C5C524B1DD5F0092E5DF /* Localizable.strings */; };
 		2360C5C924B205020092E5DF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 2360C5CB24B205020092E5DF /* Localizable.stringsdict */; };
@@ -32,13 +33,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2360C5BE24B1CF900092E5DF /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
+		232D1CF524B2651400E74A7B /* QiblaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiblaViewController.swift; sourceTree = "<group>"; };
+		235DD3A824B35D6F00B9DB09 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		235DD3AA24B35DE600B9DB09 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
 		2360C5BF24B1D8C90092E5DF /* SwiftLocalizedExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLocalizedExtension.swift; sourceTree = "<group>"; };
 		2360C5C424B1DD5F0092E5DF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2360C5C624B1DD620092E5DF /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2360C5CA24B205020092E5DF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		2360C5CC24B205060092E5DF /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ar; path = ar.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
-		2360C5CD24B20E870092E5DF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		2360C5CE24B20E870092E5DF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2360C5CF24B20E870092E5DF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = fr; path = fr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		23AD38BB24AA1AAE0071A3DF /* locationNameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationNameManager.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				23BFD143247D13FA00E0EF2F /* TimesViewController.swift */,
+				232D1CF524B2651400E74A7B /* QiblaViewController.swift */,
 				23BBD40E24828950003B0EC7 /* SettingsViewController.swift */,
 			);
 			path = Controllers;
@@ -246,6 +249,7 @@
 				23E4BA8C24A4AD480018EB87 /* CoreDataHelper.swift in Sources */,
 				2360C5C024B1D8C90092E5DF /* SwiftLocalizedExtension.swift in Sources */,
 				23F0AA36247FD78B0013F880 /* Time.swift in Sources */,
+				232D1CF624B2651400E74A7B /* QiblaViewController.swift in Sources */,
 				23BFD156247D2EC000E0EF2F /* PrayerTimesManager.swift in Sources */,
 				23BFD15F247D390C00E0EF2F /* PrayerTimesModel.swift in Sources */,
 				23BBD40F24828950003B0EC7 /* SettingsViewController.swift in Sources */,
@@ -279,8 +283,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				23BFD146247D13FA00E0EF2F /* Base */,
-				2360C5BE24B1CF900092E5DF /* ar */,
-				2360C5CD24B20E870092E5DF /* fr */,
+				235DD3A824B35D6F00B9DB09 /* fr */,
+				235DD3AA24B35DE600B9DB09 /* ar */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

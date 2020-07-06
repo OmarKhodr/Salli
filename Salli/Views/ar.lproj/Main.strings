@@ -1,12 +1,12 @@
 
 /* Class = "UILabel"; text = "PM"; ObjectID = "459-eE-b0i"; */
-"459-eE-b0i.text" = "ص";
+"459-eE-b0i.text" = "م";
 
 /* Class = "UILabel"; text = "PM"; ObjectID = "6OW-qe-CYo"; */
-"6OW-qe-CYo.text" = "ص";
+"6OW-qe-CYo.text" = "م";
 
 /* Class = "UILabel"; text = "City, Country"; ObjectID = "6X4-NZ-G5u"; */
-"6X4-NZ-G5u.text" = "المدينة، البلد";
+"6X4-NZ-G5u.text" = "المديتة، البلد";
 
 /* Class = "UILabel"; text = "--:--"; ObjectID = "6oP-jl-anJ"; */
 "6oP-jl-anJ.text" = "--:--";
@@ -15,25 +15,28 @@
 "7IK-ia-mLP.text" = "Monday, Shaw. 3, 1441 AH";
 
 /* Class = "UILabel"; text = "PM"; ObjectID = "84v-LY-CmS"; */
-"84v-LY-CmS.text" = "ص";
+"84v-LY-CmS.text" = "م";
 
 /* Class = "UILabel"; text = "--:--"; ObjectID = "8At-50-tHx"; */
 "8At-50-tHx.text" = "--:--";
+
+/* Class = "UITabBarItem"; title = "Qibla"; ObjectID = "9Ak-fX-pLn"; */
+"9Ak-fX-pLn.title" = "القبلة";
 
 /* Class = "UILabel"; text = "--:--"; ObjectID = "FrZ-oY-Ebv"; */
 "FrZ-oY-Ebv.text" = "--:--";
 
 /* Class = "UILabel"; text = "PM"; ObjectID = "GWJ-oq-xaN"; */
-"GWJ-oq-xaN.text" = "ص";
+"GWJ-oq-xaN.text" = "م";
 
 /* Class = "UILabel"; text = "Asr"; ObjectID = "I7a-B2-VmF"; */
 "I7a-B2-VmF.text" = "العصر";
 
 /* Class = "UILabel"; text = "PM"; ObjectID = "ID4-Hj-oIn"; */
-"ID4-Hj-oIn.text" = "ص";
+"ID4-Hj-oIn.text" = "م";
 
 /* Class = "UILabel"; text = "PM"; ObjectID = "JFw-PT-ehV"; */
-"JFw-PT-ehV.text" = "ص";
+"JFw-PT-ehV.text" = "م";
 
 /* Class = "UILabel"; text = "Isha"; ObjectID = "JhP-Xb-pWo"; */
 "JhP-Xb-pWo.text" = "العشاء";
@@ -60,13 +63,13 @@
 "amt-W9-mg2.title" = "الإعدادات";
 
 /* Class = "UILabel"; text = "PM"; ObjectID = "cnK-jT-f8K"; */
-"cnK-jT-f8K.text" = "ص";
+"cnK-jT-f8K.text" = "م";
 
 /* Class = "UITabBarItem"; title = "Times"; ObjectID = "dS6-5h-gXR"; */
 "dS6-5h-gXR.title" = "الأوقات";
 
 /* Class = "UILabel"; text = "5 hours 59 minutes until Midnight"; ObjectID = "jPD-Aj-i47"; */
-"jPD-Aj-i47.text" = "بقي ٥ ساعات و ٥٩ دقيقة للمغرب";
+"jPD-Aj-i47.text" = "باقي ٥ ساعات و ٥٩ دقيقة لمنتصف الليل";
 
 /* Class = "UILabel"; text = "Duhr"; ObjectID = "kud-Yg-w8N"; */
 "kud-Yg-w8N.text" = "الظهر";
@@ -81,7 +84,7 @@
 "sW4-QP-6rj.text" = "الإمساك";
 
 /* Class = "UILabel"; text = "PM"; ObjectID = "tdf-3V-dRS"; */
-"tdf-3V-dRS.text" = "ص";
+"tdf-3V-dRS.text" = "م";
 
 /* Class = "UITabBarItem"; title = "Settings"; ObjectID = "u3a-DB-Wwg"; */
 "u3a-DB-Wwg.title" = "الإعدادات";

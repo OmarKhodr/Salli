@@ -1,0 +1,62 @@
+{
+  "images" : [
+    {
+      "filename" : "compass-latin-light-letters.png",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "light"
+        }
+      ],
+      "filename" : "compass-latin-light-letters-1.png",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "compass-latin-dark-letters.png",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "compass-letters-arabic.png",
+      "idiom" : "universal",
+      "locale" : "ar"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "light"
+        }
+      ],
+      "filename" : "compass-letters-arabic-1.png",
+      "idiom" : "universal",
+      "locale" : "ar"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "compass-arabic-dark-letters.png",
+      "idiom" : "universal",
+      "locale" : "ar"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "localizable" : true
+  }
+}

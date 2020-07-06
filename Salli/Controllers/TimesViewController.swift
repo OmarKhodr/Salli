@@ -45,8 +45,8 @@ class TimesViewController: UIViewController {
         super.viewDidLoad()
         
         //TESTING - hiding midnight and imsak HStacks for now.
-//        midnightStack.isHidden = true
-//        imsakStack.isHidden = true
+        midnightStack.isHidden = true
+        imsakStack.isHidden = true
         
         //clearing labels to prepare them for being updated by Core Data and/or CLLocationManager
         locationLabel.text = ""
@@ -63,7 +63,7 @@ class TimesViewController: UIViewController {
         dateFor.calendar = hijriCalendar
 
         dateFor.dateFormat = "EEEE, MMM d, yyyy"
-        currentDateLabel.text = "\(dateFor.string(from: Date())) AH"
+        currentDateLabel.text = "\(dateFor.string(from: Date())) \("AH".localized)"
         
         //adding rounded corners to background of prayer times
         prayerTimesBackgroundView.layer.cornerRadius = 16
@@ -85,19 +85,19 @@ class TimesViewController: UIViewController {
     
     @IBAction func qiblaButtonPressed(_ sender: UIButton) {
         //only apply the blur if the user hasn't disabled transparency effects
-        if !UIAccessibility.isReduceTransparencyEnabled {
-           view.backgroundColor = .clear
-
-           let blurEffect = UIBlurEffect(style: .dark)
-           let blurEffectView = UIVisualEffectView(effect: blurEffect)
-           //always fill the view
-           blurEffectView.frame = self.view.bounds
-           blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
-           view.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
-        } else {
-           view.backgroundColor = .black
-        }
+//        if !UIAccessibility.isReduceTransparencyEnabled {
+//           view.backgroundColor = .clear
+//
+//           let blurEffect = UIBlurEffect(style: .dark)
+//           let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//           //always fill the view
+//           blurEffectView.frame = self.view.bounds
+//           blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//
+//           view.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
+//        } else {
+//           view.backgroundColor = .black
+//        }
     }
     
     

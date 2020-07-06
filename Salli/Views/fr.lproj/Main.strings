@@ -20,6 +20,9 @@
 /* Class = "UILabel"; text = "--:--"; ObjectID = "8At-50-tHx"; */
 "8At-50-tHx.text" = "--:--";
 
+/* Class = "UITabBarItem"; title = "Qibla"; ObjectID = "9Ak-fX-pLn"; */
+"9Ak-fX-pLn.title" = "Qibla";
+
 /* Class = "UILabel"; text = "--:--"; ObjectID = "FrZ-oY-Ebv"; */
 "FrZ-oY-Ebv.text" = "--:--";
 
