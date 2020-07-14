@@ -39,14 +39,18 @@ class TimesViewController: UIViewController {
     var locationManager = CLLocationManager()
     //initialize prayer times manager for sending and handling requests to the Prayer Times API
     var prayerTimesManager = PrayerTimesManager()
+    //UserDefaults
+    let defaults = UserDefaults.standard
+    
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        //TESTING - hiding midnight and imsak HStacks for now.
-        midnightStack.isHidden = true
-        imsakStack.isHidden = true
+        setupDefaults()
+        
+        midnightStack.isHidden = !defaults.bool(forKey: K.Keys.showMidnightTime)
+        imsakStack.isHidden = !defaults.bool(forKey: K.Keys.showImsakTime)
         
         //clearing labels to prepare them for being updated by Core Data and/or CLLocationManager
         locationLabel.text = ""
@@ -77,27 +81,20 @@ class TimesViewController: UIViewController {
         
         //fetching data (if available) from database and checking if still valid, request location to update them if either check fails.
         loadTimes()
+        updateUI()
         
         //timer for calling updateUI() on separate thread every tenth of a second.
         _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(TimesViewController.updateUI), userInfo: nil, repeats: true)
     }
     
-    
-    @IBAction func qiblaButtonPressed(_ sender: UIButton) {
-        //only apply the blur if the user hasn't disabled transparency effects
-//        if !UIAccessibility.isReduceTransparencyEnabled {
-//           view.backgroundColor = .clear
-//
-//           let blurEffect = UIBlurEffect(style: .dark)
-//           let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//           //always fill the view
-//           blurEffectView.frame = self.view.bounds
-//           blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//
-//           view.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
-//        } else {
-//           view.backgroundColor = .black
-//        }
+    func setupDefaults() {
+        let hasOnboarded = defaults.bool(forKey: K.Keys.hasOnboarded)
+        if !hasOnboarded {
+            defaults.set(true, forKey: K.Keys.hasOnboarded)
+            defaults.set(false, forKey: K.Keys.showMidnightTime)
+            defaults.set(false, forKey: K.Keys.showImsakTime)
+            defaults.set(0, forKey: K.Keys.appearance)
+        }
     }
     
     

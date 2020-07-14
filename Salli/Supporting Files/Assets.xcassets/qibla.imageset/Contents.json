@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "qibla-light.png",
+      "filename" : "new-arrow-light.png",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "qibla-light-1.png",
+      "filename" : "new-arrow-light-1.png",
       "idiom" : "universal"
     },
     {
@@ -21,7 +21,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "qibla-dark.png",
+      "filename" : "new-arrow-dark.png",
       "idiom" : "universal"
     }
   ],

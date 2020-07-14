@@ -22,4 +22,12 @@ class K {
     struct Colors {
         static let brandBlue = "brandBlue"
     }
+    
+    struct Keys {
+        static let hasOnboarded = "hasOnboarded"
+        static let showMidnightTime = "showMidnightTime"
+        static let showImsakTime = "showImsakTime"
+        static let calculationMethod = "calculationMethod"
+        static let appearance = "appearance"
+    }
 }

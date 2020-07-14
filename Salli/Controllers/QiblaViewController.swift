@@ -23,9 +23,12 @@ class QiblaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.delegate = self
         
+        //initially, before getting location to get qibla direction, arrow not visible
         qiblaArrow.layer.opacity = 0
         
+        //programmatically add the indicator line for current direction.
         let lineView = UIView()
         lineView.backgroundColor = .systemBackground
         view.addSubview(lineView)
@@ -40,13 +43,12 @@ class QiblaViewController: UIViewController {
         
         let heightConstraint = NSLayoutConstraint(item: lineView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 50)
         
+        //constraints: centerX, width=3, height=50, aligned with compass image's "lines"
         view.addConstraints([horizontalConstraint, verticalConstraint, widthConstraint, heightConstraint])
         
         //set qibla arrow blending mode.
         qiblaArrow.layer.compositingFilter = "differenceBlendMode"
         lineView.layer.compositingFilter = "differenceBlendMode"
-        
-        locationManager.delegate = self
         
         //immediately fetch location to determine qibla direction
         locationManager.requestWhenInUseAuthorization()
@@ -90,7 +92,8 @@ extension QiblaViewController: CLLocationManagerDelegate {
             //stop updating location while fetching from array
             locationManager.stopUpdatingLocation()
             
-            UIView.animate(withDuration: 0.5) {
+            //once we can get qibla direction, make qibla arrow appear again
+            UIView.animate(withDuration: 0.35) {
                 self.qiblaArrow.layer.opacity = 100
             }
             
@@ -114,8 +117,10 @@ extension QiblaViewController: CLLocationManagerDelegate {
     
     //called every time heading changes: rotate compass and qibla arrow images to match new heading.
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        
         let newRad = degreesToRadians(newHeading.trueHeading)
         let isVisible = qiblaArrow.layer.opacity == 100
+        //only generate haptic feedback if withtin 1 degree of qibla, the qibla arrow is fully opaque and we've already left it or have never reached it
         if abs(newRad-qiblaRad) <= degreesToRadians(1) && isVisible && !facingQibla {
             facingQibla = true
             let generator = UIImpactFeedbackGenerator(style: .rigid)
@@ -124,7 +129,7 @@ extension QiblaViewController: CLLocationManagerDelegate {
         else {
             facingQibla = false
         }
-        
+        //rotate compass image to new true north and qibla arrow along with it
         rotate(view: compassImageView, to: newRad)
         rotate(view: qiblaArrow, to: newRad-qiblaRad)
     }
