@@ -14,6 +14,7 @@ class QiblaViewController: UIViewController {
 
     @IBOutlet weak var compassImageView: UIImageView!
     @IBOutlet weak var qiblaArrow: UIImageView!
+    @IBOutlet weak var closeButton: UIButton!
     
     private let locationManager = CLLocationManager()
     
@@ -30,7 +31,7 @@ class QiblaViewController: UIViewController {
         
         //programmatically add the indicator line for current direction.
         let lineView = UIView()
-        lineView.backgroundColor = .systemBackground
+        lineView.backgroundColor = .label
         view.addSubview(lineView)
 
         lineView.translatesAutoresizingMaskIntoConstraints = false
@@ -60,6 +61,10 @@ class QiblaViewController: UIViewController {
             locationManager.headingFilter = 1
             locationManager.startUpdatingHeading()
         }
+    }
+    
+    @IBAction func closeButtonPressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
     
     //animated rotation to a defined rotation angle (radians).

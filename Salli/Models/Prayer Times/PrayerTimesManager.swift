@@ -18,12 +18,15 @@ class PrayerTimesManager {
     //takes delegate to do operations (on UI, for e.g.) when events occur, such as when prayer times are updated or when an error occurs
     var delegate: PrayerTimesManagerDelegate?
     
+    let defaults = UserDefaults.standard
+    
     //called from CLLocationManager's didUpdateLocation() method where the current location's latitude and longitude are taken to complete the URL to perform the GET request from the
     func fetchTimings(coordinates location: CLLocation) {
         let latitude = location.coordinate.latitude
         let longitude = location.coordinate.longitude
         //completes URL with latitude and longitude and the 4th method of prayer times calculations, currently hardcoded as 4 - Umm Al-Qura University, Makkah
-        let urlString = "\(K.prayerTimesURL)timings?latitude=\(latitude)&longitude=\(longitude)&method=4"
+        let method = defaults.integer(forKey: K.Keys.calculationMethod)
+        let urlString = "\(K.prayerTimesURL)timings?latitude=\(latitude)&longitude=\(longitude)&method=\(method)"
         //perform reverse geocode location operation to get user-friendly location representation (i.e. city, state, country) from coordinates.
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location, preferredLocale: Locale.init(identifier: "lang".localized)) { (placemarksArray, error) in
@@ -36,7 +39,7 @@ class PrayerTimesManager {
                         city = "\(ct), "
                     }
                     var state = ""
-                    if let st = placemark.subAdministrativeArea {
+                    if let st = placemark.administrativeArea {
                         state = "\(st), "
                     }
                     var country = ""
@@ -51,7 +54,10 @@ class PrayerTimesManager {
     }
     
     func fetchTimings(city: String, country: String) {
-        let urlString = "\(K.prayerTimesURL)timingsByCity?city=\(city)&country=\(country)&method=4"
+        let method = defaults.integer(forKey: K.Keys.calculationMethod)
+        let cityURL = URLify(city)
+        let countryURL = URLify(country)
+        let urlString = "\(K.prayerTimesURL)timingsByCity?city=\(cityURL)&country=\(countryURL)&method=\(method)"
         let locationStr = "\(city), \(country)"
         self.performRequest(with: urlString, locationString: locationStr)
     }
@@ -107,6 +113,18 @@ class PrayerTimesManager {
             return nil
         }
         
+    }
+    
+    func URLify(_ data: String) -> String {
+        var result: String = ""
+        for char in data {
+            if char != " " {
+                result.append(char)
+            } else {
+                result.append("%20")
+            }
+        }
+        return result
     }
     
     

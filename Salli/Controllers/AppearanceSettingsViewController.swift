@@ -16,8 +16,16 @@ class AppearanceSettingsViewController: UITableViewController {
     
     let defaults = UserDefaults.standard
     
+    let dict: [Int: UIUserInterfaceStyle] = [
+        0: .unspecified,
+        1: .light,
+        2: .dark
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = UIView()
+        
         switch defaults.integer(forKey: K.Keys.appearance) {
         case 0:
             matchSystemCell.accessoryType = .checkmark
@@ -36,12 +44,17 @@ class AppearanceSettingsViewController: UITableViewController {
         darkCell.accessoryType = .none
     }
     
+    func changeTheme(val: Int) {
+        self.view.window?.overrideUserInterfaceStyle = dict[val]!
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         reset()
         let cell = tableView.cellForRow(at: indexPath)
         cell?.accessoryType = .checkmark
         tableView.deselectRow(at: indexPath, animated: true)
         defaults.set(indexPath.row, forKey: K.Keys.appearance)
+        changeTheme(val: indexPath.row)
     }
     
 }

@@ -7,13 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2307976824D75247004060F7 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2307976724D75247004060F7 /* LoadingViewController.swift */; };
+		2307976A24D75275004060F7 /* ChildViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2307976924D75275004060F7 /* ChildViewControllerExtension.swift */; };
 		231E3FBA24B46434004BF726 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 231E3FB824B46434004BF726 /* Settings.storyboard */; };
 		232D1CF624B2651400E74A7B /* QiblaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232D1CF524B2651400E74A7B /* QiblaViewController.swift */; };
+		23314AA524DB10F400F81400 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23314AA424DB10F400F81400 /* Alert.storyboard */; };
+		23553DC024D81C5A00B1535D /* DefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23553DBF24D81C5A00B1535D /* DefaultsManager.swift */; };
+		23553DC624D8278F00B1535D /* RoundedViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23553DC524D8278F00B1535D /* RoundedViewExtension.swift */; };
+		23553DC824D84ACE00B1535D /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23553DC724D84ACE00B1535D /* OnboardingViewController.swift */; };
 		2360C5C024B1D8C90092E5DF /* SwiftLocalizedExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2360C5BF24B1D8C90092E5DF /* SwiftLocalizedExtension.swift */; };
 		2360C5C324B1DD5F0092E5DF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2360C5C524B1DD5F0092E5DF /* Localizable.strings */; };
 		2360C5C924B205020092E5DF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 2360C5CB24B205020092E5DF /* Localizable.stringsdict */; };
+		239415B824C02F4900D91C74 /* CalculationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239415B724C02F4900D91C74 /* CalculationSettingsViewController.swift */; };
+		239415BA24C0331300D91C74 /* CalculationMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239415B924C0331300D91C74 /* CalculationMethod.swift */; };
 		23AD38BA24AA18590071A3DF /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 23AD38B924AA18590071A3DF /* Adhan */; };
 		23AD38BC24AA1AAE0071A3DF /* locationNameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AD38BB24AA1AAE0071A3DF /* locationNameManager.swift */; };
+		23B315E324DA951A006B3071 /* ManualLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B315E224DA951A006B3071 /* ManualLocationViewController.swift */; };
+		23B6299B24C094C700BFB9DF /* AboutSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B6299A24C094C700BFB9DF /* AboutSettingsViewController.swift */; };
 		23BBD40824822715003B0EC7 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23BBD40624822715003B0EC7 /* DataModel.xcdatamodeld */; };
 		23BBD40F24828950003B0EC7 /* RootSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BBD40E24828950003B0EC7 /* RootSettingsViewController.swift */; };
 		23BFD140247D13FA00E0EF2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD13F247D13FA00E0EF2F /* AppDelegate.swift */; };
@@ -28,16 +38,23 @@
 		23BFD15D247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD15C247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift */; };
 		23BFD15F247D390C00E0EF2F /* PrayerTimesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */; };
 		23DB63D524BE14630027EDC3 /* PrayerTimesSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DB63D424BE14630027EDC3 /* PrayerTimesSettingsViewController.swift */; };
-		23DB63D924BE1F6D0027EDC3 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DB63D824BE1F6D0027EDC3 /* TabBarViewController.swift */; };
 		23DB63DD24BE27F50027EDC3 /* AppearanceSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DB63DC24BE27F50027EDC3 /* AppearanceSettingsViewController.swift */; };
 		23E4BA8C24A4AD480018EB87 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E4BA8B24A4AD480018EB87 /* CoreDataHelper.swift */; };
+		23E69E2624DB2193008686F2 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E69E2524DB2193008686F2 /* AlertViewController.swift */; };
+		23E69E2824DB26A1008686F2 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E69E2724DB26A1008686F2 /* AlertService.swift */; };
 		23F0AA36247FD78B0013F880 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F0AA35247FD78B0013F880 /* Time.swift */; };
 		23FBFE782484DBCD004E11B5 /* PrayerCurrentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FBFE772484DBCD004E11B5 /* PrayerCurrentInformation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2307976724D75247004060F7 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		2307976924D75275004060F7 /* ChildViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildViewControllerExtension.swift; sourceTree = "<group>"; };
 		231E3FB924B46434004BF726 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		232D1CF524B2651400E74A7B /* QiblaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiblaViewController.swift; sourceTree = "<group>"; };
+		23314AA424DB10F400F81400 /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
+		23553DBF24D81C5A00B1535D /* DefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsManager.swift; sourceTree = "<group>"; };
+		23553DC524D8278F00B1535D /* RoundedViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedViewExtension.swift; sourceTree = "<group>"; };
+		23553DC724D84ACE00B1535D /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		235DD3A824B35D6F00B9DB09 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		235DD3AA24B35DE600B9DB09 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
 		2360C5BF24B1D8C90092E5DF /* SwiftLocalizedExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLocalizedExtension.swift; sourceTree = "<group>"; };
@@ -47,7 +64,11 @@
 		2360C5CC24B205060092E5DF /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ar; path = ar.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		2360C5CE24B20E870092E5DF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2360C5CF24B20E870092E5DF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = fr; path = fr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		239415B724C02F4900D91C74 /* CalculationSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationSettingsViewController.swift; sourceTree = "<group>"; };
+		239415B924C0331300D91C74 /* CalculationMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationMethod.swift; sourceTree = "<group>"; };
 		23AD38BB24AA1AAE0071A3DF /* locationNameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationNameManager.swift; sourceTree = "<group>"; };
+		23B315E224DA951A006B3071 /* ManualLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualLocationViewController.swift; sourceTree = "<group>"; };
+		23B6299A24C094C700BFB9DF /* AboutSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsViewController.swift; sourceTree = "<group>"; };
 		23BBD40724822715003B0EC7 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		23BBD40E24828950003B0EC7 /* RootSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSettingsViewController.swift; sourceTree = "<group>"; };
 		23BFD13C247D13FA00E0EF2F /* Salli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salli.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,9 +85,10 @@
 		23BFD15C247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesManagerDelegate.swift; sourceTree = "<group>"; };
 		23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesModel.swift; sourceTree = "<group>"; };
 		23DB63D424BE14630027EDC3 /* PrayerTimesSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesSettingsViewController.swift; sourceTree = "<group>"; };
-		23DB63D824BE1F6D0027EDC3 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		23DB63DC24BE27F50027EDC3 /* AppearanceSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppearanceSettingsViewController.swift; path = Salli/Controllers/AppearanceSettingsViewController.swift; sourceTree = SOURCE_ROOT; };
 		23E4BA8B24A4AD480018EB87 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		23E69E2524DB2193008686F2 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		23E69E2724DB26A1008686F2 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		23F0AA35247FD78B0013F880 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		23FBFE772484DBCD004E11B5 /* PrayerCurrentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerCurrentInformation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,6 +109,10 @@
 			isa = PBXGroup;
 			children = (
 				23BFD158247D318700E0EF2F /* Constants.swift */,
+				2360C5BF24B1D8C90092E5DF /* SwiftLocalizedExtension.swift */,
+				2307976724D75247004060F7 /* LoadingViewController.swift */,
+				23553DC524D8278F00B1535D /* RoundedViewExtension.swift */,
+				2307976924D75275004060F7 /* ChildViewControllerExtension.swift */,
 				23BFD148247D13FD00E0EF2F /* Assets.xcassets */,
 				23BFD14A247D13FD00E0EF2F /* LaunchScreen.storyboard */,
 				2360C5C524B1DD5F0092E5DF /* Localizable.strings */,
@@ -101,8 +127,22 @@
 				23DB63DC24BE27F50027EDC3 /* AppearanceSettingsViewController.swift */,
 				23BBD40E24828950003B0EC7 /* RootSettingsViewController.swift */,
 				23DB63D424BE14630027EDC3 /* PrayerTimesSettingsViewController.swift */,
+				23B315E224DA951A006B3071 /* ManualLocationViewController.swift */,
+				239415B724C02F4900D91C74 /* CalculationSettingsViewController.swift */,
+				23B6299A24C094C700BFB9DF /* AboutSettingsViewController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		231E72DF24D724E2001D0B12 /* Prayer Times */ = {
+			isa = PBXGroup;
+			children = (
+				23BFD155247D2EC000E0EF2F /* PrayerTimesManager.swift */,
+				23BFD15A247D342000E0EF2F /* PrayerTimesData.swift */,
+				23BFD15C247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift */,
+				23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */,
+			);
+			path = "Prayer Times";
 			sourceTree = "<group>";
 		};
 		23BFD133247D13FA00E0EF2F = {
@@ -138,10 +178,11 @@
 		23BFD153247D2E9F00E0EF2F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				23DB63D824BE1F6D0027EDC3 /* TabBarViewController.swift */,
+				23553DC724D84ACE00B1535D /* OnboardingViewController.swift */,
 				23BFD143247D13FA00E0EF2F /* TimesViewController.swift */,
 				232D1CF524B2651400E74A7B /* QiblaViewController.swift */,
 				231E3FBD24B469A4004BF726 /* Settings */,
+				23E69E2924DB26A7008686F2 /* Alert */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -149,8 +190,9 @@
 		23BFD154247D2EA800E0EF2F /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				231E3FB824B46434004BF726 /* Settings.storyboard */,
 				23BFD145247D13FA00E0EF2F /* Main.storyboard */,
+				231E3FB824B46434004BF726 /* Settings.storyboard */,
+				23314AA424DB10F400F81400 /* Alert.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -158,18 +200,25 @@
 		23BFD157247D2EC600E0EF2F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				23BFD155247D2EC000E0EF2F /* PrayerTimesManager.swift */,
-				23BFD15A247D342000E0EF2F /* PrayerTimesData.swift */,
-				23BFD15C247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift */,
-				23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */,
+				231E72DF24D724E2001D0B12 /* Prayer Times */,
 				23F0AA35247FD78B0013F880 /* Time.swift */,
 				23FBFE772484DBCD004E11B5 /* PrayerCurrentInformation.swift */,
 				23E4BA8B24A4AD480018EB87 /* CoreDataHelper.swift */,
 				23AD38BB24AA1AAE0071A3DF /* locationNameManager.swift */,
-				2360C5BF24B1D8C90092E5DF /* SwiftLocalizedExtension.swift */,
+				239415B924C0331300D91C74 /* CalculationMethod.swift */,
+				23553DBF24D81C5A00B1535D /* DefaultsManager.swift */,
 				23BBD40624822715003B0EC7 /* DataModel.xcdatamodeld */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		23E69E2924DB26A7008686F2 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				23E69E2524DB2193008686F2 /* AlertViewController.swift */,
+				23E69E2724DB26A1008686F2 /* AlertService.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +292,7 @@
 				2360C5C924B205020092E5DF /* Localizable.stringsdict in Resources */,
 				231E3FBA24B46434004BF726 /* Settings.storyboard in Resources */,
 				23BFD149247D13FD00E0EF2F /* Assets.xcassets in Resources */,
+				23314AA524DB10F400F81400 /* Alert.storyboard in Resources */,
 				23BFD147247D13FA00E0EF2F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,24 +305,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				23BFD159247D318700E0EF2F /* Constants.swift in Sources */,
+				23B6299B24C094C700BFB9DF /* AboutSettingsViewController.swift in Sources */,
 				23FBFE782484DBCD004E11B5 /* PrayerCurrentInformation.swift in Sources */,
 				23BBD40824822715003B0EC7 /* DataModel.xcdatamodeld in Sources */,
 				23DB63DD24BE27F50027EDC3 /* AppearanceSettingsViewController.swift in Sources */,
 				23AD38BC24AA1AAE0071A3DF /* locationNameManager.swift in Sources */,
-				23DB63D924BE1F6D0027EDC3 /* TabBarViewController.swift in Sources */,
 				23BFD15B247D342000E0EF2F /* PrayerTimesData.swift in Sources */,
 				23BFD144247D13FA00E0EF2F /* TimesViewController.swift in Sources */,
 				23DB63D524BE14630027EDC3 /* PrayerTimesSettingsViewController.swift in Sources */,
 				23BFD140247D13FA00E0EF2F /* AppDelegate.swift in Sources */,
+				239415BA24C0331300D91C74 /* CalculationMethod.swift in Sources */,
+				23553DC824D84ACE00B1535D /* OnboardingViewController.swift in Sources */,
 				23BFD15D247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift in Sources */,
+				23553DC624D8278F00B1535D /* RoundedViewExtension.swift in Sources */,
+				2307976824D75247004060F7 /* LoadingViewController.swift in Sources */,
+				23E69E2624DB2193008686F2 /* AlertViewController.swift in Sources */,
 				23BFD142247D13FA00E0EF2F /* SceneDelegate.swift in Sources */,
+				23E69E2824DB26A1008686F2 /* AlertService.swift in Sources */,
 				23E4BA8C24A4AD480018EB87 /* CoreDataHelper.swift in Sources */,
 				2360C5C024B1D8C90092E5DF /* SwiftLocalizedExtension.swift in Sources */,
+				2307976A24D75275004060F7 /* ChildViewControllerExtension.swift in Sources */,
+				23553DC024D81C5A00B1535D /* DefaultsManager.swift in Sources */,
 				23F0AA36247FD78B0013F880 /* Time.swift in Sources */,
 				232D1CF624B2651400E74A7B /* QiblaViewController.swift in Sources */,
 				23BFD156247D2EC000E0EF2F /* PrayerTimesManager.swift in Sources */,
+				239415B824C02F4900D91C74 /* CalculationSettingsViewController.swift in Sources */,
 				23BFD15F247D390C00E0EF2F /* PrayerTimesModel.swift in Sources */,
 				23BBD40F24828950003B0EC7 /* RootSettingsViewController.swift in Sources */,
+				23B315E324DA951A006B3071 /* ManualLocationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

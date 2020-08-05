@@ -12,12 +12,15 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    let defaults = UserDefaults.standard
+    
     func application(
       _ application: UIApplication,
       didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
         -> Bool {
         print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! as String)
+//            let timeZoneIdentifiers = TimeZone.knownTimeZoneIdentifiers
+//            print(timeZoneIdentifiers)
             UITabBar.appearance().tintColor = UIColor(named: K.Colors.brandBlue)
 
       return true

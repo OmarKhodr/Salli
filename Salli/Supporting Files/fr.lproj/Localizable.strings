@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  Salli
+
+  Created by Omar Khodr on 7/5/20.
+  Copyright © 2020 Omar Khodr. All rights reserved.
+*/
+
+"lang" = "fr";
+
+"AH" = "AH";
+
+"less than a minute left" = "moins qu'une minute";
+
+"until Fajr" = "jusqu'à Fajr";
+"until Sunrise" = "jusqu'à Sunrise";
+"until Dhuhr" = "jusqu'à Dhuhr";
+"until Asr" = "jusqu'à Asr";
+"until Maghrib" = "jusqu'à Maghrib";
+"until Isha" = "jusqu'à Isha";
+"until Midnight" = "jusqu'à Midnight";
+"until Imsak" = "jusqu'à Imsak";

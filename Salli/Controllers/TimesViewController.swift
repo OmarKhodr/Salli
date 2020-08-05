@@ -9,28 +9,30 @@
 import UIKit
 import CoreData
 import CoreLocation
-import Adhan
 
 class TimesViewController: UIViewController {
+    
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var timeLeftLabel: UILabel!
     @IBOutlet weak var currentDateLabel: UILabel!
     
     @IBOutlet weak var prayerTimesBackgroundView: UIView!
+    @IBOutlet weak var prayerTimesStack: UIStackView!
     
     @IBOutlet var prayerLabels: [UILabel]!
     @IBOutlet var prayerTimeLabels: [UILabel]!
     @IBOutlet var periodLabels: [UILabel]!
     
-    
     @IBOutlet weak var midnightStack: UIStackView!
     @IBOutlet weak var imsakStack: UIStackView!
     
+    @IBOutlet weak var qiblaButton: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
+    
     var prayerTimes: [Date] = []
-    
     var locationString: String = ""
-    
     var timeLeftString: String = ""
     
     let coreDataHelper = CoreDataHelper()
@@ -40,22 +42,58 @@ class TimesViewController: UIViewController {
     //initialize prayer times manager for sending and handling requests to the Prayer Times API
     var prayerTimesManager = PrayerTimesManager()
     //UserDefaults
+    var defaultsManager: DefaultsManager!
     let defaults = UserDefaults.standard
+    //Alert service/factory
+    let alertService = AlertService()
+    
+    var onboarding: Bool!
+    
+    var timer: Timer!
     
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
-        setupDefaults()
-        
-        midnightStack.isHidden = !defaults.bool(forKey: K.Keys.showMidnightTime)
-        imsakStack.isHidden = !defaults.bool(forKey: K.Keys.showImsakTime)
-        
+        configureRefreshControl()
+        defaultsManager = DefaultsManager()
+        onboarding = !defaultsManager.setupDefaults()
+
         //clearing labels to prepare them for being updated by Core Data and/or CLLocationManager
         locationLabel.text = ""
         timeLeftLabel.text = ""
         currentDateLabel.text = ""
+
+        //adding rounded corners
+        prayerTimesBackgroundView.rounded(cornerRadius: 16)
+        qiblaButton.rounded(cornerRadius: 8)
+        settingsButton.rounded(cornerRadius: 8)
+        
+        //setting view as delegate for location manager
+        locationManager.delegate = self
+        
+        //setting view as delegate for prayer times manager
+        prayerTimesManager.delegate = self
+        
+        loadData()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if onboarding {
+            defaultsManager.setupViews(viewController: self)
+        }
+        let alertVC = alertService.alert(imageName: "exclamationmark.triangle.fill",
+                                         title: "Test Alert",
+                                         body: "This is a test of the custom alert.",
+                                         actionName: "Confirm") { }
+        present(alertVC, animated: true)
+    }
+    
+    func loadData() {
+        midnightStack.isHidden = !defaults.bool(forKey: K.Keys.showMidnightTime)
+        imsakStack.isHidden = !defaults.bool(forKey: K.Keys.showImsakTime)
         
         //Setting date label as current Hijri date
         let dateFor = DateFormatter()
@@ -69,34 +107,34 @@ class TimesViewController: UIViewController {
         dateFor.dateFormat = "EEEE, MMM d, yyyy"
         currentDateLabel.text = "\(dateFor.string(from: Date())) \("AH".localized)"
         
-        //adding rounded corners to background of prayer times
-        prayerTimesBackgroundView.layer.cornerRadius = 16
-        prayerTimesBackgroundView.layer.masksToBounds = true
-        
-        //setting view as delegate for location manager
-        locationManager.delegate = self
-        
-        //setting view as delegate for prayer times manager
-        prayerTimesManager.delegate = self
-        
         //fetching data (if available) from database and checking if still valid, request location to update them if either check fails.
         loadTimes()
         updateUI()
         
         //timer for calling updateUI() on separate thread every tenth of a second.
-        _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(TimesViewController.updateUI), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(TimesViewController.updateUI), userInfo: nil, repeats: true)
     }
     
-    func setupDefaults() {
-        let hasOnboarded = defaults.bool(forKey: K.Keys.hasOnboarded)
-        if !hasOnboarded {
-            defaults.set(true, forKey: K.Keys.hasOnboarded)
-            defaults.set(false, forKey: K.Keys.showMidnightTime)
-            defaults.set(false, forKey: K.Keys.showImsakTime)
-            defaults.set(0, forKey: K.Keys.appearance)
+    @IBAction func qiblaButtonPressed(_ sender: UIButton) {
+        animate(button: sender)
+        performSegue(withIdentifier: K.Segues.toQibla, sender: self)
+    }
+    
+    @IBAction func settingsButtonPressed(_ sender: UIButton) {
+        animate(button: sender)
+        performSegue(withIdentifier: K.Segues.toSettings, sender: self)
+    }
+    
+    func fetchPrayerTimes() {
+        let automaticLocation = defaults.bool(forKey: K.Keys.automaticLocation)
+        if automaticLocation {
+            requestLocation()
+        } else {
+            let city = defaults.string(forKey: K.Keys.manualCity)!
+            let country = defaults.string(forKey: K.Keys.manualCountry)!
+            prayerTimesManager.fetchTimings(city: city, country: country)
         }
     }
-    
     
 }
 
@@ -117,6 +155,7 @@ extension TimesViewController: CLLocationManagerDelegate {
     
     //in case updating location fails
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        stopRefreshControl()
         print("failed to update location: \(error)")
     }
     
@@ -132,17 +171,17 @@ extension TimesViewController: CLLocationManagerDelegate {
 extension TimesViewController: PrayerTimesManagerDelegate {
     //called when updating prayer times fails
     func didFailWithError(_ manager: PrayerTimesManager, error: Error) {
+        stopRefreshControl()
         print(error)
     }
     
     //called to update UI when prayer times are updated
     func didUpdatePrayerTimes(_ manager: PrayerTimesManager, _ model: PrayerTimesModel) {
-        
+        stopRefreshControl()
         coreDataHelper.saveNewTimes(model: model)
         
         prayerTimes = model.times
         locationString = model.location
-
     }
 }
 
@@ -153,32 +192,35 @@ extension TimesViewController {
 //MARK: - Core Data Methods
     
     func loadTimes() {
-        
         let result: [PrayerInfo] = coreDataHelper.fetch()
-        
         guard result.count <= 1 else {
             fatalError("result has more than one element!!!")
         }
-        
         let info = result.first
-        
         if let info = info {
             (prayerTimes, locationString) = coreDataHelper.assignData(with: info)
         }
-        
-        if !coreDataHelper.upToDate(info: info) {
-            requestLocation()
+        let needUpdating = defaults.bool(forKey: K.Keys.needUpdatingSettings)
+        if !coreDataHelper.upToDate(info: info) || needUpdating {
+            defaults.set(false, forKey: K.Keys.needUpdatingSettings)
+            fetchPrayerTimes()
         }
-        
     }
     
 //MARK: - UI Helper Methods
     
     @objc func updateUI() {
-        
         //if prayerTimes not yet loaded into array, nothing to update.
         if prayerTimes.count == 0 {
             return
+        }
+        
+        let needUpdating = defaults.bool(forKey: K.Keys.needUpdatingSettings)
+        
+        if needUpdating {
+            timer.invalidate()
+            defaults.set(false, forKey: K.Keys.needUpdatingSettings)
+            loadData()
         }
         
         //use model to get string of next prayer
@@ -212,7 +254,6 @@ extension TimesViewController {
         
         //updating UI elements on main thread.
         DispatchQueue.main.async {
-            
             self.locationLabel.text = self.locationString
             
             self.timeLeftLabel.text = self.timeLeftString
@@ -251,19 +292,37 @@ extension TimesViewController {
         }
     }
     
-    //was using to animate buttons which don't exist anymore, might use later
-//    func animate(button: UIButton) {
-//        //animate button by shrinking to 95% size for a tenth of a second then back to original size in the same time
-//        UIView.animate(withDuration: 0.1,
-//        animations: {
-//            button.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-//        },
-//        completion: { _ in
-//            UIView.animate(withDuration: 0.1) {
-//                button.transform = CGAffineTransform.identity
-//            }
-//        })
-//    }
+    func animate(button: UIButton) {
+        //animate button by shrinking to 95% size for a tenth of a second then back to original size in the same time
+        UIView.animate(withDuration: 0.1,
+        animations: {
+            button.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        },
+        completion: { _ in
+            UIView.animate(withDuration: 0.1) {
+                button.transform = CGAffineTransform.identity
+            }
+        })
+    }
+    
+    func configureRefreshControl () {
+       // Add the refresh control to your UIScrollView object.
+       scrollView.refreshControl = UIRefreshControl()
+       scrollView.refreshControl?.addTarget(self, action:
+                                          #selector(handleRefreshControl),
+                                          for: .valueChanged)
+    }
+        
+    @objc func handleRefreshControl() {
+        fetchPrayerTimes()
+    }
+    
+    func stopRefreshControl() {
+        DispatchQueue.main.async {
+            if let refreshControl = self.scrollView.refreshControl, refreshControl.isRefreshing {
+                refreshControl.endRefreshing()
+            }
+        }
+    }
     
 }
-
