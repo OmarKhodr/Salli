@@ -40,5 +40,6 @@ class K {
         static let toOnboarding = "ToOnboarding"
         static let toQibla = "ToQibla"
         static let toSettings = "ToSettings"
+        static let toManualLocation = "ToManualLocation"
     }
 }

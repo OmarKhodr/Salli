@@ -18,9 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       _ application: UIApplication,
       didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
         -> Bool {
-        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! as String)
-//            let timeZoneIdentifiers = TimeZone.knownTimeZoneIdentifiers
-//            print(timeZoneIdentifiers)
+//        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! as String)
             UITabBar.appearance().tintColor = UIColor(named: K.Colors.brandBlue)
 
       return true

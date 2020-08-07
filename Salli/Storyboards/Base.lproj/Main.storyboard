@@ -475,17 +475,39 @@
                                     <action selector="closeButtonPressed:" destination="UWg-xK-sWG" eventType="touchUpInside" id="bV2-Om-0sb"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EiO-zP-s5C">
+                                <rect key="frame" x="20" y="566.5" width="335" height="50.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamationmark.triangle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="MC5-AN-eS4">
+                                        <rect key="frame" x="0.0" y="11" width="30" height="28"/>
+                                        <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="hKc-2L-q3Q"/>
+                                            <constraint firstAttribute="width" constant="30" id="woZ-ig-byl"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Since location is disabled, this is the approximate Qibla direction. Please turn on automatic location for the exact direction." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBG-ei-dyv">
+                                        <rect key="frame" x="38" y="0.0" width="297" height="50.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="pCL-uA-CXY" secondAttribute="trailing" id="2Yh-gv-XVp"/>
+                            <constraint firstAttribute="trailing" secondItem="EiO-zP-s5C" secondAttribute="trailing" constant="20" id="3J2-U1-N5J"/>
                             <constraint firstItem="kfi-2p-Hzv" firstAttribute="centerX" secondItem="EQF-q2-nmX" secondAttribute="centerX" id="5Ro-bA-RvP"/>
                             <constraint firstItem="pCL-uA-CXY" firstAttribute="leading" secondItem="EQF-q2-nmX" secondAttribute="leading" id="6DI-pX-soe"/>
+                            <constraint firstItem="EiO-zP-s5C" firstAttribute="leading" secondItem="EQF-q2-nmX" secondAttribute="leading" constant="20" id="GFi-FD-yOk"/>
                             <constraint firstItem="pCL-uA-CXY" firstAttribute="centerX" secondItem="EQF-q2-nmX" secondAttribute="centerX" id="LLW-c2-SRl"/>
                             <constraint firstItem="dUc-wS-Maw" firstAttribute="top" secondItem="ZtW-Rr-Ibk" secondAttribute="top" constant="20" id="Rsu-e1-amJ"/>
                             <constraint firstItem="kfi-2p-Hzv" firstAttribute="centerY" secondItem="EQF-q2-nmX" secondAttribute="centerY" id="cc8-Wh-mfd"/>
                             <constraint firstItem="kfi-2p-Hzv" firstAttribute="trailing" secondItem="ZtW-Rr-Ibk" secondAttribute="trailing" id="cfD-N8-WNl"/>
                             <constraint firstItem="kfi-2p-Hzv" firstAttribute="leading" secondItem="ZtW-Rr-Ibk" secondAttribute="leading" id="m57-eT-G0o"/>
+                            <constraint firstItem="ZtW-Rr-Ibk" firstAttribute="bottom" secondItem="EiO-zP-s5C" secondAttribute="bottom" constant="30" id="nlL-Dl-FgZ"/>
                             <constraint firstItem="pCL-uA-CXY" firstAttribute="centerY" secondItem="EQF-q2-nmX" secondAttribute="centerY" id="pum-NK-taC"/>
                             <constraint firstItem="ZtW-Rr-Ibk" firstAttribute="trailing" secondItem="dUc-wS-Maw" secondAttribute="trailing" constant="20" id="z4C-Q9-1pz"/>
                         </constraints>
@@ -496,11 +518,12 @@
                         <outlet property="closeButton" destination="dUc-wS-Maw" id="SbM-gp-Sb8"/>
                         <outlet property="compassImageView" destination="pCL-uA-CXY" id="dSI-fX-Nzy"/>
                         <outlet property="qiblaArrow" destination="kfi-2p-Hzv" id="SUa-2V-Vcd"/>
+                        <outlet property="warningStackView" destination="EiO-zP-s5C" id="7i4-al-kbp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FPg-F8-IgX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1046.25" y="954.92957746478874"/>
+            <point key="canvasLocation" x="1045.5999999999999" y="954.87256371814101"/>
         </scene>
         <!--Settings-->
         <scene sceneID="U3V-YX-vHW">
@@ -518,6 +541,7 @@
         <image name="arrowtriangle.up.circle.fill" catalog="system" width="128" height="121"/>
         <image name="clock.fill" catalog="system" width="128" height="121"/>
         <image name="compass" width="793" height="768"/>
+        <image name="exclamationmark.triangle.fill" catalog="system" width="128" height="112"/>
         <image name="qibla" width="793" height="768"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
         <namedColor name="brandBlue">

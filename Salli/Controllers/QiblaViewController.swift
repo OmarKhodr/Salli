@@ -15,12 +15,15 @@ class QiblaViewController: UIViewController {
     @IBOutlet weak var compassImageView: UIImageView!
     @IBOutlet weak var qiblaArrow: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var warningStackView: UIStackView!
     
+    private let defaults = UserDefaults.standard
     private let locationManager = CLLocationManager()
-    
     //qibla direction in radians. Will be used by heading updating method to compute rotation of qibla arrow once coordinates are determined.
     private var qiblaRad: Double = 0
     private var facingQibla: Bool = false
+    var latitude: Double?
+    var longitude: Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +54,14 @@ class QiblaViewController: UIViewController {
         qiblaArrow.layer.compositingFilter = "differenceBlendMode"
         lineView.layer.compositingFilter = "differenceBlendMode"
         
-        //immediately fetch location to determine qibla direction
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
+        let automaticLocation = defaults.bool(forKey: K.Keys.automaticLocation)
+        if let lat = latitude, let lon = longitude, !automaticLocation {
+            startQiblaDirection(latitude: lat, longitude: lon)
+        } else {
+            warningStackView.isHidden = true
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.requestLocation()
+        }
         
         //start real-time updating of heading (= degrees from true/magnetic north)
         if CLLocationManager.headingAvailable() {
@@ -65,6 +73,22 @@ class QiblaViewController: UIViewController {
     
     @IBAction func closeButtonPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func startQiblaDirection(latitude: Double, longitude: Double) {
+        //once we can get qibla direction, make qibla arrow appear again
+        UIView.animate(withDuration: 0.35) {
+            self.qiblaArrow.layer.opacity = 100
+        }
+        //init. coordinates as Adhan library wants them.
+        let coordinates = Coordinates(latitude: latitude, longitude: longitude)
+        //use Adhan library to get Qibla direction relative to true north
+        let qiblaDirection = Qibla(coordinates: coordinates)
+        qiblaRad = degreesToRadians(qiblaDirection.direction)
+        //call didUpdateHeading() now in case it isn't changing (i.e device set on table or something)
+        if let heading = locationManager.heading {
+            self.locationManager(locationManager, didUpdateHeading: heading)
+        }
     }
     
     //animated rotation to a defined rotation angle (radians).
@@ -96,22 +120,7 @@ extension QiblaViewController: CLLocationManagerDelegate {
         if let location = locations.last {
             //stop updating location while fetching from array
             locationManager.stopUpdatingLocation()
-            
-            //once we can get qibla direction, make qibla arrow appear again
-            UIView.animate(withDuration: 0.35) {
-                self.qiblaArrow.layer.opacity = 100
-            }
-            
-            //init. coordinates as Adhan library wants them.
-            let coordinates = Coordinates(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            //use Adhan library to get Qibla direction relative to true north
-            let qiblaDirection = Qibla(coordinates: coordinates)
-            qiblaRad = degreesToRadians(qiblaDirection.direction)
-            
-            //call didUpdateHeading() now in case it isn't changing (i.e device set on table or something)
-            if let heading = locationManager.heading {
-                self.locationManager(locationManager, didUpdateHeading: heading)
-            }
+            startQiblaDirection(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         }
     }
     

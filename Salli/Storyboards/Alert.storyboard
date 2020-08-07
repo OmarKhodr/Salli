@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Bed-ec-41y">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -17,35 +17,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKe-j4-pie">
-                                <rect key="frame" x="50" y="248" width="275" height="171"/>
+                                <rect key="frame" x="50" y="244" width="275" height="179"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamationmark.triangle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Lq0-zQ-3J2">
-                                        <rect key="frame" x="8" y="8.5" width="259" height="38"/>
+                                        <rect key="frame" x="8" y="16.5" width="259" height="38"/>
                                         <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="vJY-rF-0mN"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjr-Dp-UQX">
-                                        <rect key="frame" x="120" y="56" width="35.5" height="20.5"/>
+                                        <rect key="frame" x="120" y="64" width="35.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qlb-MX-N7u">
-                                        <rect key="frame" x="16" y="84.5" width="243" height="20.5"/>
+                                        <rect key="frame" x="16" y="92.5" width="243" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FGo-6X-knj">
-                                        <rect key="frame" x="8" y="113" width="259" height="50"/>
+                                        <rect key="frame" x="8" y="121" width="259" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QZG-L2-8or">
                                                 <rect key="frame" x="0.0" y="0.0" width="125.5" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <state key="normal" title="Cancel">
-                                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapCancel:" destination="Bed-ec-41y" eventType="touchUpInside" id="Pvs-8t-jDU"/>
@@ -67,7 +66,7 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="alertBackground"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Lq0-zQ-3J2" secondAttribute="trailing" constant="8" id="3n7-D8-jN6"/>
                                     <constraint firstItem="FGo-6X-knj" firstAttribute="top" secondItem="Qlb-MX-N7u" secondAttribute="bottom" constant="8" id="48E-2x-QGz"/>
@@ -77,7 +76,7 @@
                                     <constraint firstItem="Qlb-MX-N7u" firstAttribute="leading" secondItem="dKe-j4-pie" secondAttribute="leading" constant="16" id="Y5W-NI-iM8"/>
                                     <constraint firstAttribute="trailing" secondItem="Qlb-MX-N7u" secondAttribute="trailing" constant="16" id="a9f-x2-EHm"/>
                                     <constraint firstAttribute="width" constant="275" id="e15-o2-vPw"/>
-                                    <constraint firstItem="Lq0-zQ-3J2" firstAttribute="top" secondItem="dKe-j4-pie" secondAttribute="top" constant="8" id="iCk-vb-P6v"/>
+                                    <constraint firstItem="Lq0-zQ-3J2" firstAttribute="top" secondItem="dKe-j4-pie" secondAttribute="top" constant="16" id="iCk-vb-P6v"/>
                                     <constraint firstItem="Lq0-zQ-3J2" firstAttribute="leading" secondItem="dKe-j4-pie" secondAttribute="leading" constant="8" id="lyI-kS-GTl"/>
                                     <constraint firstItem="Qlb-MX-N7u" firstAttribute="top" secondItem="gjr-Dp-UQX" secondAttribute="bottom" constant="8" id="nYu-fA-7IK"/>
                                     <constraint firstItem="gjr-Dp-UQX" firstAttribute="top" secondItem="Lq0-zQ-3J2" secondAttribute="bottom" constant="8" id="rGJ-oe-lie"/>
@@ -107,6 +106,9 @@
     </scenes>
     <resources>
         <image name="exclamationmark.triangle.fill" catalog="system" width="128" height="112"/>
+        <namedColor name="alertBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="brandBlue">
             <color red="0.0080000003799796104" green="0.41600000858306885" blue="0.90600001811981201" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

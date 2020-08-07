@@ -14,6 +14,7 @@ struct PrayerTimesData: Codable {
 
 struct Data: Codable {
     let timings: Timings
+    let meta: Meta
 }
 
 struct Timings: Codable {
@@ -25,4 +26,9 @@ struct Timings: Codable {
     let Isha: String
     let Midnight: String
     let Imsak: String
+}
+
+struct Meta: Codable {
+    let latitude: Double
+    let longitude: Double
 }

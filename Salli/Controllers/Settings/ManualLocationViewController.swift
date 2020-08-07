@@ -16,6 +16,7 @@ class ManualLocationViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Manual Location's viewDidLoad Called!")
         tableView.rowHeight = 43.5
         cityTextField.text = defaults.string(forKey: K.Keys.manualCity)
         countryTextField.text = defaults.string(forKey: K.Keys.manualCountry)
@@ -26,6 +27,7 @@ class ManualLocationViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        print("Manual Location's viewWillAppear Called!")
         saveLocation(cityTextField)
         saveLocation(countryTextField)
         defaults.set(true, forKey: K.Keys.needUpdatingSettings)
@@ -47,7 +49,7 @@ extension ManualLocationViewController: UITextFieldDelegate {
         }
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
+        print("textFieldDidEndEditing called!")
     }
     
     func saveLocation(_ textField: UITextField) {

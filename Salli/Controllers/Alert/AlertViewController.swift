@@ -18,8 +18,10 @@ class AlertViewController: UIViewController {
     @IBOutlet weak var actionButton: UIButton!
     
     var alertImageName = ""
+    var alertImageColor: UIColor?
     var alertTitle = ""
     var alertBody = ""
+    var cancelVisible: Bool?
     var alertAction = ""
     var alertCompletion: (() -> Void)?
     
@@ -38,13 +40,13 @@ class AlertViewController: UIViewController {
         backgroundView.layer.shadowRadius = 5
 //        backgroundView.layer.shadowPath = UIBezierPath(rect: backgroundView.bounds).cgPath
         backgroundView.rounded(cornerRadius: 8)
-        cancelButton.rounded(cornerRadius: 8)
-        actionButton.rounded(cornerRadius: 8)
     }
     func setupData() {
         alertImage.image = UIImage(systemName: alertImageName)
+        alertImage.tintColor = alertImageColor!
         titleLabel.text = alertTitle
         bodyLabel.text = alertBody
+        cancelButton.isHidden = !(cancelVisible!)
         actionButton.setTitle(alertAction, for: .normal)
     }
     @IBAction func didTapCancel(_ sender: UIButton) {

@@ -63,21 +63,15 @@ struct CoreDataHelper {
     
     func saveNewTimes(model: PrayerTimesModel) {
         //first delete everything currently in PrayerInfo table (by design there should only be a single entry) to save a new one.
-        
         let result: [PrayerInfo] = fetch()
-        
         guard result.count <= 1 else {
             fatalError("More than one element in database!!!")
         }
-        
         for entry in result {
             context.delete(entry)
         }
-
         //dictionary from model which contains just-fetched times
         let times = model.times
-        let location = model.location
-        
         //creating table entry for updated prayer times and saving them
         let newPrayerInfo = PrayerInfo(context: context)
         newPrayerInfo.dateFetched = Date()
@@ -89,25 +83,10 @@ struct CoreDataHelper {
         newPrayerInfo.isha = times[5]
         newPrayerInfo.midnight = times[6]
         newPrayerInfo.imsak = times[7]
-        newPrayerInfo.location = location
-        
+        newPrayerInfo.location = model.location
+        newPrayerInfo.latitude = model.latitude
+        newPrayerInfo.longitude = model.longitude
         //save entry in table
         saveContext()
-    }
-    
-    //assigns data inside PrayerInfo entry into prayerTimes array and location string
-    func assignData(with info: PrayerInfo) -> ([Date], String) {
-        let prayerTimes = [
-            info.fajr!,
-            info.sunrise!,
-            info.dhuhr!,
-            info.asr!,
-            info.maghrib!,
-            info.isha!,
-            info.midnight!,
-            info.imsak!
-        ]
-        let locationString = info.location!
-        return (prayerTimes, locationString)
     }
 }

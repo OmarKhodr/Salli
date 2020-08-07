@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="PrayerInfo" representedClassName=".PrayerInfo" syncable="YES" codeGenerationType="class">
         <attribute name="asr" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateFetched" attributeType="Date" usesScalarValueType="NO"/>
@@ -7,12 +7,14 @@
         <attribute name="fajr" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="imsak" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isha" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="location" attributeType="String"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="maghrib" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="midnight" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="sunrise" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <elements>
-        <element name="PrayerInfo" positionX="-63" positionY="-18" width="128" height="193"/>
+        <element name="PrayerInfo" positionX="-63" positionY="-18" width="128" height="223"/>
     </elements>
 </model>

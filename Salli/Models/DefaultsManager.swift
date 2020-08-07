@@ -16,16 +16,21 @@ class DefaultsManager {
         2: .dark
     ]
     
+    func changeTheme(viewController: UIViewController) {
+        changeTheme(val: defaults.integer(forKey: K.Keys.appearance), viewController: viewController)
+    }
+    
     func changeTheme(val: Int, viewController: UIViewController) {
         viewController.view.window?.overrideUserInterfaceStyle = dict[val]!
     }
     
+    //returns hasOnboarded.
     func setupDefaults() -> Bool {
         defaults.set(false, forKey: K.Keys.needUpdatingSettings)
         let hasOnboarded = defaults.bool(forKey: K.Keys.hasOnboarded)
         if !hasOnboarded {
             defaults.set(true, forKey: K.Keys.hasOnboarded)
-            defaults.set(false, forKey: K.Keys.automaticLocation)
+            defaults.set(true, forKey: K.Keys.automaticLocation)
             defaults.set("Cupertino", forKey: K.Keys.manualCity)
             defaults.set("United States", forKey: K.Keys.manualCountry)
             defaults.set(false, forKey: K.Keys.showMidnightTime)
@@ -38,8 +43,10 @@ class DefaultsManager {
         }
     }
     
-    func setupViews(viewController: UIViewController) {
+    func setupViews(_ viewController: UIViewController, _ hasOnboarded: Bool) {
         changeTheme(val: defaults.integer(forKey: K.Keys.appearance), viewController: viewController)
-        viewController.performSegue(withIdentifier: K.Segues.toOnboarding, sender: viewController)
+        if !hasOnboarded {
+            viewController.performSegue(withIdentifier: K.Segues.toOnboarding, sender: viewController)
+        }
     }
 }

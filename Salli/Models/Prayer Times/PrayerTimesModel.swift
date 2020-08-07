@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 //model for prayer times after having fetched them from API request
 struct PrayerTimesModel {
@@ -14,9 +15,11 @@ struct PrayerTimesModel {
     //dictionary containing datetimes for prayers
     var times: [Date]
     var location: String
+    var latitude: Double
+    var longitude: Double
     
     //constructor takes strings of times in 24-hour format (as it comes from API request) and converts them to date types
-    init(stringArray arr: [String], location: String) {
+    init(stringArray arr: [String], location: String, latitude: Double, longitude: Double) {
         times = []
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
@@ -28,10 +31,23 @@ struct PrayerTimesModel {
             times.append(date)
         }
         self.location = location
+        self.latitude = latitude
+        self.longitude = longitude
     }
     
-    init(times: [Date], location: String) {
-        self.times = times
-        self.location = location
+    init(from info: PrayerInfo) {
+        self.times = [
+            info.fajr!,
+            info.sunrise!,
+            info.dhuhr!,
+            info.asr!,
+            info.maghrib!,
+            info.isha!,
+            info.midnight!,
+            info.imsak!
+        ]
+        self.location = info.location!
+        self.latitude = info.latitude
+        self.longitude = info.longitude
     }
 }

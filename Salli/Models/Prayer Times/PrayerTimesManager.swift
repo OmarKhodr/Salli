@@ -31,7 +31,7 @@ class PrayerTimesManager {
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location, preferredLocale: Locale.init(identifier: "lang".localized)) { (placemarksArray, error) in
             if let error = error {
-                print("error performing reverse geolocation: \(error)")
+                self.delegate?.didFailReverseGeolocation(self, error: error)
             } else {
                 if let placemark = placemarksArray?.last {
                     var city = ""
@@ -102,13 +102,16 @@ class PrayerTimesManager {
                 decodedData.data.timings.Midnight,
                 decodedData.data.timings.Imsak
             ]
-            let model = PrayerTimesModel(stringArray: times, location: location)
+            let latitude = decodedData.data.meta.latitude
+            let longitude = decodedData.data.meta.longitude
+            let model = PrayerTimesModel(stringArray: times, location: location, latitude: latitude, longitude: longitude)
             //return the model for it to be passed as argument to didUpdatePrayerTimes() to be used by the delegate
             return model
             
         }
         catch {
             //in case decoding fails (usually either bad format of the JSON response or bad format of data class)
+            print("Failed to build model: \(error)")
             delegate?.didFailWithError(self, error: error)
             return nil
         }

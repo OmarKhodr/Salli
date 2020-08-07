@@ -17,6 +17,7 @@ class PrayerTimesSettingsViewController: UITableViewController {
     @IBOutlet weak var locationLabel: UILabel!
     
     let defaults = UserDefaults.standard
+    let alertService = AlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +59,16 @@ class PrayerTimesSettingsViewController: UITableViewController {
             manualLocationCell.isUserInteractionEnabled = true
             manualLocationCell.accessoryType = .disclosureIndicator
             automaticLocationSwitch.isOn = false
-            locationLabel.text = defaults.string(forKey: K.Keys.manualCity)
+            if let city = defaults.string(forKey: K.Keys.manualCity),
+                let _ = defaults.string(forKey: K.Keys.manualCountry) {
+                locationLabel.text = city
+            } else {
+                let alertVC = alertService.warningAlert(title: "Invalid Location", body: "Either the city or country fields are empty. Please Enter a valid city and country.", cancelVisible: true, actionName: "Set Location") {
+                    self.performSegue(withIdentifier: K.Segues.toManualLocation, sender: self)
+                }
+                present(alertVC, animated: true)
+            }
+            
         }
     }
 

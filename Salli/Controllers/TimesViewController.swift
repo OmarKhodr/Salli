@@ -34,6 +34,8 @@ class TimesViewController: UIViewController {
     var prayerTimes: [Date] = []
     var locationString: String = ""
     var timeLeftString: String = ""
+    var latitude: Double?
+    var longitude: Double?
     
     let coreDataHelper = CoreDataHelper()
     
@@ -47,7 +49,7 @@ class TimesViewController: UIViewController {
     //Alert service/factory
     let alertService = AlertService()
     
-    var onboarding: Bool!
+    var hasOnboarded: Bool!
     
     var timer: Timer!
     
@@ -57,7 +59,7 @@ class TimesViewController: UIViewController {
         
         configureRefreshControl()
         defaultsManager = DefaultsManager()
-        onboarding = !defaultsManager.setupDefaults()
+        hasOnboarded = defaultsManager.setupDefaults()
 
         //clearing labels to prepare them for being updated by Core Data and/or CLLocationManager
         locationLabel.text = ""
@@ -81,14 +83,8 @@ class TimesViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if onboarding {
-            defaultsManager.setupViews(viewController: self)
-        }
-        let alertVC = alertService.alert(imageName: "exclamationmark.triangle.fill",
-                                         title: "Test Alert",
-                                         body: "This is a test of the custom alert.",
-                                         actionName: "Confirm") { }
-        present(alertVC, animated: true)
+        defaultsManager.setupViews(self, hasOnboarded)
+        hasOnboarded = true
     }
     
     func loadData() {
@@ -116,13 +112,25 @@ class TimesViewController: UIViewController {
     }
     
     @IBAction func qiblaButtonPressed(_ sender: UIButton) {
-        animate(button: sender)
-        performSegue(withIdentifier: K.Segues.toQibla, sender: self)
+        if latitude != nil && longitude != nil {
+            animate(button: sender)
+            performSegue(withIdentifier: K.Segues.toQibla, sender: self)
+        }
     }
     
     @IBAction func settingsButtonPressed(_ sender: UIButton) {
         animate(button: sender)
         performSegue(withIdentifier: K.Segues.toSettings, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.Segues.toQibla {
+            let destVC = segue.destination as! QiblaViewController
+            if let lat = latitude, let long = longitude {
+                destVC.latitude = lat
+                destVC.longitude = long
+            }
+        }
     }
     
     func fetchPrayerTimes() {
@@ -156,7 +164,11 @@ extension TimesViewController: CLLocationManagerDelegate {
     //in case updating location fails
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         stopRefreshControl()
-        print("failed to update location: \(error)")
+        let warningAlertVC = alertService.warningAlert(title: "Location Error",
+                                                       body: "Failed to get location. Please make sure that location is enabled for Salli in Settings and try again later.",
+                                                       cancelVisible: false,
+                                                       actionName: "Okay") { }
+        present(warningAlertVC, animated: true)
     }
     
     func requestLocation() {
@@ -171,8 +183,34 @@ extension TimesViewController: CLLocationManagerDelegate {
 extension TimesViewController: PrayerTimesManagerDelegate {
     //called when updating prayer times fails
     func didFailWithError(_ manager: PrayerTimesManager, error: Error) {
+        var body = ""
+        if defaults.bool(forKey: K.Keys.automaticLocation) {
+            body = "Failed to connect to the network to fetch latest prayer times. Please make sure that the device has internet access and try again."
+        } else {
+            body = "Failed to connect to the network to fetch latest prayer times. Please make sure that the device has internet access and that the city and country fields are spelled correctly."
+        }
+        DispatchQueue.main.async {
+            let warningAlertVC = self.alertService.warningAlert(title: "Network Error",
+                                                           body: body,
+                                                           cancelVisible: false,
+                                                           actionName: "Okay") { }
+            self.present(warningAlertVC, animated: true)
+
+        }
         stopRefreshControl()
-        print(error)
+        print("Failed fetching prayer times: \(error)")
+    }
+    
+    func didFailReverseGeolocation(_ manager: PrayerTimesManager, error: Error) {
+        DispatchQueue.main.async {
+            let warningAlertVC = self.alertService.warningAlert(title: "Location Error",
+                                                           body: "Failed to identify city and country. Please try again later.",
+                                                           cancelVisible: false,
+                                                           actionName: "Okay") { }
+            self.present(warningAlertVC, animated: true)
+        }
+        stopRefreshControl()
+        print("error performing reverse geolocation: \(error)")
     }
     
     //called to update UI when prayer times are updated
@@ -182,6 +220,8 @@ extension TimesViewController: PrayerTimesManagerDelegate {
         
         prayerTimes = model.times
         locationString = model.location
+        latitude = model.latitude
+        longitude = model.longitude
     }
 }
 
@@ -198,7 +238,11 @@ extension TimesViewController {
         }
         let info = result.first
         if let info = info {
-            (prayerTimes, locationString) = coreDataHelper.assignData(with: info)
+            let model = PrayerTimesModel(from: info)
+            prayerTimes = model.times
+            locationString = model.location
+            latitude = model.latitude
+            longitude = model.longitude
         }
         let needUpdating = defaults.bool(forKey: K.Keys.needUpdatingSettings)
         if !coreDataHelper.upToDate(info: info) || needUpdating {
