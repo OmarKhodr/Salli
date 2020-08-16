@@ -88,20 +88,6 @@ struct PrayerCurrentInformation {
             timeLeftString = "less than a minute left".localized
         }
         else {
-//            if (hoursLeft > 0) {
-//                timeLeftString += "\(hoursLeft) hour"
-//                if (hoursLeft > 1) {
-//                    timeLeftString += "s"
-//                }
-//                timeLeftString += " "
-//            }
-//            if (minutesLeft > 0) {
-//                timeLeftString += "\(minutesLeft) minute"
-//                if (minutesLeft > 1) {
-//                    timeLeftString += "s"
-//                }
-//                timeLeftString += " "
-//            }
             let formatTimeLeft = "time left".localized
             timeLeftString += String.localizedStringWithFormat(formatTimeLeft, hoursLeft, minutesLeft)
         }

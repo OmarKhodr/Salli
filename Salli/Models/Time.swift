@@ -11,16 +11,13 @@ import Foundation
 //taken from: https://stackoverflow.com/questions/41646542/how-do-you-compare-just-the-time-of-a-date-in-swift
 
 class Time: Comparable, Equatable {
-init(_ date: Date) {
-    //get the current calender
-    let calendar = Calendar.current
-
-    //get just the minute and the hour of the day passed to it
-    let dateComponents = calendar.dateComponents([.hour, .minute], from: date)
-
+    init(_ date: Date) {
+        //get the current calender
+        let calendar = Calendar.current
+        //get just the minute and the hour of the day passed to it
+        let dateComponents = calendar.dateComponents([.hour, .minute], from: date)
         //calculate the seconds since the beggining of the day for comparisions
         let dateSeconds = dateComponents.hour! * 3600 + dateComponents.minute! * 60
-
         //set the varibles
         secondsSinceBeginningOfDay = dateSeconds
         hour = dateComponents.hour!
@@ -30,7 +27,6 @@ init(_ date: Date) {
     init(_ hour: Int, _ minute: Int) {
         //calculate the seconds since the beggining of the day for comparisions
         let dateSeconds = hour * 3600 + minute * 60
-
         //set the varibles
         secondsSinceBeginningOfDay = dateSeconds
         self.hour = hour
@@ -43,13 +39,10 @@ init(_ date: Date) {
     var date: Date {
         //get the current calender
         let calendar = Calendar.current
-
         //create a new date components.
         var dateComponents = DateComponents()
-
         dateComponents.hour = hour
         dateComponents.minute = minute
-
         return calendar.date(byAdding: dateComponents, to: Date())!
     }
 

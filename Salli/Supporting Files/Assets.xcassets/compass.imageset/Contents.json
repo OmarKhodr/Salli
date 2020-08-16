@@ -21,7 +21,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "compass-latin-dark-letters.png",
+      "filename" : "compass-latin-modally-dark-letters.png",
       "idiom" : "universal"
     },
     {
@@ -47,7 +47,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "compass-arabic-dark-letters.png",
+      "filename" : "compass-arabic-modally-dark-letters.png",
       "idiom" : "universal",
       "locale" : "ar"
     }

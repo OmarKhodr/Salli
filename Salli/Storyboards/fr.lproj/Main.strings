@@ -2,8 +2,17 @@
 /* Class = "UILabel"; text = "PM"; ObjectID = "459-eE-b0i"; */
 "459-eE-b0i.text" = "PM";
 
+/* Class = "UILabel"; text = "Prayer Times"; ObjectID = "5xJ-3Y-bRu"; */
+"5xJ-3Y-bRu.text" = "Horaires de Prière";
+
+/* Class = "UILabel"; text = "Enter City and Country"; ObjectID = "6A5-OT-boZ"; */
+"6A5-OT-boZ.text" = "Entrer la Ville et le Pays";
+
 /* Class = "UILabel"; text = "PM"; ObjectID = "6OW-qe-CYo"; */
 "6OW-qe-CYo.text" = "PM";
+
+/* Class = "UIButton"; normalTitle = "Use Automatic Location"; ObjectID = "6SX-SU-aE1"; */
+"6SX-SU-aE1.normalTitle" = "Localisation Automatique";
 
 /* Class = "UILabel"; text = "City, Country"; ObjectID = "6X4-NZ-G5u"; */
 "6X4-NZ-G5u.text" = "Ville, Pays";
@@ -11,8 +20,11 @@
 /* Class = "UILabel"; text = "--:--"; ObjectID = "6oP-jl-anJ"; */
 "6oP-jl-anJ.text" = "--:--";
 
+/* Class = "UILabel"; text = "View today's prayer times for your location automatically or by setting a location manually. Customizable and versatile."; ObjectID = "6y5-aR-cSP"; */
+"6y5-aR-cSP.text" = "Visionner les horaires de prière d'aujourd'hui automatiquement ou en indiquant son emplacement manuellement.";
+
 /* Class = "UILabel"; text = "Monday, Shaw. 3, 1441 AH"; ObjectID = "7IK-ia-mLP"; */
-"7IK-ia-mLP.text" = "Lundi, Shaw. 3, 1441 AH";
+"7IK-ia-mLP.text" = "Monday, Shaw. 3, 1441 AH";
 
 /* Class = "UILabel"; text = "PM"; ObjectID = "84v-LY-CmS"; */
 "84v-LY-CmS.text" = "PM";
@@ -23,11 +35,20 @@
 /* Class = "UITabBarItem"; title = "Qibla"; ObjectID = "9Ak-fX-pLn"; */
 "9Ak-fX-pLn.title" = "Qibla";
 
+/* Class = "UIButton"; normalTitle = "Settings"; ObjectID = "ApJ-MB-qxh"; */
+"ApJ-MB-qxh.normalTitle" = "Réglages";
+
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "Bs2-kY-ZhF"; */
+"Bs2-kY-ZhF.normalTitle" = "Continuer";
+
 /* Class = "UILabel"; text = "--:--"; ObjectID = "FrZ-oY-Ebv"; */
 "FrZ-oY-Ebv.text" = "--:--";
 
 /* Class = "UILabel"; text = "PM"; ObjectID = "GWJ-oq-xaN"; */
 "GWJ-oq-xaN.text" = "PM";
+
+/* Class = "UILabel"; text = "Welcome to Salli!"; ObjectID = "H04-Oc-3ao"; */
+"H04-Oc-3ao.text" = "Bienvenu dans Salli!";
 
 /* Class = "UILabel"; text = "Asr"; ObjectID = "I7a-B2-VmF"; */
 "I7a-B2-VmF.text" = "Asr";
@@ -56,11 +77,20 @@
 /* Class = "UILabel"; text = "--:--"; ObjectID = "Oev-Bb-dhJ"; */
 "Oev-Bb-dhJ.text" = "--:--";
 
+/* Class = "UITextField"; placeholder = "Country"; ObjectID = "QY6-kl-7x8"; */
+"QY6-kl-7x8.placeholder" = "Pays";
+
 /* Class = "UILabel"; text = "--:--"; ObjectID = "TP0-9r-E97"; */
 "TP0-9r-E97.text" = "--:--";
 
-/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "amt-W9-mg2"; */
-"amt-W9-mg2.title" = "Paramètres";
+/* Class = "UIButton"; normalTitle = "Use Manual Location"; ObjectID = "U9a-7c-zx0"; */
+"U9a-7c-zx0.normalTitle" = "Localisation Manuelle";
+
+/* Class = "UITextField"; placeholder = "City"; ObjectID = "YAe-e1-5tT"; */
+"YAe-e1-5tT.placeholder" = "Ville";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "bcV-pw-Nv8"; */
+"bcV-pw-Nv8.title" = "Item";
 
 /* Class = "UILabel"; text = "PM"; ObjectID = "cnK-jT-f8K"; */
 "cnK-jT-f8K.text" = "PM";
@@ -68,8 +98,11 @@
 /* Class = "UITabBarItem"; title = "Times"; ObjectID = "dS6-5h-gXR"; */
 "dS6-5h-gXR.title" = "Horaires";
 
+/* Class = "UILabel"; text = "This is the approximate Qibla direction. Please turn on automatic location for the exact direction."; ObjectID = "eBG-ei-dyv"; */
+"eBG-ei-dyv.text" = "Ceci est la direction approximative de la Qibla. Veuillez activer la localisation automatique pour accéder à la direction exacte.";
+
 /* Class = "UILabel"; text = "5 hours 59 minutes until Midnight"; ObjectID = "jPD-Aj-i47"; */
-"jPD-Aj-i47.text" = "5 heures 59 minutes jusqu'à Minuit";
+"jPD-Aj-i47.text" = "5 hours 59 minutes until Midnight";
 
 /* Class = "UILabel"; text = "Duhr"; ObjectID = "kud-Yg-w8N"; */
 "kud-Yg-w8N.text" = "Duhr";
@@ -80,20 +113,23 @@
 /* Class = "UILabel"; text = "--:--"; ObjectID = "o7n-bz-wXx"; */
 "o7n-bz-wXx.text" = "--:--";
 
+/* Class = "UIButton"; normalTitle = "Qibla Direction"; ObjectID = "pkx-O2-0l3"; */
+"pkx-O2-0l3.normalTitle" = "Direction de la Qibla";
+
+/* Class = "UILabel"; text = "View the direction of the Kaaba superimposed over a compass using GPS location or approximately using manual location."; ObjectID = "rob-ej-IEE"; */
+"rob-ej-IEE.text" = "Visionnner la direction de la Kaaba superimposé sur une bousolle grace à votre localisation GPS ou approximativement en indiquant son emplacement manuellement.";
+
 /* Class = "UILabel"; text = "Imsak"; ObjectID = "sW4-QP-6rj"; */
 "sW4-QP-6rj.text" = "Imsak";
+
+/* Class = "UILabel"; text = "Qibla Direction"; ObjectID = "tCG-gj-8HB"; */
+"tCG-gj-8HB.text" = "Direction de la Qibla";
 
 /* Class = "UILabel"; text = "PM"; ObjectID = "tdf-3V-dRS"; */
 "tdf-3V-dRS.text" = "PM";
 
-/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "u3a-DB-Wwg"; */
-"u3a-DB-Wwg.title" = "Paramètres";
-
 /* Class = "UILabel"; text = "Fajr"; ObjectID = "wlQ-0Y-e3e"; */
 "wlQ-0Y-e3e.text" = "Fajr";
-
-/* Class = "UINavigationItem"; title = "Setting"; ObjectID = "z4f-W4-EV7"; */
-"z4f-W4-EV7.title" = "Paramètre";
 
 /* Class = "UILabel"; text = "Today"; ObjectID = "zZv-hj-1Ih"; */
 "zZv-hj-1Ih.text" = "Aujourd'hui";

@@ -16,6 +16,7 @@ class QiblaViewController: UIViewController {
     @IBOutlet weak var qiblaArrow: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var warningStackView: UIStackView!
+    private let loadingVC = LoadingViewController()
     
     private let defaults = UserDefaults.standard
     private let locationManager = CLLocationManager()
@@ -28,7 +29,6 @@ class QiblaViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
-        
         //initially, before getting location to get qibla direction, arrow not visible
         qiblaArrow.layer.opacity = 0
         
@@ -58,6 +58,7 @@ class QiblaViewController: UIViewController {
         if let lat = latitude, let lon = longitude, !automaticLocation {
             startQiblaDirection(latitude: lat, longitude: lon)
         } else {
+            add(loadingVC)
             warningStackView.isHidden = true
             locationManager.requestWhenInUseAuthorization()
             locationManager.requestLocation()
@@ -112,7 +113,6 @@ class QiblaViewController: UIViewController {
 }
 
 extension QiblaViewController: CLLocationManagerDelegate {
-    
     //method that gets triggered when location, managed by CLLocationManager, is updated
     //input is self and array of fetched locations
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -120,6 +120,9 @@ extension QiblaViewController: CLLocationManagerDelegate {
         if let location = locations.last {
             //stop updating location while fetching from array
             locationManager.stopUpdatingLocation()
+            DispatchQueue.main.async {
+                self.loadingVC.remove()
+            }
             startQiblaDirection(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         }
     }
@@ -131,7 +134,6 @@ extension QiblaViewController: CLLocationManagerDelegate {
     
     //called every time heading changes: rotate compass and qibla arrow images to match new heading.
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        
         let newRad = degreesToRadians(newHeading.trueHeading)
         let isVisible = qiblaArrow.layer.opacity == 100
         //only generate haptic feedback if withtin 1 degree of qibla, the qibla arrow is fully opaque and we've already left it or have never reached it

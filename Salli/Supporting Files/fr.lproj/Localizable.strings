@@ -20,3 +20,17 @@
 "until Isha" = "jusqu'à Isha";
 "until Midnight" = "jusqu'à Midnight";
 "until Imsak" = "jusqu'à Imsak";
+
+"Location Error" = "Erreure de Localisation";
+
+"Failed to get location. Please make sure that location is enabled for Salli in Settings and try again later." = "La localisation a echoué. Veuillez verifier que la localisation est permise pour Salli dans les réglages et réessayer plus tard.";
+
+"Okay" = "D'accord";
+
+"Failed to connect to the network to fetch latest prayer times. Please make sure that the device has internet access and try again." = "Incapable de se connecter au résaux pour afficher les horaires de prière. Veuillez verifiez que l'appareil est connecté à internet et réessayer.";
+
+"Failed to connect to the network to fetch latest prayer times. Please make sure that the device has internet access and that the city and country fields are spelled correctly." = "Incapable de se connecter au résaux pour afficher les horaires de prière. Veuillez verifiez que l'appareil est connecté à internet et que la ville et le pays sont enregistré correctement et en Anglais.";
+
+"Network Error" = "Erreure de Résaux";
+
+"Failed to identify city and country." = "Incapable d'identifier la ville et le pays.";

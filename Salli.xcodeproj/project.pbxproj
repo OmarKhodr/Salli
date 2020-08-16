@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		2307976824D75247004060F7 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2307976724D75247004060F7 /* LoadingViewController.swift */; };
 		2307976A24D75275004060F7 /* ChildViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2307976924D75275004060F7 /* ChildViewControllerExtension.swift */; };
+		231354CB24E6FFE000724A47 /* OnboardingLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231354CA24E6FFE000724A47 /* OnboardingLocationViewController.swift */; };
+		231354CD24E70A7400724A47 /* LocationTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231354CC24E70A7400724A47 /* LocationTextFieldDelegate.swift */; };
 		231E3FBA24B46434004BF726 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 231E3FB824B46434004BF726 /* Settings.storyboard */; };
 		232D1CF624B2651400E74A7B /* QiblaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232D1CF524B2651400E74A7B /* QiblaViewController.swift */; };
-		23314AA524DB10F400F81400 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23314AA424DB10F400F81400 /* Alert.storyboard */; };
 		23553DC024D81C5A00B1535D /* DefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23553DBF24D81C5A00B1535D /* DefaultsManager.swift */; };
 		23553DC624D8278F00B1535D /* RoundedViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23553DC524D8278F00B1535D /* RoundedViewExtension.swift */; };
 		23553DC824D84ACE00B1535D /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23553DC724D84ACE00B1535D /* OnboardingViewController.swift */; };
@@ -21,7 +22,6 @@
 		239415B824C02F4900D91C74 /* CalculationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239415B724C02F4900D91C74 /* CalculationSettingsViewController.swift */; };
 		239415BA24C0331300D91C74 /* CalculationMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239415B924C0331300D91C74 /* CalculationMethod.swift */; };
 		23AD38BA24AA18590071A3DF /* Adhan in Frameworks */ = {isa = PBXBuildFile; productRef = 23AD38B924AA18590071A3DF /* Adhan */; };
-		23AD38BC24AA1AAE0071A3DF /* locationNameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AD38BB24AA1AAE0071A3DF /* locationNameManager.swift */; };
 		23B315E324DA951A006B3071 /* ManualLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B315E224DA951A006B3071 /* ManualLocationViewController.swift */; };
 		23B6299B24C094C700BFB9DF /* AboutSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B6299A24C094C700BFB9DF /* AboutSettingsViewController.swift */; };
 		23BBD40824822715003B0EC7 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23BBD40624822715003B0EC7 /* DataModel.xcdatamodeld */; };
@@ -42,6 +42,7 @@
 		23E4BA8C24A4AD480018EB87 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E4BA8B24A4AD480018EB87 /* CoreDataHelper.swift */; };
 		23E69E2624DB2193008686F2 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E69E2524DB2193008686F2 /* AlertViewController.swift */; };
 		23E69E2824DB26A1008686F2 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E69E2724DB26A1008686F2 /* AlertService.swift */; };
+		23EDAD9B24E9BDB100E39D92 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23EDAD9D24E9BDB100E39D92 /* Alert.storyboard */; };
 		23F0AA36247FD78B0013F880 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F0AA35247FD78B0013F880 /* Time.swift */; };
 		23FBFE782484DBCD004E11B5 /* PrayerCurrentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FBFE772484DBCD004E11B5 /* PrayerCurrentInformation.swift */; };
 /* End PBXBuildFile section */
@@ -49,14 +50,13 @@
 /* Begin PBXFileReference section */
 		2307976724D75247004060F7 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		2307976924D75275004060F7 /* ChildViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildViewControllerExtension.swift; sourceTree = "<group>"; };
+		231354CA24E6FFE000724A47 /* OnboardingLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLocationViewController.swift; sourceTree = "<group>"; };
+		231354CC24E70A7400724A47 /* LocationTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTextFieldDelegate.swift; sourceTree = "<group>"; };
 		231E3FB924B46434004BF726 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		232D1CF524B2651400E74A7B /* QiblaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiblaViewController.swift; sourceTree = "<group>"; };
-		23314AA424DB10F400F81400 /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
 		23553DBF24D81C5A00B1535D /* DefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsManager.swift; sourceTree = "<group>"; };
 		23553DC524D8278F00B1535D /* RoundedViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedViewExtension.swift; sourceTree = "<group>"; };
 		23553DC724D84ACE00B1535D /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		235DD3A824B35D6F00B9DB09 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
-		235DD3AA24B35DE600B9DB09 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
 		2360C5BF24B1D8C90092E5DF /* SwiftLocalizedExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLocalizedExtension.swift; sourceTree = "<group>"; };
 		2360C5C424B1DD5F0092E5DF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2360C5C624B1DD620092E5DF /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -66,7 +66,6 @@
 		2360C5CF24B20E870092E5DF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = fr; path = fr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		239415B724C02F4900D91C74 /* CalculationSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationSettingsViewController.swift; sourceTree = "<group>"; };
 		239415B924C0331300D91C74 /* CalculationMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationMethod.swift; sourceTree = "<group>"; };
-		23AD38BB24AA1AAE0071A3DF /* locationNameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationNameManager.swift; sourceTree = "<group>"; };
 		23B315E224DA951A006B3071 /* ManualLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualLocationViewController.swift; sourceTree = "<group>"; };
 		23B6299A24C094C700BFB9DF /* AboutSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsViewController.swift; sourceTree = "<group>"; };
 		23BBD40724822715003B0EC7 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -89,6 +88,13 @@
 		23E4BA8B24A4AD480018EB87 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		23E69E2524DB2193008686F2 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		23E69E2724DB26A1008686F2 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		23EDAD9424E9B6D600E39D92 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
+		23EDAD9624E9B6D900E39D92 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		23EDAD9A24E9BB4D00E39D92 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Settings.strings; sourceTree = "<group>"; };
+		23EDAD9C24E9BDB100E39D92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Alert.storyboard; sourceTree = "<group>"; };
+		23EDAD9F24E9BDBB00E39D92 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Alert.strings; sourceTree = "<group>"; };
+		23EDADA124E9BFC900E39D92 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Settings.strings; sourceTree = "<group>"; };
+		23EDADA324E9C0D300E39D92 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Alert.strings; sourceTree = "<group>"; };
 		23F0AA35247FD78B0013F880 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		23FBFE772484DBCD004E11B5 /* PrayerCurrentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerCurrentInformation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +119,7 @@
 				2307976724D75247004060F7 /* LoadingViewController.swift */,
 				23553DC524D8278F00B1535D /* RoundedViewExtension.swift */,
 				2307976924D75275004060F7 /* ChildViewControllerExtension.swift */,
+				231354CC24E70A7400724A47 /* LocationTextFieldDelegate.swift */,
 				23BFD148247D13FD00E0EF2F /* Assets.xcassets */,
 				23BFD14A247D13FD00E0EF2F /* LaunchScreen.storyboard */,
 				2360C5C524B1DD5F0092E5DF /* Localizable.strings */,
@@ -143,6 +150,15 @@
 				23BFD15E247D390C00E0EF2F /* PrayerTimesModel.swift */,
 			);
 			path = "Prayer Times";
+			sourceTree = "<group>";
+		};
+		23520DE924E3F575001A4C46 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				23553DC724D84ACE00B1535D /* OnboardingViewController.swift */,
+				231354CA24E6FFE000724A47 /* OnboardingLocationViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		23BFD133247D13FA00E0EF2F = {
@@ -178,7 +194,7 @@
 		23BFD153247D2E9F00E0EF2F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				23553DC724D84ACE00B1535D /* OnboardingViewController.swift */,
+				23520DE924E3F575001A4C46 /* Onboarding */,
 				23BFD143247D13FA00E0EF2F /* TimesViewController.swift */,
 				232D1CF524B2651400E74A7B /* QiblaViewController.swift */,
 				231E3FBD24B469A4004BF726 /* Settings */,
@@ -192,7 +208,7 @@
 			children = (
 				23BFD145247D13FA00E0EF2F /* Main.storyboard */,
 				231E3FB824B46434004BF726 /* Settings.storyboard */,
-				23314AA424DB10F400F81400 /* Alert.storyboard */,
+				23EDAD9D24E9BDB100E39D92 /* Alert.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -204,7 +220,6 @@
 				23F0AA35247FD78B0013F880 /* Time.swift */,
 				23FBFE772484DBCD004E11B5 /* PrayerCurrentInformation.swift */,
 				23E4BA8B24A4AD480018EB87 /* CoreDataHelper.swift */,
-				23AD38BB24AA1AAE0071A3DF /* locationNameManager.swift */,
 				239415B924C0331300D91C74 /* CalculationMethod.swift */,
 				23553DBF24D81C5A00B1535D /* DefaultsManager.swift */,
 				23BBD40624822715003B0EC7 /* DataModel.xcdatamodeld */,
@@ -292,7 +307,7 @@
 				2360C5C924B205020092E5DF /* Localizable.stringsdict in Resources */,
 				231E3FBA24B46434004BF726 /* Settings.storyboard in Resources */,
 				23BFD149247D13FD00E0EF2F /* Assets.xcassets in Resources */,
-				23314AA524DB10F400F81400 /* Alert.storyboard in Resources */,
+				23EDAD9B24E9BDB100E39D92 /* Alert.storyboard in Resources */,
 				23BFD147247D13FA00E0EF2F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,13 +323,14 @@
 				23B6299B24C094C700BFB9DF /* AboutSettingsViewController.swift in Sources */,
 				23FBFE782484DBCD004E11B5 /* PrayerCurrentInformation.swift in Sources */,
 				23BBD40824822715003B0EC7 /* DataModel.xcdatamodeld in Sources */,
+				231354CB24E6FFE000724A47 /* OnboardingLocationViewController.swift in Sources */,
 				23DB63DD24BE27F50027EDC3 /* AppearanceSettingsViewController.swift in Sources */,
-				23AD38BC24AA1AAE0071A3DF /* locationNameManager.swift in Sources */,
 				23BFD15B247D342000E0EF2F /* PrayerTimesData.swift in Sources */,
 				23BFD144247D13FA00E0EF2F /* TimesViewController.swift in Sources */,
 				23DB63D524BE14630027EDC3 /* PrayerTimesSettingsViewController.swift in Sources */,
 				23BFD140247D13FA00E0EF2F /* AppDelegate.swift in Sources */,
 				239415BA24C0331300D91C74 /* CalculationMethod.swift in Sources */,
+				231354CD24E70A7400724A47 /* LocationTextFieldDelegate.swift in Sources */,
 				23553DC824D84ACE00B1535D /* OnboardingViewController.swift in Sources */,
 				23BFD15D247D37A200E0EF2F /* PrayerTimesManagerDelegate.swift in Sources */,
 				23553DC624D8278F00B1535D /* RoundedViewExtension.swift in Sources */,
@@ -343,6 +359,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				231E3FB924B46434004BF726 /* Base */,
+				23EDAD9A24E9BB4D00E39D92 /* ar */,
+				23EDADA124E9BFC900E39D92 /* fr */,
 			);
 			name = Settings.storyboard;
 			sourceTree = "<group>";
@@ -371,8 +389,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				23BFD146247D13FA00E0EF2F /* Base */,
-				235DD3A824B35D6F00B9DB09 /* fr */,
-				235DD3AA24B35DE600B9DB09 /* ar */,
+				23EDAD9424E9B6D600E39D92 /* ar */,
+				23EDAD9624E9B6D900E39D92 /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -383,6 +401,16 @@
 				23BFD14B247D13FD00E0EF2F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		23EDAD9D24E9BDB100E39D92 /* Alert.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				23EDAD9C24E9BDB100E39D92 /* Base */,
+				23EDAD9F24E9BDBB00E39D92 /* ar */,
+				23EDADA324E9C0D300E39D92 /* fr */,
+			);
+			name = Alert.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

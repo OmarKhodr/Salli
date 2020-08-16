@@ -20,3 +20,17 @@
 "until Isha" = "until Isha";
 "until Midnight" = "until Midnight";
 "until Imsak" = "until Imsak";
+
+"Location Error" = "Location Error";
+
+"Failed to get location. Please make sure that location is enabled for Salli in Settings and try again later." = "Failed to get location. Please make sure that location is enabled for Salli in Settings and try again later.";
+
+"Okay" = "Okay";
+
+"Failed to connect to the network to fetch latest prayer times. Please make sure that the device has internet access and try again." = "Failed to connect to the network to fetch latest prayer times. Please make sure that the device has internet access and try again.";
+
+"Failed to connect to the network to fetch latest prayer times. Please make sure that the device has internet access and that the city and country fields are spelled correctly." = "Failed to connect to the network to fetch latest prayer times. Please make sure that the device has internet access and that the city and country fields are spelled correctly.";
+
+"Network Error" = "Network Error";
+
+"Failed to identify city and country." = "Failed to identify city and country.";

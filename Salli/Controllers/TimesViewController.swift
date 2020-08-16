@@ -77,7 +77,7 @@ class TimesViewController: UIViewController {
         //setting view as delegate for prayer times manager
         prayerTimesManager.delegate = self
         
-        loadData()
+        loadData(needUpdating: false)
         
     }
     
@@ -87,7 +87,7 @@ class TimesViewController: UIViewController {
         hasOnboarded = true
     }
     
-    func loadData() {
+    func loadData(needUpdating: Bool) {
         midnightStack.isHidden = !defaults.bool(forKey: K.Keys.showMidnightTime)
         imsakStack.isHidden = !defaults.bool(forKey: K.Keys.showImsakTime)
         
@@ -104,7 +104,7 @@ class TimesViewController: UIViewController {
         currentDateLabel.text = "\(dateFor.string(from: Date())) \("AH".localized)"
         
         //fetching data (if available) from database and checking if still valid, request location to update them if either check fails.
-        loadTimes()
+        loadTimes(needUpdating: needUpdating)
         updateUI()
         
         //timer for calling updateUI() on separate thread every tenth of a second.
@@ -164,10 +164,10 @@ extension TimesViewController: CLLocationManagerDelegate {
     //in case updating location fails
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         stopRefreshControl()
-        let warningAlertVC = alertService.warningAlert(title: "Location Error",
-                                                       body: "Failed to get location. Please make sure that location is enabled for Salli in Settings and try again later.",
+        let warningAlertVC = alertService.warningAlert(title: "Location Error".localized,
+                                                       body: "Failed to get location. Please make sure that location is enabled for Salli in Settings and try again later.".localized,
                                                        cancelVisible: false,
-                                                       actionName: "Okay") { }
+                                                       actionName: "Okay".localized) { }
         present(warningAlertVC, animated: true)
     }
     
@@ -185,15 +185,15 @@ extension TimesViewController: PrayerTimesManagerDelegate {
     func didFailWithError(_ manager: PrayerTimesManager, error: Error) {
         var body = ""
         if defaults.bool(forKey: K.Keys.automaticLocation) {
-            body = "Failed to connect to the network to fetch latest prayer times. Please make sure that the device has internet access and try again."
+            body = "Failed to connect to the network to fetch latest prayer times. Please make sure that the device has internet access and try again.".localized
         } else {
-            body = "Failed to connect to the network to fetch latest prayer times. Please make sure that the device has internet access and that the city and country fields are spelled correctly."
+            body = "Failed to connect to the network to fetch latest prayer times. Please make sure that the device has internet access and that the city and country fields are spelled correctly.".localized
         }
         DispatchQueue.main.async {
-            let warningAlertVC = self.alertService.warningAlert(title: "Network Error",
+            let warningAlertVC = self.alertService.warningAlert(title: "Network Error".localized,
                                                            body: body,
                                                            cancelVisible: false,
-                                                           actionName: "Okay") { }
+                                                           actionName: "Okay".localized) { }
             self.present(warningAlertVC, animated: true)
 
         }
@@ -203,10 +203,10 @@ extension TimesViewController: PrayerTimesManagerDelegate {
     
     func didFailReverseGeolocation(_ manager: PrayerTimesManager, error: Error) {
         DispatchQueue.main.async {
-            let warningAlertVC = self.alertService.warningAlert(title: "Location Error",
-                                                           body: "Failed to identify city and country. Please try again later.",
+            let warningAlertVC = self.alertService.warningAlert(title: "Location Error".localized,
+                                                                body: "Failed to identify city and country.".localized,
                                                            cancelVisible: false,
-                                                           actionName: "Okay") { }
+                                                           actionName: "Okay".localized) { }
             self.present(warningAlertVC, animated: true)
         }
         stopRefreshControl()
@@ -216,8 +216,9 @@ extension TimesViewController: PrayerTimesManagerDelegate {
     //called to update UI when prayer times are updated
     func didUpdatePrayerTimes(_ manager: PrayerTimesManager, _ model: PrayerTimesModel) {
         stopRefreshControl()
-        coreDataHelper.saveNewTimes(model: model)
-        
+        DispatchQueue.main.async {
+            self.coreDataHelper.saveNewTimes(model: model)
+        }
         prayerTimes = model.times
         locationString = model.location
         latitude = model.latitude
@@ -231,7 +232,7 @@ extension TimesViewController {
     
 //MARK: - Core Data Methods
     
-    func loadTimes() {
+    func loadTimes(needUpdating: Bool) {
         let result: [PrayerInfo] = coreDataHelper.fetch()
         guard result.count <= 1 else {
             fatalError("result has more than one element!!!")
@@ -244,7 +245,6 @@ extension TimesViewController {
             latitude = model.latitude
             longitude = model.longitude
         }
-        let needUpdating = defaults.bool(forKey: K.Keys.needUpdatingSettings)
         if !coreDataHelper.upToDate(info: info) || needUpdating {
             defaults.set(false, forKey: K.Keys.needUpdatingSettings)
             fetchPrayerTimes()
@@ -264,7 +264,8 @@ extension TimesViewController {
         if needUpdating {
             timer.invalidate()
             defaults.set(false, forKey: K.Keys.needUpdatingSettings)
-            loadData()
+            loadData(needUpdating: true)
+            return
         }
         
         //use model to get string of next prayer

@@ -1,0 +1,72 @@
+
+/* Class = "UITableViewSection"; headerTitle = "Method"; ObjectID = "1Dm-Si-zHa"; */
+"1Dm-Si-zHa.headerTitle" = "طريقة الحساب";
+
+/* Class = "UILabel"; text = "Cupertino"; ObjectID = "1VO-kg-bgl"; */
+"1VO-kg-bgl.text" = "Cupertino";
+
+/* Class = "UILabel"; text = "Match System Appearance"; ObjectID = "F0Z-8D-lJX"; */
+"F0Z-8D-lJX.text" = "استخدم مظهر النظام";
+
+/* Class = "UILabel"; text = "Set Automatically"; ObjectID = "FPE-Pw-JZq"; */
+"FPE-Pw-JZq.text" = "التحديد تلقائيا";
+
+/* Class = "UITableViewSection"; headerTitle = "Location"; ObjectID = "Fc5-CU-V7g"; */
+"Fc5-CU-V7g.headerTitle" = "الموقع";
+
+/* Class = "UITextField"; placeholder = "City"; ObjectID = "NAE-5Q-w1Y"; */
+"NAE-5Q-w1Y.placeholder" = "المدينة";
+
+/* Class = "UILabel"; text = "Light"; ObjectID = "ORt-ZS-5c7"; */
+"ORt-ZS-5c7.text" = "فاتح";
+
+/* Class = "UILabel"; text = "Calculation Method"; ObjectID = "Ow2-7h-Olo"; */
+"Ow2-7h-Olo.text" = "طريقة الحساب";
+
+/* Class = "UILabel"; text = "Show Imsak Time"; ObjectID = "WEO-fc-BZi"; */
+"WEO-fc-BZi.text" = "عرض وقت الإمساك";
+
+/* Class = "UIButton"; normalTitle = "Icons by Icons8"; ObjectID = "Xuu-JF-H9S"; */
+"Xuu-JF-H9S.normalTitle" = "Icons by Icons8";
+
+/* Class = "UIButton"; normalTitle = "Submit Feedback"; ObjectID = "YpN-Yt-dWw"; */
+"YpN-Yt-dWw.normalTitle" = "تصدير الملاحظات";
+
+/* Class = "UILabel"; text = "Appearance"; ObjectID = "Zhi-3k-Lx4"; */
+"Zhi-3k-Lx4.text" = "المظهر";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "amt-W9-mg2"; */
+"amt-W9-mg2.title" = "الإعدادات";
+
+/* Class = "UILabel"; text = "Salli"; ObjectID = "avU-Tu-5dZ"; */
+"avU-Tu-5dZ.text" = "صل";
+
+/* Class = "UILabel"; text = "Prayer Times"; ObjectID = "bp6-5y-7Fl"; */
+"bp6-5y-7Fl.text" = "أوقات الصلاة";
+
+/* Class = "UILabel"; text = "Dark"; ObjectID = "clD-C3-b8q"; */
+"clD-C3-b8q.text" = "داكن";
+
+/* Class = "UILabel"; text = "Location"; ObjectID = "d5y-Wf-5Hc"; */
+"d5y-Wf-5Hc.text" = "الموقع";
+
+/* Class = "UILabel"; text = "About"; ObjectID = "eQs-Af-gCT"; */
+"eQs-Af-gCT.text" = "عن صل";
+
+/* Class = "UILabel"; text = "Version Number"; ObjectID = "h0T-dk-Mlb"; */
+"h0T-dk-Mlb.text" = "الإصدار رقم";
+
+/* Class = "UITableViewSection"; headerTitle = "Display"; ObjectID = "k6j-I0-awh"; */
+"k6j-I0-awh.headerTitle" = "الشاشة";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "kJm-5o-fvp"; */
+"kJm-5o-fvp.title" = "تم";
+
+/* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "uFT-JY-0GH"; */
+"uFT-JY-0GH.headerTitle" = "المظهر";
+
+/* Class = "UILabel"; text = "Show Midnight Time"; ObjectID = "ysW-za-pIc"; */
+"ysW-za-pIc.text" = "عرض وقت منتصف الليل";
+
+/* Class = "UITextField"; placeholder = "Country"; ObjectID = "zDT-5t-9cb"; */
+"zDT-5t-9cb.placeholder" = "Country";

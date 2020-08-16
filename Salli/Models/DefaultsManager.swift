@@ -30,7 +30,7 @@ class DefaultsManager {
         let hasOnboarded = defaults.bool(forKey: K.Keys.hasOnboarded)
         if !hasOnboarded {
             defaults.set(true, forKey: K.Keys.hasOnboarded)
-            defaults.set(true, forKey: K.Keys.automaticLocation)
+            defaults.set(false, forKey: K.Keys.automaticLocation)
             defaults.set("Cupertino", forKey: K.Keys.manualCity)
             defaults.set("United States", forKey: K.Keys.manualCountry)
             defaults.set(false, forKey: K.Keys.showMidnightTime)

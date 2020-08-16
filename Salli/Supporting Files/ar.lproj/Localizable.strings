@@ -20,3 +20,17 @@
 "until Isha" = "للعشاء";
 "until Midnight" = "لمنتصف الليل";
 "until Imsak" = "للإمساك";
+
+"Location Error" = "خطأ في تحديد الموقع";
+
+"Failed to get location. Please make sure that location is enabled for Salli in Settings and try again later." = "لم يتم تحديد الموقع بنجاح. الرجاء التأكد من ان تحديد الموقع مفعل في الاعدادات من اجل صل و اعد المحاولة لاحقا.";
+
+"Okay" = "حسنا";
+
+"Failed to connect to the network to fetch latest prayer times. Please make sure that the device has internet access and try again." = "فشلت محاولة التواصل مع الشبكة لعرض أوقات الصلاة. الرجاء التاكد ان الجهاز متصل بالانترنت و اعد المحاولة.";
+
+"Failed to connect to the network to fetch latest prayer times. Please make sure that the device has internet access and that the city and country fields are spelled correctly." = "فشلة محاولة التواصل مع الشبكة لعرض اوقات الصلاة. الرجاء التاكد بان الجهاز متصل بالانترنت و ان المدينة و البلد كتبوا بطريقة صحيحة و باللغة الانجليزية.";
+
+"Network Error" = "خطأ في الشبكة";
+
+"Failed to identify city and country." = "فشلت محاولة معرفة المدينة و البلد.";

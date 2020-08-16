@@ -1,0 +1,12 @@
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "QZG-L2-8or"; */
+"QZG-L2-8or.normalTitle" = "Annuler";
+
+/* Class = "UILabel"; text = "Body"; ObjectID = "Qlb-MX-N7u"; */
+"Qlb-MX-N7u.text" = "Corps";
+
+/* Class = "UIButton"; normalTitle = "Action"; ObjectID = "SBx-Gw-dM9"; */
+"SBx-Gw-dM9.normalTitle" = "Action";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "gjr-Dp-UQX"; */
+"gjr-Dp-UQX.text" = "Titre";

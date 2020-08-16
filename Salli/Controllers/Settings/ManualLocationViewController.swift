@@ -12,44 +12,28 @@ class ManualLocationViewController: UITableViewController {
 
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var countryTextField: UITextField!
+    var textFieldDelegate: LocationTextFieldDelegate!
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Manual Location's viewDidLoad Called!")
         tableView.rowHeight = 43.5
         cityTextField.text = defaults.string(forKey: K.Keys.manualCity)
         countryTextField.text = defaults.string(forKey: K.Keys.manualCountry)
         tableView.tableFooterView = UIView()
-        cityTextField.delegate = self
-        countryTextField.delegate = self
+        
+        textFieldDelegate = LocationTextFieldDelegate()
+        textFieldDelegate.cityTextField = cityTextField
+        textFieldDelegate.countryTextField = countryTextField
+        cityTextField.delegate = textFieldDelegate
+        countryTextField.delegate = textFieldDelegate
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("Manual Location's viewWillAppear Called!")
         saveLocation(cityTextField)
         saveLocation(countryTextField)
         defaults.set(true, forKey: K.Keys.needUpdatingSettings)
-    }
-
-}
-
-extension ManualLocationViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.endEditing(true)
-        return true
-    }
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if textField.text != "" {
-            return true
-        } else {
-            textField.placeholder = "Please type something"
-            return false
-        }
-    }
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        print("textFieldDidEndEditing called!")
     }
     
     func saveLocation(_ textField: UITextField) {
@@ -61,4 +45,5 @@ extension ManualLocationViewController: UITextFieldDelegate {
             }
         }
     }
+
 }
