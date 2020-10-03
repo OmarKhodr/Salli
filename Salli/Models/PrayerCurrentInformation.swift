@@ -18,7 +18,8 @@ struct PrayerCurrentInformation {
         for i in 0...times.count-1 {
             
             let previous = times[i].time
-            let next = times[i+1].time
+            // modulo in case we're at the last prayer time of the day
+            let next = times[(i+1)%times.count].time
             
             if previous < next {
                 let range = previous..<next
