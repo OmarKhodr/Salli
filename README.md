@@ -1,5 +1,6 @@
 # Salli
 > iOS Application for Prayer Times and Qibla Direction.
+Tools Used: Core Data, Core Location, URLSession
 
 [![Swift Version][swift-image]][swift-url]
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
